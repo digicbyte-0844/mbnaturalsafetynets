@@ -1,0 +1,252 @@
+# MB NATURAL SAFETY NETS - Page-by-Page UI/UX Specifications & Mobile Wireframes
+
+## 1. Master Brand Identity & Metadata Architecture
+
+- **Brand Name**: `MB NATURAL SAFETY NETS`
+- **Legal Entity**: `MB Natural Safety Nets Hyderabad`
+- **Proprietor & Director**: `Manohar Gosala`
+- **Designer & Developer**: `Prabhuteja Koda`
+- **Official Admin Email**: `mahimanohar47@gmail.com`
+- **Direct Helpline / WhatsApp**: `+91 77024 54046` / `917702454046`
+- **Operational Hub**: HITEC City Main Road, Madhapur & Gachibowli Hub, Hyderabad, Telangana 500081
+- **Domain**: `https://mbnaturalsafetynets.com`
+- **Core Specialization**: 100% Focused on **Balcony Safety Nets & High-Rise Balcony Protection Solutions** (Pigeon Netting, Child & Toddler Safety, SS 316 Marine Invisible Grills, Cat & Pet Safety, AC Ledges & Duct Shaft Netting).
+- **Hyderabad Local SEO Coverage**: 25+ Localities across West, North, and Central Hyderabad (Gachibowli, HITEC City, Kondapur, Kokapet, Financial District, Madhapur, Nanakramguda, Manikonda, Tellapur, Narsingi, Jubilee Hills, Banjara Hills, Miyapur, Chandanagar, Kukatpally, Nizampet, Bachupally, Begumpet, Secunderabad, Ameerpet, etc.).
+
+---
+
+## 2. Page 1: Home (`/`) - High-Conversion Balcony Protection Hub
+
+### Objective
+Immediately establish hyper-local credibility in Hyderabad high-rises, communicate 100% balcony safety specialization, showcase transparent pricing with 5-year replacement guarantee, and capture leads in under 2 clicks.
+
+### Section Breakdown & Hierarchy
+```
+[1. Hero (Cinematic High-Rise Video / Dynamic Headline / 4 Trust Badges)]
+       ↓
+[2. Touch-Safe Before/After Balcony Comparison Visualizer]
+       ↓
+[3. Core 5 Balcony Safety Solutions (Pigeon, Child, Invisible Grill, Pet, Duct)]
+       ↓
+[4. Real-Time Balcony Cost Estimator Preview (TouchStepper Controls)]
+       ↓
+[5. Hyderabad 30-Min Service Network (25+ Localities & Landmark Societies)]
+       ↓
+[6. High-Rise Tensile Load & Wind Velocity Touch Lab]
+       ↓
+[7. 5-Step Architectural Rigging & Laser Calibration Workflow]
+       ↓
+[8. Verified Customer Testimonials & High-Rise Society Case Studies]
+       ↓
+[9. High-Intent Balcony FAQ Accordion (JSON-LD Schema)]
+       ↓
+[10. Pre-Footer Doorstep Laser Inspection Booking Band]
+```
+
+### Mobile Layout Wireframe (`< 768px`)
+- **Hero**: Vertical `100svh` frame preventing mobile browser toolbar jumps. Background high-rise video plays smoothly muted. Dynamic headline: *"Protecting [Balconies / Children / Pets / High-Rises] with Zero View Blockage"*. Two primary full-width touch buttons: *"Book Free Balcony Inspection"* (Emerald Gradient) and *"Call Helpline: 77024 54046"* (Dark Glass).
+- **Before/After**: Centered visualizer with a dual-mode 1-tap toggle switch (`[Infested Balcony] | [MB Protected]`) and a draggable splitter handle with 28px edge margins to prevent iOS/Android browser back gestures.
+- **5 Balcony Solutions**: Horizontal swipeable carousel with active indicator dots; each card features high-clarity photography, sq.ft price tag, tensile rating, and direct booking CTA.
+- **Hyderabad Network**: 2-column mobile grid displaying neighborhoods with arrival SLAs (e.g. *"Gachibowli • 20 mins"*).
+- **Capsule Dock**: Sticky unified mobile capsule floating at `bottom-4` containing Call, WhatsApp, and Free Inspection buttons.
+
+### Desktop Layout Adaptation (`>= 1024px`)
+- **Hero**: Asymmetrical two-column grid: Left side showcases dynamic typography, proprietary trust metrics, and quick quote trigger; right side displays an interactive 3D balcony preview card with live tensile stress readouts.
+- **Services**: 3-column / 2-column responsive grid with hover lift, micro-interactions, and instant package detail drawers.
+
+---
+
+## 3. Page 2: Balcony Services Catalog (`/services`)
+
+### Objective
+Present the full suite of 5 certified balcony safety solutions with technical engineering specifications, material certifications (Garware UV Nylon, SS 316 Marine Grade Cables), transparent sq.ft pricing, and turnaround SLAs.
+
+### Section Hierarchy
+1. **Catalog Header & Filter Bar**:
+   - Eyebrow: `5 CERTIFIED BALCONY PROTECTION SOLUTIONS • HYDERABAD`
+   - Title: `Engineered for High-Rise Safety. Invisible to the City Skyline.`
+   - Filter Chips: `All Balcony Solutions (5)`, `Balcony Pigeon Nets`, `Child & Toddler Safety`, `Invisible Grills`, `Pet & Cat Nets`, `AC Ledge & Ducts`.
+2. **Comprehensive Service Cards Grid**:
+   - **Card 1: Balcony Pigeon Safety Nets** (`₹18 - ₹26 / sq.ft`, Garware 0.8mm-1.2mm UV Polyethylene, 25mm-30mm diamond mesh, 2-3 Hours SLA).
+   - **Card 2: Balcony Child Fall Protection Nets** (`₹22 - ₹32 / sq.ft`, 2.5mm high-tensile braided nylon, 450kg+ breaking load, 3-4 Hours SLA).
+   - **Card 3: Balcony SS 316 Invisible Grills** (`₹115 - ₹175 / sq.ft`, 2.5mm-3.0mm marine-grade stainless steel with transparent nylon coating, Same-Day SLA).
+   - **Card 4: Balcony Cat & Pet Safety Nets** (`₹20 - ₹28 / sq.ft`, claw-resistant, anti-chew, bite-proof reinforced mesh, 2-3 Hours SLA).
+   - **Card 5: Balcony AC Ledge & Duct Area Nets** (`₹16 - ₹24 / sq.ft`, heavy-duty shaft defense preventing pigeon colonization, 3-5 Hours SLA).
+3. **Engineering Comparison Matrix**:
+   - Side-by-side technical evaluation: **MB Natural Safety Nets** vs **Traditional Heavy Iron Grills** vs **Cheap Polyethylene Unbranded Nets**.
+   - Evaluates: View blockage (0% vs 65%), Rust & corrosion resistance (100% vs 0%), Emergency fire escape safety (Instant cuttable with safety tool vs Trapped iron bars), Wind resistance (Up to 240 km/h vs High wind shear).
+4. **Guaranteed Dispatch Band**:
+   - Guaranteed same-day doorstep inspection across Gachibowli, Madhapur, HITEC City, Kondapur, Kokapet, and Secunderabad.
+
+### Mobile-Specific UX
+- Technical specifications collapse inside an accordion `[ + View 6 Engineering Specs ]` so users can compare cards without infinite vertical scrolling.
+- Pricing packages (Standard, Heavy-Duty, Marine Armor) swipe horizontally with snap-points.
+
+---
+
+## 4. Page 3: Balcony Service Detail (`/services/:id`)
+
+### Objective
+Dedicated landing page for each of the 5 balcony safety net solutions. Designed for high organic search intent (e.g., *"balcony pigeon net installation gachibowli"*, *"invisible grill balcony hyderabad cost"*) and Google Ads traffic.
+
+### Dynamic Routes Supported
+1. `/services/balcony-pigeon-net`
+2. `/services/balcony-child-safety-net`
+3. `/services/balcony-invisible-grill`
+4. `/services/balcony-pet-safety-net`
+5. `/services/balcony-duct-shaft-net`
+
+### Section Specification Breakdown
+1. **Cinematic Hero**:
+   - Breadcrumbs: `Home / Balcony Services / [Service Title]`
+   - Trust Badge: Tensile load capacity & warranty (e.g. `450kg+ Load Certified • 5-Year Replacement Warranty`).
+   - High-impact headline & benefit description.
+   - Quick Action buttons: Direct helpline `+91 77024 54046` + WhatsApp pre-filled with the exact service name and Hyderabad locality.
+2. **Interactive Before/After Balcony Visualizer**:
+   - Specific to this service (e.g. Pigeon-fouled balcony railing vs Pristine MB Natural transparent netting).
+3. **Engineering Specification Grid (6 Structured Cards)**:
+   - Tensile Breaking Load (kg / N)
+   - Core Material & Chemical Formulation (UV Stabilized Garware Nylon / SS 316 Marine Wire)
+   - Optical Transparency & Aesthetic Impact (98% Sightline Preservation)
+   - Anchoring Hardware (SS 304/316 Heavy Expansion Anchors & Turnbuckles)
+   - Mesh Aperture & Diamond Weave Size (19mm - 40mm)
+   - Weathering Endurance (UV-resistant, heat-tested up to 55°C, rot-proof)
+4. **5-Step Architectural Rigging Workflow**:
+   - Step 1: Laser Level Calibration & Railing Structural Scan
+   - Step 2: SS 316 Expansion Anchor Installation (Zero wall cracking)
+   - Step 3: Marine Stainless Steel Perimeter Cable Rigging
+   - Step 4: High-Tension Diamond Weave Stitching & Turnbuckle Tuning
+   - Step 5: Dual Pull-Stress Testing & Doorstep 5-Year Warranty Handover
+5. **3-Tier Package Pricing**:
+   - Standard Shield, Heavy-Duty Armor (Recommended), Marine Pro Defense.
+6. **Embedded Direct Booking Form**:
+   - Dispatches lead asynchronously to `mahimanohar47@gmail.com` with service pre-selected.
+7. **Verified High-Rise Customer Reviews**:
+   - 3 real customer reviews specifically about this service from societies like *My Home Bhooja*, *Prestige High Fields*, *Lanco Hills*.
+8. **Related Balcony Solutions Carousel**:
+   - Complementary cross-links (e.g. Child Safety paired with Invisible Grills).
+
+---
+
+## 5. Page 4: Balcony Cost & Tensile Simulator Lab (`/calculator`)
+
+### Objective
+Demystify balcony safety netting costs, establish price integrity, simulate high-rise physics, and generate high-intent inquiries.
+
+### Interactive Components
+1. **Interactive Balcony Cost Estimator**:
+   - **Service Selector**: Dropdown / Pill selector for all 5 balcony solutions.
+   - **Balcony Length (Width)**: TouchStepperInput (4 ft to 60 ft, 1 ft steps).
+   - **Balcony Height**: TouchStepperInput (3 ft to 20 ft, 0.5 ft steps).
+   - **Number of Balconies**: Stepper (1 to 6+ units).
+   - **Deep Balcony Sanitization Add-on**: Optional toggle for high-pressure antimicrobial pigeon waste wash.
+2. **Dynamic Price Breakdown Box**:
+   - Calculated Total Balcony Area (sq.ft).
+   - Estimated Cost Range (Min - Max ₹).
+   - Official 5-Year Replacement Warranty inclusion guarantee.
+   - Free SS 316 hardware & laser measurement inclusion badge.
+   - Primary CTA: *"Send Estimate to WhatsApp"* (Generates pre-formatted inquiry text).
+   - Secondary CTA: *"Book Free Doorstep Inspection"* (Triggers bottom sheet lead submission to `mahimanohar47@gmail.com`).
+3. **High-Rise Tensile & Wind Velocity Simulator**:
+   - Sliders to test wind velocities up to **240 km/h** (Category 4 cyclone simulation) and dynamic impact loads up to **450 kg**.
+   - Real-time animated canvas showing mesh deflection, cable tension, and safety factor calculations.
+
+---
+
+## 6. Page 5: Balcony Installation Gallery (`/gallery`)
+
+### Objective
+Provide indisputable visual proof of craftsmanship, optical transparency, and clean architectural finishes across Hyderabad's landmark residential towers.
+
+### Section Breakdown
+1. **Filter Header**:
+   - Category Filters: `All Balcony Photos (12)`, `Pigeon Netting`, `Child Fall Protection`, `SS 316 Invisible Grills`, `AC Ledge & Shafts`.
+2. **Masonry Photography Grid**:
+   - Real high-resolution photography showcasing finished balconies.
+   - Apartment Society & Locality Tags (e.g. *"Prestige High Fields, Financial District"*, *"Aparna Sarovar, Nallagandla"*, *"My Home Bhooja, HITEC City"*, *"Incor One City, KPHB"*).
+   - Hardware Badge: `SS 316 Marine Anchored` / `Garware UV Nylon`.
+3. **Interactive Mobile-Safe Lightbox Modal**:
+   - Full-screen high-res preview on tap.
+   - Pinch-to-zoom and pan support on touch devices.
+   - Conversion Trigger: *"I Want This Installed on My Balcony"* (Pre-fills inquiry modal with photo title and locality).
+
+---
+
+## 7. Page 6: Verified Customer Reviews (`/reviews`)
+
+### Objective
+Build trust through verified social proof, genuine high-rise apartment testimonials, and residential society president endorsements.
+
+### Section Breakdown
+1. **Trust Header & Metric Counters**:
+   - `10,000+` Balconies Protected across Hyderabad.
+   - `4.98 / 5.0` Star Rating across Google and verified direct customer reviews.
+   - `5-Year` Official Written Replacement Warranty on every installation.
+   - `30-Min` Average Inspection Dispatch SLA in West & North Hyderabad.
+2. **Categorized High-Rise Testimonials Grid**:
+   - Real customer names, apartment society names, and Hyderabad localities.
+   - 5-Star verified installation badge.
+   - Detailed testimonials covering view preservation, pigeon elimination, toddler safety, and polite technician conduct.
+3. **Society Resident & Facility Manager Case Studies**:
+   - Large-scale high-rise society installations (e.g. 450+ balconies secured in a single gated community with zero aesthetic disruption).
+4. **Google Reviews Direct Link & Review Submission Form**:
+   - Allows satisfied customers to leave feedback.
+
+---
+
+## 8. Page 7: Contact & Free Laser Inspection (`/contact`)
+
+### Objective
+Friction-free, hyper-local communication hub for booking doorstep laser measurements, requesting quotations, and reaching senior installation engineers.
+
+### Section Breakdown
+1. **Direct Contact Cards**:
+   - **Direct Helpline**: `+91 77024 54046` (One-tap direct phone call to Manohar Gosala's team).
+   - **WhatsApp Support**: `917702454046` (One-tap chat with pre-filled message).
+   - **Official Admin Email**: `mahimanohar47@gmail.com` (Direct email correspondence).
+   - **Operational Hub Address**: HITEC City Main Road, Madhapur & Gachibowli Hub, Hyderabad, Telangana 500081.
+   - **Operating Hours**: Mon - Sun: 7:00 AM - 9:00 PM (Emergency Same-Day Dispatch Available).
+2. **Doorstep Laser Inspection Booking Form**:
+   - Fields: Full Name, WhatsApp / Phone Number (10 digits), Hyderabad Locality dropdown (25+ neighborhoods), Balcony Service Type, Preferred Inspection Date, Balcony Measurements / Special Requests.
+   - Background submission via FormSubmit AJAX directly to `mahimanohar47@gmail.com`.
+   - Instant WhatsApp confirmation handoff.
+3. **Hyderabad 25+ Locality Service Grid**:
+   - Displays all covered localities with PIN codes and average team arrival times.
+4. **Interactive Google Maps Embed**:
+   - Geographic locator centered on the Madhapur / Gachibowli operational hub.
+
+---
+
+## 9. Global Redesigned Footer Specification (All Pages)
+
+### Structure & Visual Hierarchy
+```
++-----------------------------------------------------------------------------------------+
+| [PRE-FOOTER CTA: Ready to Protect Your Balcony? Free Measurement in 30 Mins]            |
+| [ 📞 Call +91 77024 54046 ]           |           [ ⚡ Book Laser Inspection ]           |
++-----------------------------------------------------------------------------------------+
+| MB NATURAL SAFETY NETS               | 5 BALCONY SOLUTIONS  | HYDERABAD LOCALITIES      |
+| ISO 9001:2015 Certified              | • Balcony Pigeon Net | • Gachibowli (20m)        |
+| 5-Year Replacement Warranty          | • Child Safety Net   | • HITEC City (15m)        |
+| 10,000+ Balconies Protected          | • Invisible Grills   | • Kondapur (20m)          |
+| Hub: Madhapur & Gachibowli, Hyd      | • Pet Safety Net     | • Kokapet (25m)           |
+| Email: mahimanohar47@gmail.com       | • AC Ledge & Ducts   | • Financial District (20m)|
+| Phone: +91 77024 54046               |                      | • 20+ More Localities     |
++-----------------------------------------------------------------------------------------+
+| [🛡️ PROPRIETOR & DIRECTOR: MANOHAR GOSALA] | [⚡ DESIGNED & DEVELOPED BY PRABHUTEJA KODA]|
++-----------------------------------------------------------------------------------------+
+| © 2026 MB Natural Safety Nets. All Rights Reserved. Privacy Policy • Terms • Sitemap    |
++-----------------------------------------------------------------------------------------+
+```
+
+### Critical Legal & Identity Standards in Footer
+1. **Proprietor Badge**:
+   - `Proprietor: Manohar Gosala` displayed with verified corporate shield badge.
+2. **Designer & Developer Signature**:
+   - `Designed & Developed by Prabhuteja Koda` displayed with modern gradient tech badge.
+3. **Official Email**:
+   - `mahimanohar47@gmail.com` linked via `mailto:`.
+4. **Official Phone**:
+   - `+91 77024 54046` linked via `tel:`.
+5. **Coverage Footnote**:
+   - Dedicated local SEO links covering all 25+ Hyderabad high-rise residential belts.

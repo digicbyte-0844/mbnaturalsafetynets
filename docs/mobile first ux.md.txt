@@ -1,0 +1,375 @@
+# MB NATURAL SAFETY NETS - Mobile-First UX & UI Engineering Blueprint
+
+## 1. Executive Mobile Strategy
+
+Over **84% of all inbound emergency safety net inquiries and inspection bookings originate from mobile smartphones**. In Hyderabad high-rises (Gachibowli, HITEC City, Kondapur, Kokapet, Financial District, Miyapur, etc.), apartment residents face urgent balcony challenges:
+- Pigeons roosting, fouling balconies, creating respiratory hazards and ruining laundry.
+- Anxious parents with toddlers or young children near low parapets or open balcony railings.
+- Pet parents worried about playful cats or dogs leaping across balcony edges.
+- AC outdoor compressors and open utility duct shafts infested with pigeons and debris.
+
+When an apartment resident spots an issue on their balcony, they do not open a desktop laptop; they search on their phone, expect sub-second load times, immediate WhatsApp or direct phone access, and friction-free mobile forms that do not fight with mobile touch screens or virtual keyboards.
+
+**MB NATURAL SAFETY NETS** (founded by **Proprietor Manohar Gosala**, engineered and designed by **Prabhuteja Koda**) adopts an uncompromising **pure mobile-first design and engineering standard**:
+1. **One-Handed Thumb Reachability**: All critical interactive targets reside within the natural bottom ergonomic thumb zone (44px - 56px touch boundaries).
+2. **Zero Virtual Keyboard Disruption**: Native gesture bottom sheets replace centered popup modals that get pushed off-screen or obscured by mobile keyboards.
+3. **Scroll-Safe Ergonomics**: Stepper controls with distinct `+` and `-` buttons prevent vertical scroll gestures from accidentally dragging horizontal calculator sliders.
+4. **Touch-Safe Before/After Balcony Comparison**: Edge margin buffers and a 1-tap segmented switch eliminate the iOS/Android "swipe to navigate back" browser collision.
+5. **Unified Mobile Capsule Dock**: Consolidates separate floating phone buttons, WhatsApp bubbles, and quote buttons into a single floating glass island with safe-area bottom insets (`env(safe-area-inset-bottom)`).
+6. **Direct Lead Telemetry**: One-tap bookings dispatch instant AJAX lead telemetry directly to `mahimanohar47@gmail.com` via FormSubmit alongside formatted WhatsApp messages pre-filled with the resident's Hyderabad locality.
+
+---
+
+## 2. The Mobile Layout Anatomy (Safe-Area & Dynamic Viewport Management)
+
+```
++-------------------------------------------------------------------------+
+| [Status Bar] (iOS Dynamic Island / Android Notch Safe Area)             |
++-------------------------------------------------------------------------+
+| [Compact Sticky Header] (Logo + Call Action + Dark Toggle + Menu)       | -> 56px fixed
++-------------------------------------------------------------------------+
+|                                                                         |
+|                                                                         |
+|                        SCROLLABLE MOBILE VIEWPORT                       |
+|                  (Hero, Visualizer, 5 Balcony Solutions,                |
+|                    Calculator, Localities, Reviews)                     |
+|                                                                         |
+|                                                                         |
++-------------------------------------------------------------------------+
+| [Unified Mobile Capsule Dock] (📞 Call | 💬 WhatsApp | ⚡ Free Inspec.)  | -> 64px floating glass
++-------------------------------------------------------------------------+
+| [Safe Area Inset Bottom] (Home Indicator on iPhone & Modern Android)    | -> env(safe-area-inset-bottom)
++-------------------------------------------------------------------------+
+```
+
+### Essential Mobile CSS Reset Rules (`src/index.css`)
+```css
+/* Eliminates 300ms mobile tap delays and ugly grey touch highlights */
+* {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Uses dynamic small viewport units (svh) to prevent address bar layout shifts */
+.mobile-hero-height {
+  height: 100svh;
+  min-height: 560px;
+}
+
+/* Safe Area Inset Support for Modern iOS and Android Devices */
+.mobile-bottom-dock {
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* Prevent horizontal viewport overflow on small devices */
+body, html {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Fluid responsive typography clamp */
+.fluid-title {
+  font-size: clamp(1.85rem, 5vw + 1rem, 3.25rem);
+  line-height: 1.15;
+}
+```
+
+---
+
+## 3. Solution 1: The Unified Floating "Capsule Dock"
+
+### The Desktop vs. Mobile Challenge
+On desktop, users have ample screen real estate for sticky top headers and floating sidebar triggers. On mobile devices (such as iPhone 13 Mini, SE, or standard 6.1" Android displays), stacking multiple floating widgets (phone FAB, WhatsApp bubble, inquiry button) consumes up to 35% of the lower viewport, blocks footer links, and causes frequent accidental clicks.
+
+### The Engineered Solution: The Unified Floating Capsule Dock
+Instead of competing floating buttons, **MB NATURAL SAFETY NETS** deploys a single, floating glass capsule docked at `bottom-4 inset-x-3 max-w-md mx-auto`:
+
+```
++-----------------------------------------------------------------------------+
+|    [📞 Call]       |        [💬 WhatsApp]         |   [⚡ Book Free Inspec]  |
+| (One-Tap Helpline) | (Pre-filled Locality Chat)  |  (Opens Native Sheet)   |
+|   +91 77024 54046  |   WhatsApp +91 77024 54046  |  mahimanohar47@gmail.com|
++-----------------------------------------------------------------------------+
+```
+
+#### Technical Implementation of the Capsule Dock
+```jsx
+// src/components/layout/UnifiedMobileDock.jsx
+import React, { useState, useEffect } from 'react';
+import { Phone, Sparkles, MessageCircle } from 'lucide-react';
+import { brandConfig } from '../../data/brandConfig';
+
+export default function UnifiedMobileDock({ onOpenQuoteSheet }) {
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  // Auto-hides on rapid downward flick; immediately reappears on upward flick
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY && currentScrollY > 120) {
+        setIsVisible(false); // User scrolling down to read content
+      } else {
+        setIsVisible(true);  // User scrolling up or pausing
+      }
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
+  return (
+    <div
+      className={`fixed bottom-4 inset-x-3 z-40 md:hidden max-w-md mx-auto transition-all duration-300 transform ${
+        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-24 opacity-0 pointer-events-none'
+      }`}
+      style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
+    >
+      <div className="bg-slate-900/95 dark:bg-[#0c1424]/95 backdrop-blur-xl border border-white/15 dark:border-white/10 rounded-2xl p-2 shadow-2xl flex items-center justify-between gap-2 text-white">
+        
+        {/* Direct Phone Call to Manohar Gosala's Team */}
+        <a
+          href={`tel:${brandConfig.phone}`}
+          aria-label="Direct Call MB Natural Safety Nets Helpline"
+          className="flex-1 flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-white/5 active:bg-white/20 active:scale-95 transition-all text-slate-200 hover:text-white"
+        >
+          <Phone className="w-4 h-4 text-emerald-400 mb-0.5" />
+          <span className="text-[10px] font-bold tracking-tight">Call Now</span>
+        </a>
+
+        {/* WhatsApp Lead Channel Pre-formatted */}
+        <a
+          href={`https://wa.me/${brandConfig.whatsapp}?text=Hi%20MB%20Natural%20Safety%20Nets%2C%20I%20would%20like%20a%20free%20doorstep%20balcony%20inspection%20in%20Hyderabad.`}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp Quick Balcony Lead"
+          className="flex-1 flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-[#25D366]/20 text-[#25D366] active:bg-[#25D366]/30 active:scale-95 transition-all"
+        >
+          <MessageCircle className="w-4 h-4 fill-current mb-0.5" />
+          <span className="text-[10px] font-bold tracking-tight">WhatsApp</span>
+        </a>
+
+        {/* Primary Booking Trigger */}
+        <button
+          onClick={onOpenQuoteSheet}
+          aria-label="Open Doorstep Inspection Sheet"
+          className="flex-[1.8] flex items-center justify-center gap-1.5 py-3 px-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-extrabold text-xs shadow-lg shadow-emerald-900/40 active:scale-95 transition-all cursor-pointer"
+        >
+          <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
+          <span>Free Inspection</span>
+        </button>
+
+      </div>
+    </div>
+  );
+}
+```
+
+---
+
+## 4. Solution 2: Native Mobile Gesture Bottom Sheet (Replacing Centered Modals)
+
+### The Problem with Traditional Modals on Mobile
+1. Centered dialog boxes render inputs in the middle of the screen.
+2. When the resident taps into the "Mobile Number" or "Locality" field, iOS and Android bring up the virtual keyboard (occupying 40-50% of the screen height).
+3. The submit button is pushed beneath the fold, forcing the user to scroll inside an inner modal scrollpane.
+4. Tapping outside accidentally dismisses unsubmitted input data.
+
+### The Engineered Solution: Mobile Bottom Sheet with 2-Step Disclosure
+1. **Anchored to Viewport Bottom**: Slides upward seamlessly above the home indicator.
+2. **Gesture Dismiss Handle**: A 48px wide grey pill at the top signals native app-like draggable behavior.
+3. **2-Step Progressive Disclosure**:
+   - **Step 1 (Fast Identity)**: Customer Name + 10-Digit Mobile Number (verified with regex).
+   - **Step 2 (Balcony Specs)**: Service Type (Balcony Pigeon Net, Child Safety, Invisible Grill, Pet Safety, Duct Area) + Hyderabad Locality selector.
+4. **Reliable Dual Lead Dispatch**: Submitting triggers an asynchronous background POST to `mahimanohar47@gmail.com` via FormSubmit API and offers an optional 1-tap WhatsApp confirmation pre-filled with their submission details.
+
+```
++-----------------------------------------------------------------+
+|                       [ ======= ] (Drag Bar)                    |
+| 🛡️ Free Balcony Laser Inspection (30-Min SLA)             [ ✕ ] |
++-----------------------------------------------------------------+
+| STEP 1 OF 2: CONTACT DETAILS                                    |
+|                                                                 |
+| Resident Name *                                                 |
+| [ Manohar Reddy                                               ] |
+|                                                                 |
+| WhatsApp / Mobile Number *                                      |
+| [ +91 98765 43210                                             ] |
+|                                                                 |
+| [ Continue to Balcony Selection (Step 2) ➔                   ] |
++-----------------------------------------------------------------+
+| ✓ 5-Year Replacement Warranty • Free Laser Measurements Included|
++-----------------------------------------------------------------+
+```
+
+---
+
+## 5. Solution 3: Touch-Safe Ergonomics for Sliders & Tools
+
+### The Horizontal Drag Collision Problem
+In price calculators and simulation tools, standard HTML range inputs `<input type="range" />` create severe gesture collisions on mobile phones:
+- When a user tries to scroll down the page, their finger lands on the slider track.
+- The browser traps the touch event, moves the slider from 10ft to 50ft, and abruptly stops vertical page scrolling.
+- This results in high bounce rates and user frustration.
+
+### The Engineered Solution: Dual-Control "TouchStepperInput"
+Every dimension input on mobile features **oversized 48px `+` and `-` touch buttons** flanking the slider. The slider track has generous vertical padding and a restricted touch-action so users can either tap the precision steppers or deliberately scrub the track:
+
+```
+[ Balcony Length / Width ]
++-----------------------------------------------------------------+
+|  [ - ] (48px)     |     16 Feet (Bold Monospace)    |   [ + ]   |
++-----------------------------------------------------------------+
+|  ========[============O==============================]  |
+|  Min: 4 ft                                            Max: 60 ft|
++-----------------------------------------------------------------+
+```
+
+#### Code Implementation: TouchStepperInput
+```jsx
+// src/components/calculator/TouchStepperInput.jsx
+import React from 'react';
+import { Minus, Plus } from 'lucide-react';
+
+export default function TouchStepperInput({
+  label,
+  value,
+  min = 4,
+  max = 60,
+  step = 1,
+  unit = 'ft',
+  onChange
+}) {
+  const handleDecrement = (e) => {
+    e.preventDefault();
+    if (value > min) onChange(value - step);
+  };
+
+  const handleIncrement = (e) => {
+    e.preventDefault();
+    if (value < max) onChange(value + step);
+  };
+
+  return (
+    <div className="bg-slate-50 dark:bg-slate-800/80 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700 select-none">
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">{label}</span>
+        <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400 border border-slate-200 dark:border-slate-700 shadow-sm">
+          {value} {unit}
+        </span>
+      </div>
+
+      <div className="flex items-center gap-3">
+        {/* 48px Touch-Compliant Minus Button */}
+        <button
+          type="button"
+          onClick={handleDecrement}
+          disabled={value <= min}
+          aria-label={`Decrease ${label}`}
+          className="w-12 h-12 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-800 dark:text-white active:scale-90 disabled:opacity-30 transition-transform cursor-pointer shadow-sm touch-manipulation"
+        >
+          <Minus className="w-5 h-5" />
+        </button>
+
+        {/* Range Slider with Edge Margins */}
+        <div className="flex-1 px-1">
+          <input
+            type="range"
+            min={min}
+            max={max}
+            step={step}
+            value={value}
+            onChange={(e) => onChange(Number(e.target.value))}
+            className="w-full h-3 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-600 dark:accent-emerald-500 touch-none"
+          />
+        </div>
+
+        {/* 48px Touch-Compliant Plus Button */}
+        <button
+          type="button"
+          onClick={handleIncrement}
+          disabled={value >= max}
+          aria-label={`Increase ${label}`}
+          className="w-12 h-12 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-800 dark:text-white active:scale-90 disabled:opacity-30 transition-transform cursor-pointer shadow-sm touch-manipulation"
+        >
+          <Plus className="w-5 h-5" />
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+---
+
+## 6. Solution 4: Mobile Before-and-After Balcony Comparison
+
+### The Mobile Gesture Back-Swipe Bug
+On mobile Safari (iOS) and Android Chrome with gesture navigation, swiping near the left or right edges of the screen triggers the browser's native **"Navigate Back"** or **"Navigate Forward"** history navigation. An unbuffered Before/After visualizer causes users to accidentally leave the website.
+
+### The Engineered Solution: Edge Buffering & 1-Tap Segmented Control
+1. **28px Horizontal Edge Safety Inset**: The draggable splitter handle cannot be dragged into the extreme 28px left or right edge zones, keeping touch coordinates inside safe boundaries.
+2. **Instant 1-Tap Segmented Toggle**: Above the comparison slider, a clean segmented pill button allows users with lower dexterity or single-handed thumb grip to toggle between views without dragging:
+   - `[ 🐦 Infested Balcony ]` vs `[ 🛡️ MB Natural Protected ]`
+3. **Animated Hint on First Viewport Entry**: When the visualizer scrolls into view on mobile, it plays a subtle 800ms left-to-right bounce to teach the user that the divider is interactive.
+
+---
+
+## 7. Solution 5: High-Speed Mobile App-Like Navigation Drawer
+
+The mobile slide-out drawer functions as an efficient command center:
+1. **Header Brand Identity**: Shows **MB NATURAL SAFETY NETS** with certified ISO & 5-Year Guarantee badges.
+2. **Top Quick Emergency Bar**:
+   - `[ 📞 Call Manohar Gosala: 77024 54046 ]`
+   - `[ 💬 WhatsApp Inquiry ]`
+3. **5 Balcony Safety Solutions Directory**:
+   - Balcony Pigeon Netting (2-3 Hours SLA)
+   - Balcony Child & Toddler Safety (3-4 Hours SLA)
+   - Balcony SS 316 Invisible Grills (Same-Day SLA)
+   - Balcony Cat & Pet Protection (2-3 Hours SLA)
+   - Balcony AC Ledge & Utility Ducts (3-5 Hours SLA)
+4. **Locality Quick Launcher**:
+   - Dropdown of 25+ Hyderabad neighborhoods (Gachibowli, HITEC City, Kondapur, Kokapet, Financial District, Jubilee Hills, Banjara Hills, Miyapur, Chandanagar, Kukatpally, Secunderabad, etc.) that pre-fills quote parameters.
+5. **Dark/Light Theme Toggle**: Instant transition with persistent localStorage sync.
+6. **Footer Attribution**:
+   - `Proprietor: Manohar Gosala`
+   - `Designed & Developed by Prabhuteja Koda`
+
+---
+
+## 8. Mobile Performance Budgets & Core Web Vitals (Hyderabad 4G/5G)
+
+| Metric | Target | Optimization Implemented |
+|---|---|---|
+| **Largest Contentful Paint (LCP)** | `< 1.8s` | WebP image formats, lazy loading for below-the-fold media, SVG icons |
+| **First Input Delay / INP** | `< 45ms` | Touch-manipulation CSS reset, lightweight React state without heavy animation bundles |
+| **Cumulative Layout Shift (CLS)** | `0.00` | Explicit aspect ratios on all balcony photography and 100svh hero container |
+| **Bundle Size (Gzipped)** | `< 85 KB` | Tree-shaken Lucide icons, Vite code splitting, zero heavy CSS frameworks |
+| **Mobile Form Conversion** | `< 20s completion`| 2-Step bottom sheet with Indian telephone regex auto-formatting |
+
+---
+
+## 9. Mobile Conversion & Lead Telemetry Workflow
+
+```
+[Mobile Resident in Hyderabad]
+       │
+       ▼ (Taps "Free Inspection" on Capsule Dock or Hero)
+[Gesture Bottom Sheet Slides Up (Step 1)]
+       │
+       ▼ (Enters Name + 10-Digit Phone -> Validates)
+[Proceeds to Step 2 (Selects Balcony Net + Locality)]
+       │
+       ▼ (Taps "Confirm Free Laser Measurement")
+ ┌─────────────────────────────┴─────────────────────────────┐
+ │                                                           │
+ ▼ (Asynchronous AJAX POST)                                  ▼ (Optional Direct Chat)
+[FormSubmit API -> mahimanohar47@gmail.com]         [WhatsApp Direct Handoff]
+- Resident Name & Phone                             - wa.me/917702454046
+- Selected Balcony Service                          - Pre-filled message text
+- Hyderabad Locality & Society                      - Instant 5-minute reply
+- Timestamp & Device User-Agent
+```
+
+This ensures zero lead leakage even if mobile users have unstable cellular networks or close their browser immediately after submitting.

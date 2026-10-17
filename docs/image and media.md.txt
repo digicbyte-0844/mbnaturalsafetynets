@@ -1,0 +1,69 @@
+# MB NATURAL SAFETY NETS - Image, Media & Visual Asset Art Direction
+
+## 1. Visual Creative Direction & Brand Standards
+
+The visual identity of **MB NATURAL SAFETY NETS** (Proprietor: **Manohar Gosala**, Designed & Developed by: **Prabhuteja Koda**) shifts from amateur hardware photography to **"Modern High-Rise Architectural Safety"**:
+- **Aesthetic Tone**: Ultra-clean, sunlit contemporary high-rise apartments in Hyderabad (warm teak decking, glass railings, panoramic skyline views over HITEC City, Gachibowli, and Financial District).
+- **Transparency Emphasis**: Photography must clearly highlight the dual benefit: 100% unblocked skyline views and complete fall protection for children, toddlers, and pets, alongside complete pigeon exclusion.
+- **Lighting**: Bright natural morning sunlight (10:00 AM sun) or warm architectural golden hour.
+- **Human & Emotional Connection**: Happy families, young children, or household pets safely enjoying open balconies without vertigo or anxiety.
+- **Hardware Credibility**: Close-up details of marine-grade SS 316 cables, zero-crack nylon wall plugs, and precision turnbuckles.
+
+---
+
+## 2. Complete Asset Matrix & Target Specifications
+
+| Asset Identifier | File Path | Target Resolution | Target Format | Aspect Ratio | Creative Subject |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `hero-balcony` | `/images/hero-balcony.png` | 1920 × 1080 (Desktop)<br>1080 × 1920 (Mobile) | WebP / PNG | 16:9 & 9:16 | Panoramic high-rise penthouse balcony over Hyderabad skyline at sunrise. |
+| `pigeon-safety-net` | `/images/balcony-pigeon-net.png` | 1200 × 800 | WebP / PNG | 3:2 / 16:9 | Crystal-clear copolymer monofilament net, virtually invisible from 10ft. |
+| `balcony-child-safety` | `/images/invisible-grill-toddler.png` | 1200 × 800 | WebP / PNG | 3:2 / 16:9 | Toddler safely playing near balcony glass with SS 316 invisible grill cables. |
+| `balcony-before-mess` | `/images/balcony-before-mess.png` | 1200 × 800 | WebP / PNG | 3:2 / 16:9 | Balcony floor with pigeon droppings, feathers, and roosting pigeons. |
+| `balcony-after-clean` | `/images/balcony-after-clean.png` | 1200 × 800 | WebP / PNG | 3:2 / 16:9 | Identical angle: spotless sanitized balcony with MB Natural invisible barrier. |
+| `balcony-pet-safety` | `/images/balcony-pet-safety.png` | 1200 × 800 | WebP / PNG | 3:2 / 16:9 | Curious cat safely resting on high-rise balcony protected by transparent mesh. |
+| `balcony-duct-shaft` | `/images/balcony-duct-shaft.png` | 1200 × 800 | WebP / PNG | 3:2 / 16:9 | High-rise utility shaft and AC compressor ledge with heavy-duty bird net. |
+| `technician-laser` | `/images/technician-install.png` | 1200 × 800 | WebP / PNG | 3:2 / 16:9 | Certified Indian safety rigger using red laser calibrator on balcony slab. |
+
+---
+
+## 3. High-Fidelity AI Generation Prompts (Gemini / Imagen 3 / Flux.1)
+
+### 1. Hero High-Rise Balcony (`hero-balcony.png`)
+```text
+Architectural photography of a luxurious high-rise penthouse balcony in Hyderabad, modern glass balustrade, wooden teak decking, lush potted plants, sunny morning light, panoramic skyline view of Hyderabad high-rise towers in background, transparent ultra-fine monofilament safety netting installed across balcony opening, virtually invisible with subtle sunlight catch, clean minimal aesthetic, 8k resolution, photorealistic, interior design magazine quality, wide angle
+```
+
+### 2. Balcony Pigeon Safety Net (`balcony-pigeon-net.png`)
+```text
+Architectural photo of a modern luxury high-rise apartment balcony overlooking a city skyline, with an ultra-transparent monofilament pigeon safety net securely tensioned from railing to ceiling slab. The netting is crystal clear and lets in 100% natural sunlight. Beautiful potted green plants on clean tiled floor, elegant outdoor chairs, bright daylight, ultra-realistic, 8k
+```
+
+### 3. SS 316 Invisible Grills with Child Safety (`invisible-grill-toddler.png`)
+```text
+Candid lifestyle photograph of a 3-year-old toddler child and a cute household pet dog safely playing on a modern 18th-floor penthouse balcony, floor-to-ceiling sleek vertical stainless steel invisible grill cables spaced evenly at 2 inches, crystal clear city skyline view visible through the cables, warm late afternoon golden hour lighting, safe, peaceful, ultra-luxurious, photorealistic, 8k
+```
+
+### 4. Before: Pigeon Infested Balcony (`balcony-before-mess.png`)
+```text
+Realistic photo of a high-rise apartment balcony infested with pigeons, dirty tiled floor with bird droppings, stray feathers on railing, two pigeons roosting on outdoor AC unit and parapet wall, cluttered and distressed atmosphere, natural lighting, realistic urban apartment problem, 8k, photorealistic
+```
+
+### 5. After: Pristine Sanitized Balcony with Invisible Net (`balcony-after-clean.png`)
+```text
+Same balcony angle as before-mess, completely sanitized and gleaming clean, spotless tiles, modern outdoor seating furniture, transparent monofilament pigeon net securely anchored along the perimeter, pigeons flying away outside in the sky unable to enter, bright welcoming sunlight, beautiful and safe, 8k, photorealistic
+```
+
+### 6. Balcony Cat & Pet Safety Net (`balcony-pet-safety.png`)
+```text
+A curious domestic cat sitting safely on the ledge of a high-rise apartment balcony, protected by a fine transparent micro-mesh safety net that prevents falls. Clear blue sky and cityscape in the background, warm natural lighting, cozy and safe apartment lifestyle, ultra-realistic, 8k
+```
+
+### 7. Professional Rigging Technician with Laser Measure (`technician-install.png`)
+```text
+Professional certified Indian safety technician wearing branded navy blue polo uniform, safety harness, and white helmet, holding a digital red laser distance meter calibrating balcony ceiling anchor points, modern high-rise building background, confident, skilled craftsmanship, bright natural lighting, 8k, photorealistic
+```
+
+### 8. Balcony Utility Duct & AC Area Net (`balcony-duct-shaft.png`)
+```text
+Architectural photo of a clean high-rise residential building utility shaft and balcony AC compressor ledge area secured with heavy-duty white copolymer bird exclusion netting, preventing pigeon roosting, clean brick and concrete facade, professional installation, daytime, photorealistic
+```
