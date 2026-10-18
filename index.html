@@ -3,6 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          var isDark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
     <title>MB Natural Safety Nets — #1 Balcony Safety Nets in Hyderabad | 30-Min Rapid Inspection</title>
     
     <!-- SEO Meta Tags for Hyderabad Local SEO -->
@@ -11,35 +24,48 @@
     <meta name="theme-color" content="#090D16" />
     <meta name="author" content="MB Natural Safety Nets Hyderabad" />
     
-    <!-- Open Graph -->
+    <link rel="canonical" href="https://mbnaturalsafetynets.com/" />
+
+    <!-- Open Graph Metadata -->
     <meta property="og:title" content="MB Natural Safety Nets — Hyderabad's #1 Balcony Safety Nets Specialist" />
     <meta property="og:description" content="Protecting your high-rise balconies with 100% natural light transparency, 400kg+ tensile capacity, and a 5-Year Stamped Warranty. Fast 30-Min doorstep inspection across Hyderabad." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://mbnaturalsafetynets.com" />
-    <meta property="og:image" content="https://mbnaturalsafetynets.com/logo.jpeg" />
-    <meta property="og:image:width" content="1374" />
-    <meta property="og:image:height" content="1145" />
-    <meta property="og:image:alt" content="MB Natural Safety Nets Official Logo" />
+    <meta property="og:url" content="https://mbnaturalsafetynets.com/" />
+    <meta property="og:site_name" content="MB Natural Safety Nets" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:image" content="https://mbnaturalsafetynets.com/og-preview.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="MB Natural Safety Nets Hyderabad - Balcony Safety Nets and SS 316 Invisible Grills" />
+
+    <!-- Twitter Card Metadata -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MB Natural Safety Nets — Hyderabad's #1 Balcony Safety Specialist" />
+    <meta name="twitter:description" content="Certified Balcony Safety Nets, Pigeon Nets, Bird Spikes & SS 316 Invisible Grills. 30-Min Rapid Inspection across Hyderabad with 5-Year Stamped Warranty." />
+    <meta name="twitter:image" content="https://mbnaturalsafetynets.com/og-preview.jpg" />
+    <meta name="twitter:image:alt" content="MB Natural Safety Nets Hyderabad Social Preview" />
 
     <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 
-    <!-- Authentic Brand Favicon & Apple Touch Icons -->
+    <!-- Authentic Brand Favicon Suite & Web Manifest -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Structured Data JSON-LD for Local Business & Balcony Safety SEO -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "HomeAndConstructionBusiness",
+      "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
       "name": "MB Natural Safety Nets",
       "alternateName": "MB Balcony Safety Nets Hyderabad",
-      "image": "https://mbnaturalsafetynets.com/logo.jpeg",
-      "logo": "https://mbnaturalsafetynets.com/logo.png",
+      "image": "https://mbnaturalsafetynets.com/og-preview.jpg",
+      "logo": "https://mbnaturalsafetynets.com/favicon.svg",
       "@id": "https://mbnaturalsafetynets.com",
       "url": "https://mbnaturalsafetynets.com",
       "telephone": "+917702454046",
@@ -53,16 +79,16 @@
       "description": "Hyderabad's leading specialist in balcony safety nets, balcony pigeon netting, child balcony fall-prevention nets, and SS 316 marine-grade invisible grills with 30-minute doorstep laser measurement.",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "HITEC City Main Road, Madhapur & Gachibowli Hub",
+        "streetAddress": "Plot No. 42, i-Tech City, Gagillapur, Near Balanagar Industrial Area",
         "addressLocality": "Hyderabad",
         "addressRegion": "Telangana",
-        "postalCode": "500081",
+        "postalCode": "500043",
         "addressCountry": "IN"
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 17.4482,
-        "longitude": 78.3915
+        "latitude": 17.5855,
+        "longitude": 78.4124
       },
       "areaServed": [
         "Gachibowli", "HITEC City", "Kondapur", "Madhapur", "Financial District", 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, ShieldCheck, Sparkles, CheckCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, ShieldCheck, Sparkles, CheckCircle, ChevronDown } from 'lucide-react';
 import { brandConfig } from '../data/brandConfig';
 import { servicesData } from '../data/servicesData';
 import { allLocationsFlat } from '../data/locationsData';
@@ -10,6 +10,8 @@ import { generateWhatsAppUrl } from '../utils/generateWhatsAppUrl';
 import { sendEmailInquiry } from '../utils/sendEmailInquiry';
 import confetti from 'canvas-confetti';
 import logoEmblem from '../assets/logo-emblem.png';
+import SEOHead from '../components/seo/SEOHead';
+import CopyButton from '../components/ui/CopyButton';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -67,7 +69,13 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="pt-28 md:pt-36 pb-20 bg-canvas-light dark:bg-obsidian-canvas min-h-screen">
+    <div className="pt-8 sm:pt-12 md:pt-14 pb-20 bg-canvas-light dark:bg-obsidian-canvas min-h-screen">
+      <SEOHead
+        title="Contact MB Natural Safety Nets Hyderabad | Balanagar Hub"
+        description="Contact MB Natural Safety Nets at i-Tech City, Gagillapur, Balanagar, Hyderabad. Call +91 77024 54046 for 30-min doorstep laser inspection & estimate."
+        canonicalPath="/contact"
+        image="/images/hero-balcony.jpg"
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -111,7 +119,10 @@ export default function ContactPage() {
               <div className="w-10 h-10 rounded-2xl bg-brand-500/10 text-brand-600 dark:text-brand-400 flex items-center justify-center mb-3">
                 <Phone className="w-5 h-5" />
               </div>
-              <span className="text-[10px] font-extrabold uppercase text-slate-400">Direct Helpline</span>
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-extrabold uppercase text-slate-400">Direct Helpline</span>
+                <CopyButton textToCopy={brandConfig.phone} label="Copy phone number" />
+              </div>
               <h3 className="text-base font-bold text-slate-900 dark:text-white mt-0.5">{brandConfig.phone}</h3>
             </div>
             <span className="text-xs font-bold text-brand-600 dark:text-brand-400 mt-3">One-Tap Call Now →</span>
@@ -127,7 +138,10 @@ export default function ContactPage() {
               <div className="w-10 h-10 rounded-2xl bg-[#25D366]/20 text-[#25D366] flex items-center justify-center mb-3">
                 <WhatsAppIcon className="w-5 h-5 fill-current" />
               </div>
-              <span className="text-[10px] font-extrabold uppercase text-slate-400">WhatsApp Desk</span>
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-extrabold uppercase text-slate-400">WhatsApp Desk</span>
+                <CopyButton textToCopy={brandConfig.phone} label="Copy WhatsApp number" />
+              </div>
               <h3 className="text-base font-bold text-slate-900 dark:text-white mt-0.5">{brandConfig.phone}</h3>
             </div>
             <span className="text-xs font-bold text-emerald-500 mt-3">Start WhatsApp Chat →</span>
@@ -141,22 +155,35 @@ export default function ContactPage() {
               <div className="w-10 h-10 rounded-2xl bg-cyan-500/10 text-cyan-500 flex items-center justify-center mb-3">
                 <Mail className="w-5 h-5" />
               </div>
-              <span className="text-[10px] font-extrabold uppercase text-slate-400">Official Admin Email</span>
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-extrabold uppercase text-slate-400">Official Admin Email</span>
+                <CopyButton textToCopy={brandConfig.email} label="Copy email address" />
+              </div>
               <h3 className="text-xs font-bold text-slate-900 dark:text-white mt-0.5 break-all">{brandConfig.email}</h3>
             </div>
             <span className="text-[11px] text-sky-500 mt-3">Direct Inquiries & Quotations →</span>
           </a>
 
-          <div className="p-6 rounded-3xl bg-white dark:bg-obsidian-card border border-slate-200 dark:border-white/10 shadow-sm flex flex-col justify-between">
+          <a
+            href={brandConfig.hubMapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-6 rounded-3xl bg-white dark:bg-obsidian-card border border-slate-200 dark:border-white/10 shadow-sm hover:border-brand-500 transition-all flex flex-col justify-between"
+          >
             <div>
-              <div className="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-3">
-                <Clock className="w-5 h-5" />
+              <div className="w-10 h-10 rounded-2xl bg-brand-500/10 text-brand-600 dark:text-brand-400 flex items-center justify-center mb-3">
+                <MapPin className="w-5 h-5" />
               </div>
-              <span className="text-[10px] font-extrabold uppercase text-slate-400">Operating Hours</span>
-              <h3 className="text-xs font-bold text-slate-900 dark:text-white mt-0.5">7:00 AM – 9:00 PM IST</h3>
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-extrabold uppercase text-slate-400">Headquarters Office</span>
+                <CopyButton textToCopy={brandConfig.hubAddress} label="Copy office address" />
+              </div>
+              <h3 className="text-xs font-bold text-slate-900 dark:text-white mt-0.5 leading-snug">
+                i-Tech City, Gagillapur, Balanagar
+              </h3>
             </div>
-            <span className="text-[11px] text-emerald-500 font-semibold mt-3">7 Days / Week Active</span>
-          </div>
+            <span className="text-[11px] text-brand-600 dark:text-brand-400 font-bold mt-3">Open in Google Maps →</span>
+          </a>
         </div>
 
         {/* Form and Inspection Guarantee Container */}
@@ -204,7 +231,7 @@ export default function ContactPage() {
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="e.g. Vikram Reddy"
-                        className="w-full px-4 py-3 rounded-xl bg-canvas-muted dark:bg-obsidian-surface border border-canvas-border dark:border-obsidian-border text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+                        className="w-full px-4 py-3 rounded-xl bg-canvas-muted dark:bg-obsidian-surface border border-canvas-border dark:border-obsidian-border text-slate-900 dark:text-white text-base focus:outline-none focus:ring-2 focus:ring-brand-500"
                       />
                     </div>
 
@@ -220,44 +247,52 @@ export default function ContactPage() {
                         value={formData.phone}
                         onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value.replace(/\D/g, '') }))}
                         placeholder="10-digit mobile"
-                        className="w-full px-4 py-3 rounded-xl bg-canvas-muted dark:bg-obsidian-surface border border-canvas-border dark:border-obsidian-border text-slate-900 dark:text-white text-sm font-mono focus:outline-none focus:ring-2 focus:ring-brand-500"
+                        className="w-full px-4 py-3 rounded-xl bg-canvas-muted dark:bg-obsidian-surface border border-canvas-border dark:border-obsidian-border text-slate-900 dark:text-white text-base font-mono focus:outline-none focus:ring-2 focus:ring-brand-500"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-                        Balcony Safety Solution *
+                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 flex items-center justify-between">
+                        <span>Balcony Safety Solution *</span>
+                        <span className="text-[10px] text-brand-600 dark:text-brand-400 font-semibold">5-Yr Warranty</span>
                       </label>
-                      <select
-                        name="service"
-                        value={formData.service}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl bg-canvas-muted dark:bg-obsidian-surface border border-canvas-border dark:border-obsidian-border text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer"
-                      >
-                        {servicesData.map(s => (
-                          <option key={s.id} value={s.title}>{s.title}</option>
-                        ))}
-                      </select>
+                      <div className="relative">
+                        <select
+                          name="service"
+                          value={formData.service}
+                          onChange={handleChange}
+                          className="w-full pl-3.5 pr-10 py-3 rounded-xl bg-canvas-muted dark:bg-obsidian-surface border border-canvas-border dark:border-obsidian-border text-slate-900 dark:text-white text-base font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer appearance-none shadow-sm"
+                        >
+                          {servicesData.map(s => (
+                            <option key={s.id} value={s.title}>{s.title} ({s.priceRange})</option>
+                          ))}
+                        </select>
+                        <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      </div>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-                        Hyderabad Locality *
+                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 flex items-center justify-between">
+                        <span>Hyderabad Locality *</span>
+                        <span className="text-[10px] text-emerald-500 font-semibold">30-Min SLA Hub</span>
                       </label>
-                      <select
-                        name="locality"
-                        value={formData.locality}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl bg-canvas-muted dark:bg-obsidian-surface border border-canvas-border dark:border-obsidian-border text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer"
-                      >
-                        {allLocationsFlat.map(l => (
-                          <option key={`${l.name}-${l.pincode}`} value={l.name}>
-                            {l.name} ({l.pincode}) — SLA: {l.sla}
-                          </option>
-                        ))}
-                      </select>
+                      <div className="relative">
+                        <select
+                          name="locality"
+                          value={formData.locality}
+                          onChange={handleChange}
+                          className="w-full pl-3.5 pr-10 py-3 rounded-xl bg-canvas-muted dark:bg-obsidian-surface border border-canvas-border dark:border-obsidian-border text-slate-900 dark:text-white text-base font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer appearance-none shadow-sm"
+                        >
+                          {allLocationsFlat.map(l => (
+                            <option key={`${l.name}-${l.pincode}`} value={l.name}>
+                              {l.name} ({l.pincode}) — SLA: {l.sla}
+                            </option>
+                          ))}
+                        </select>
+                        <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      </div>
                     </div>
                   </div>
 
@@ -266,18 +301,21 @@ export default function ContactPage() {
                       <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
                         Preferred Inspection Slot
                       </label>
-                      <select
-                        name="preferredDate"
-                        value={formData.preferredDate}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl bg-canvas-muted dark:bg-obsidian-surface border border-canvas-border dark:border-obsidian-border text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer"
-                      >
-                        <option value="Earliest Available (Today / Tomorrow)">Earliest Available</option>
-                        <option value="Today Morning (9 AM - 1 PM)">Today Morning</option>
-                        <option value="Today Evening (3 PM - 7 PM)">Today Evening</option>
-                        <option value="Tomorrow Morning">Tomorrow Morning</option>
-                        <option value="Weekend Slot">Weekend Slot</option>
-                      </select>
+                      <div className="relative">
+                        <select
+                          name="preferredDate"
+                          value={formData.preferredDate}
+                          onChange={handleChange}
+                          className="w-full pl-3.5 pr-10 py-3 rounded-xl bg-canvas-muted dark:bg-obsidian-surface border border-canvas-border dark:border-obsidian-border text-slate-900 dark:text-white text-base font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer appearance-none shadow-sm"
+                        >
+                          <option value="Earliest Available (Today / Tomorrow)">Earliest Available (Today / Tomorrow)</option>
+                          <option value="Today Morning (9 AM - 1 PM)">Today Morning (9 AM - 1 PM)</option>
+                          <option value="Today Evening (3 PM - 7 PM)">Today Evening (3 PM - 7 PM)</option>
+                          <option value="Tomorrow Morning">Tomorrow Morning</option>
+                          <option value="Weekend Slot">Weekend Slot</option>
+                        </select>
+                        <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      </div>
                     </div>
 
                     <div>
@@ -290,7 +328,7 @@ export default function ContactPage() {
                         value={formData.dimensions}
                         onChange={handleChange}
                         placeholder="e.g. 2 Balconies, 18ft length"
-                        className="w-full px-4 py-3 rounded-xl bg-canvas-muted dark:bg-obsidian-surface border border-canvas-border dark:border-obsidian-border text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+                        className="w-full px-4 py-3 rounded-xl bg-canvas-muted dark:bg-obsidian-surface border border-canvas-border dark:border-obsidian-border text-slate-900 dark:text-white text-base focus:outline-none focus:ring-2 focus:ring-brand-500"
                       />
                     </div>
                   </div>
@@ -305,7 +343,7 @@ export default function ContactPage() {
                       value={formData.notes}
                       onChange={handleChange}
                       placeholder="e.g. My Home Bhooja, Tower 5. Need child fall safety on balcony railing."
-                      className="w-full px-4 py-3 rounded-xl bg-canvas-muted dark:bg-obsidian-surface border border-canvas-border dark:border-obsidian-border text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-canvas-muted dark:bg-obsidian-surface border border-canvas-border dark:border-obsidian-border text-slate-900 dark:text-white text-base focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none"
                     />
                   </div>
 

@@ -1,0 +1,26 @@
+{
+  "name": "MB Natural Safety Nets Hyderabad",
+  "short_name": "MB Safety Nets",
+  "description": "Hyderabad's #1 Specialist in Balcony Safety Nets, Bird Spikes & SS 316 Invisible Grills with 30-Minute Rapid Inspection.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090D16",
+  "theme_color": "#090D16",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

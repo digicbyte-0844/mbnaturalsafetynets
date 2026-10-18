@@ -78,7 +78,7 @@ export default function Footer({ onOpenQuoteSheet }) {
           
           {/* Brand Info & Proprietor Card (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
-            <Link to="/" className="flex items-center gap-3 group inline-flex" aria-label="MB Natural Safety Nets">
+            <Link to="/" className="flex items-center gap-3 group inline-flex" aria-label="Go to Homepage">
               <div className="h-12 w-16 flex items-center justify-center group-hover:scale-105 transition-transform">
                 <img
                   src={logoEmblem}
@@ -143,18 +143,20 @@ export default function Footer({ onOpenQuoteSheet }) {
             </h4>
             <ul className="space-y-2 text-slate-400">
               <li><Link to="/" className="hover:text-white transition-colors">Home Landing</Link></li>
-              <li><Link to="/services" className="hover:text-white transition-colors">Balcony Services</Link></li>
-              <li><Link to="/calculator" className="hover:text-white transition-colors">Balcony Cost Estimator</Link></li>
-              <li><Link to="/gallery" className="hover:text-white transition-colors">Balcony Installation Photos</Link></li>
+              <li><Link to="/services" className="hover:text-white transition-colors">Our Services</Link></li>
+              <li><Link to="/calculator" className="hover:text-white transition-colors">Cost Estimator</Link></li>
+              <li><Link to="/gallery" className="hover:text-white transition-colors">Installation Photos</Link></li>
               <li><Link to="/reviews" className="hover:text-white transition-colors">Customer Reviews (3,850+)</Link></li>
               <li><Link to="/contact" className="hover:text-white transition-colors">Contact Headquarters</Link></li>
+              <li><Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/terms-and-conditions" className="hover:text-white transition-colors">Terms & Warranty Policy</Link></li>
             </ul>
           </div>
 
-          {/* 5 Balcony Solutions (3 cols) */}
+          {/* 11 Solutions (3 cols) */}
           <div className="lg:col-span-3 space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-white">
-              Balcony Solutions
+              Safety & Sports Solutions
             </h4>
             <ul className="space-y-2">
               {servicesData.map((svc) => (
@@ -245,8 +247,12 @@ export default function Footer({ onOpenQuoteSheet }) {
             <div>
               © {new Date().getFullYear()} <strong className="text-white font-bold">{brandConfig.brandName}</strong>. All rights reserved.
             </div>
-            <div className="text-[11px] text-slate-500">
-              Registered Entity: {brandConfig.legalEntity} • Prop: <strong className="text-slate-300">{brandConfig.proprietor}</strong>
+            <div className="text-[11px] text-slate-500 flex flex-wrap items-center justify-center md:justify-start gap-1.5">
+              <span>Registered Entity: {brandConfig.legalEntity} • Prop: <strong className="text-slate-300">{brandConfig.proprietor}</strong></span>
+              <span>•</span>
+              <Link to="/privacy-policy" className="hover:text-white underline decoration-slate-700 underline-offset-2 transition-colors">Privacy Policy</Link>
+              <span>•</span>
+              <Link to="/terms-and-conditions" className="hover:text-white underline decoration-slate-700 underline-offset-2 transition-colors">Terms of Service</Link>
             </div>
           </div>
 

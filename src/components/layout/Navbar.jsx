@@ -20,7 +20,7 @@ import { servicesData } from '../../data/servicesData';
 import WhatsAppIcon from '../ui/WhatsAppIcon';
 import logoEmblem from '../../assets/logo-emblem.png';
 
-export default function Navbar({ onOpenMobileDrawer, onOpenQuoteSheet }) {
+export default function Navbar({ isMobileDrawerOpen = false, onOpenMobileDrawer, onOpenQuoteSheet }) {
   const { isDark, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
@@ -41,7 +41,7 @@ export default function Navbar({ onOpenMobileDrawer, onOpenQuoteSheet }) {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Balcony Services', path: '/services', hasDropdown: true },
+    { name: 'Services', path: '/services', hasDropdown: true },
     { name: 'Cost Calculator', path: '/calculator' },
     { name: 'Gallery', path: '/gallery' },
     { name: 'Reviews', path: '/reviews' },
@@ -49,7 +49,7 @@ export default function Navbar({ onOpenMobileDrawer, onOpenQuoteSheet }) {
   ];
 
   return (
-    <header className="fixed top-0 inset-x-0 z-40 transition-all duration-300">
+    <header className="sticky top-0 z-50 transition-all duration-300 w-full">
       
       {/* 1. Top High-Trust Utility Bar (Desktop / Tablet) */}
       <div className="hidden md:block bg-gradient-to-r from-slate-900 via-brand-950 to-slate-900 text-white text-[11px] py-1.5 px-4 border-b border-white/10 font-medium">
@@ -69,7 +69,7 @@ export default function Navbar({ onOpenMobileDrawer, onOpenQuoteSheet }) {
             <span className="text-white/20 hidden lg:inline">•</span>
             <span className="text-slate-300 hidden xl:inline-flex items-center gap-1">
               <MapPin className="w-3.5 h-3.5 text-amber-400" />
-              <span>Hub: Madhapur & Gachibowli</span>
+              <span>Office: i-Tech City, Gagillapur, Balanagar</span>
             </span>
           </div>
 
@@ -107,7 +107,7 @@ export default function Navbar({ onOpenMobileDrawer, onOpenQuoteSheet }) {
           <div className="flex items-center justify-between gap-2 sm:gap-4">
             
             {/* Brand Logo & Hyderabad Tag */}
-            <Link to="/" className="flex items-center gap-2 sm:gap-3 group shrink-0" aria-label="MB Natural Safety Nets Homepage">
+            <Link to="/" className="flex items-center gap-2 sm:gap-3 group shrink-0" aria-label="Go to Homepage">
               <div className="relative h-10 sm:h-11 w-14 sm:w-16 flex items-center justify-center p-0.5 group-hover:scale-105 transition-transform">
                 <img
                   src={logoEmblem}
@@ -165,42 +165,69 @@ export default function Navbar({ onOpenMobileDrawer, onOpenQuoteSheet }) {
                         <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isServicesOpen ? 'rotate-180 text-brand-500' : ''}`} />
                       </Link>
 
-                      {/* Services Mega Dropdown */}
+                      {/* Services Mega Dropdown (Elevated 2-Column UX) */}
                       {isServicesOpen && (
-                        <div className="absolute top-full left-0 w-80 pt-2 z-50">
-                          <div className="p-2.5 rounded-2xl bg-white dark:bg-obsidian-card border border-slate-200 dark:border-white/10 shadow-2xl space-y-1 animate-fade-in">
-                            <div className="px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 flex items-center justify-between">
-                              <span>5 Certified Balcony Solutions</span>
-                              <span className="text-emerald-500">5-Yr Warranty</span>
+                        <div className="absolute top-full left-0 w-[580px] pt-2 z-50">
+                          <div className="p-4 rounded-3xl bg-white dark:bg-obsidian-card border border-slate-200/90 dark:border-white/10 shadow-2xl space-y-2 animate-fade-in backdrop-blur-2xl">
+                            
+                            {/* Header */}
+                            <div className="px-2 py-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 flex items-center justify-between border-b border-slate-100 dark:border-white/5 pb-2">
+                              <span>11 Certified Safety, Sports & Bird Netting Solutions</span>
+                              <span className="text-emerald-500 font-bold flex items-center gap-1">
+                                <ShieldCheck className="w-3 h-3" />
+                                5-Yr Stamped Warranty
+                              </span>
                             </div>
 
-                            {servicesData.map((svc) => (
-                              <Link
-                                key={svc.id}
-                                to={`/services/${svc.id}`}
-                                className="p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/70 flex items-center justify-between transition-colors group/item"
-                              >
-                                <div>
-                                  <span className="text-xs font-bold text-slate-900 dark:text-white block group-hover/item:text-brand-600 dark:group-hover/item:text-brand-400">
-                                    {svc.title}
-                                  </span>
-                                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">
-                                    {svc.priceRange} • {svc.turnaround}
-                                  </span>
-                                </div>
-                                <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover/item:text-brand-500 group-hover/item:translate-x-0.5 transition-all" />
-                              </Link>
-                            ))}
+                            {/* Service Items Grid (2 Columns) */}
+                            <div className="grid grid-cols-2 gap-1.5 pt-1 max-h-[380px] overflow-y-auto no-scrollbar">
+                              {servicesData.map((svc) => (
+                                <Link
+                                  key={svc.id}
+                                  to={`/services/${svc.id}`}
+                                  className="p-2 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800/70 flex items-center justify-between transition-all group/item border border-transparent hover:border-slate-200/60 dark:hover:border-white/5"
+                                >
+                                  <div className="flex items-center gap-2.5 min-w-0">
+                                    <div className="w-7 h-7 rounded-lg bg-brand-500/10 text-brand-600 dark:text-brand-400 flex items-center justify-center font-bold text-xs shrink-0 group-hover/item:bg-brand-600 group-hover/item:text-white transition-colors">
+                                      {svc.shortTitle.charAt(0)}
+                                    </div>
+                                    <div className="min-w-0">
+                                      <span className="text-xs font-bold text-slate-900 dark:text-white block group-hover/item:text-brand-600 dark:group-hover/item:text-brand-400 transition-colors truncate">
+                                        {svc.shortTitle}
+                                      </span>
+                                      <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono block truncate">
+                                        {svc.priceRange}
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <ArrowRight className="w-3 h-3 text-slate-400 group-hover/item:text-brand-500 group-hover/item:translate-x-0.5 transition-all shrink-0 ml-1" />
+                                </Link>
+                              ))}
+                            </div>
 
-                            <div className="pt-2 border-t border-slate-100 dark:border-white/5">
+                            {/* Footer Callout */}
+                            <div className="pt-2.5 border-t border-slate-100 dark:border-white/5 flex items-center justify-between px-2">
                               <Link
                                 to="/services"
-                                className="text-xs font-bold text-brand-600 dark:text-brand-400 hover:underline px-3 py-1 flex items-center justify-between"
+                                className="text-xs font-bold text-brand-600 dark:text-brand-400 hover:underline flex items-center gap-1"
                               >
-                                <span>Compare All Balcony Packages</span>
+                                <span>Explore All 11 Solutions & Packages</span>
                                 <span>→</span>
                               </Link>
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  setIsServicesOpen(false);
+                                  onOpenQuoteSheet();
+                                }}
+                                className="text-[11px] font-extrabold text-emerald-600 dark:text-emerald-400 hover:underline cursor-pointer flex items-center gap-1"
+                              >
+                                <Sparkles className="w-3 h-3 text-amber-400" />
+                                <span>Book Free Measurement</span>
+                              </button>
                             </div>
+
                           </div>
                         </div>
                       )}
@@ -225,7 +252,7 @@ export default function Navbar({ onOpenMobileDrawer, onOpenQuoteSheet }) {
             </nav>
 
             {/* Right Header Actions */}
-            <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+            <div className="flex items-center gap-2 shrink-0">
               
               {/* Dark / Light Mode Switcher */}
               <button
@@ -236,17 +263,6 @@ export default function Navbar({ onOpenMobileDrawer, onOpenQuoteSheet }) {
               >
                 {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4" />}
               </button>
-
-              {/* Quick WhatsApp Shortcut (Mobile & Tablet) */}
-              <a
-                href={`https://wa.me/${brandConfig.whatsapp}?text=Hi%20MB%20Natural%20Safety%20Nets%2C%20I%20would%20like%20a%20free%20doorstep%20balcony%20inspection%20in%20Hyderabad.`}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="WhatsApp MB Natural Safety Nets"
-                className="lg:hidden w-9 h-9 rounded-xl bg-[#25D366]/15 text-[#25D366] flex items-center justify-center border border-[#25D366]/25 active:scale-95 transition-transform"
-              >
-                <WhatsAppIcon className="w-4 h-4 fill-current" />
-              </a>
 
               {/* Direct Phone Dial (Desktop) */}
               <a
@@ -271,8 +287,10 @@ export default function Navbar({ onOpenMobileDrawer, onOpenQuoteSheet }) {
               <button
                 type="button"
                 onClick={onOpenMobileDrawer}
-                aria-label="Open Navigation Menu"
-                className="lg:hidden w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 flex items-center justify-center cursor-pointer active:scale-95 border border-slate-200/60 dark:border-white/5"
+                aria-label={isMobileDrawerOpen ? "Close navigation menu" : "Open navigation menu"}
+                aria-expanded={isMobileDrawerOpen}
+                aria-controls="mobile-drawer"
+                className="lg:hidden w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 flex items-center justify-center cursor-pointer active:scale-95 border border-slate-200/60 dark:border-white/5 touch-target"
               >
                 <Menu className="w-5 h-5" />
               </button>

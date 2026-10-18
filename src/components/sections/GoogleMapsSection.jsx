@@ -14,13 +14,13 @@ export default function GoogleMapsSection() {
           <div className="lg:col-span-5 space-y-6">
             <div>
               <Badge variant="azure" size="sm" className="mb-3">
-                CENTRAL HYDERABAD BALCONY SAFETY HUB
+                CENTRAL HYDERABAD HEADQUARTERS & RIGGING HUB
               </Badge>
               <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
-                Visit Our Hub or Request 30-Min Balcony Dispatch
+                Visit Our Office or Request 30-Min Fast Dispatch
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
-                Centrally located along HITEC City and Gachibowli to provide rapid doorstep balcony laser measurement and same-day installation across Hyderabad.
+                Centrally positioned at i-Tech City, Gagillapur near Balanagar and the ORR, providing rapid doorstep laser measurement and same-day certified installation across all of Hyderabad.
               </p>
             </div>
 
@@ -30,10 +30,13 @@ export default function GoogleMapsSection() {
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Headquarters Address</h4>
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Headquarters Office Address</h4>
                   <p className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">
                     {brandConfig.hubAddress}
                   </p>
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400 block mt-0.5">
+                    Landmark: {brandConfig.hubLandmark}
+                  </span>
                 </div>
               </div>
 
@@ -47,7 +50,7 @@ export default function GoogleMapsSection() {
                     {brandConfig.workingHours}
                   </p>
                   <span className="text-[11px] text-emerald-500 font-semibold">
-                    * Emergency toddler balcony protection & pigeon removal teams on standby.
+                    * Emergency toddler protection & humane bird removal teams on standby 7 days/week.
                   </span>
                 </div>
               </div>
@@ -73,12 +76,12 @@ export default function GoogleMapsSection() {
             </div>
 
             <a
-              href="https://maps.google.com/?q=HITEC+City+Madhapur+Hyderabad"
+              href={brandConfig.hubMapUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-xs font-bold text-brand-600 dark:text-brand-400 hover:underline"
             >
-              <span>Open in Google Maps Application</span>
+              <span>Open i-Tech City, Gagillapur in Google Maps</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </div>
@@ -87,8 +90,8 @@ export default function GoogleMapsSection() {
           <div className="lg:col-span-7">
             <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-slate-900">
               <iframe
-                title="MB Natural Safety Nets Hyderabad Hub"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60906.94539169651!2d78.34898165702283!3d17.447753177721598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb93dc8c5d69df%3A0x19688beb557fa0ee!2sHITEC%20City%2C%20Hyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin"
+                title="MB Natural Safety Nets i-Tech City Gagillapur Balanagar Office Hub"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30438.487661578584!2d78.385000!3d17.585500!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb8f7c9e0cb6d1%3A0x6b907db1855a9b70!2sGagillapur%2C%20Hyderabad%2C%20Telangana%20500043!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin"
                 className="w-full h-full border-0 filter contrast-105"
                 loading="lazy"
                 allowFullScreen
@@ -102,10 +105,10 @@ export default function GoogleMapsSection() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                   </span>
-                  <span className="text-xs font-bold text-white">Mobile Balcony Riggers Active</span>
+                  <span className="text-xs font-bold text-white">Central Hub: Gagillapur Balanagar</span>
                 </div>
                 <p className="text-[11px] text-slate-300 mt-1">
-                  14 mobile technician units active now in Gachibowli, HITEC City, Kondapur, Kokapet & Kukatpally.
+                  18 mobile technician units dispatched across Balanagar, Kukatpally, HITEC City, Gachibowli & Secunderabad.
                 </p>
               </div>
             </div>

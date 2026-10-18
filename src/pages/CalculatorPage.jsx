@@ -5,10 +5,16 @@ import Badge from '../components/ui/Badge';
 import { brandConfig } from '../data/brandConfig';
 import { Ruler } from 'lucide-react';
 import logoEmblem from '../assets/logo-emblem.png';
+import SEOHead from '../components/seo/SEOHead';
 
 export default function CalculatorPage({ onOpenQuoteSheet }) {
   return (
-    <div className="pt-28 md:pt-36 pb-20 bg-canvas-light dark:bg-obsidian-canvas min-h-screen">
+    <div className="pt-8 sm:pt-12 md:pt-14 pb-20 bg-canvas-light dark:bg-obsidian-canvas min-h-screen">
+      <SEOHead
+        title="Balcony Safety Nets Cost Calculator Hyderabad | MB"
+        description="Instant cost calculator for balcony safety nets, pigeon nets, bird spikes & SS 316 invisible grills in Hyderabad. Get accurate price estimates in seconds."
+        canonicalPath="/calculator"
+      />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -26,13 +32,13 @@ export default function CalculatorPage({ onOpenQuoteSheet }) {
             />
           </div>
           <Badge variant="azure" size="sm" className="mb-3">
-            BALCONY ESTIMATION & STRESS SIMULATION LAB
+            SAFETY & SPORTS NETTING ESTIMATION LAB
           </Badge>
           <h1 className="text-3xl sm:text-5xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Balcony Safety Net & Invisible Grill <span className="text-brand-600 dark:text-brand-400">Cost Estimator</span>
+            Safety Nets, Sports & Invisible Grill <span className="text-brand-600 dark:text-brand-400">Cost Estimator</span>
           </h1>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-3">
-            Calculate exact pricing for your apartment balcony in Hyderabad. Adjust length, railing-to-ceiling height, and number of balcony units below.
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
+            Calculate exact pricing for balcony safety nets, pigeon exclusion, bird spikes, rooftop cricket practice pitches, and invisible grills across Hyderabad. Adjust dimensions and units below.
           </p>
         </div>
 

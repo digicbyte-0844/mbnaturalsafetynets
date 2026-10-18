@@ -139,8 +139,8 @@ export default function EngineeringSection() {
             </p>
           </div>
 
-          <div className="overflow-x-auto no-scrollbar">
-            <table className="w-full text-left text-xs sm:text-sm">
+          <div className="overflow-x-auto w-full no-scrollbar">
+            <table className="w-full min-w-[560px] text-left text-xs sm:text-sm">
               <thead>
                 <tr className="border-b border-white/10 text-[11px] uppercase tracking-wider text-slate-400">
                   <th className="py-3 px-4">Feature / Balcony Specification</th>

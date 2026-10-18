@@ -1,18 +1,32 @@
-import React, { useState } from 'react';
-import { Plus, Minus, HelpCircle, PhoneCall, Sparkles } from 'lucide-react';
+import React from 'react';
+import { ChevronDown, PhoneCall, Sparkles } from 'lucide-react';
 import { faqsData } from '../../data/faqsData';
 import { brandConfig } from '../../data/brandConfig';
 import Badge from '../ui/Badge';
 
 export default function FAQSection({ onOpenQuoteSheet }) {
-  const [openId, setOpenId] = useState('faq-1');
-
-  const toggleAccordion = (id) => {
-    setOpenId(prev => (prev === id ? null : id));
+  // Construct FAQPage JSON-LD Schema
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqsData.map(f => ({
+      "@type": "Question",
+      "name": f.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": f.answer
+      }
+    }))
   };
 
   return (
     <section id="faqs" className="py-16 sm:py-24 bg-canvas-muted dark:bg-[#070b14] border-t border-canvas-border dark:border-white/5">
+      {/* FAQPage JSON-LD Rich Snippet for Search Engines */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -28,50 +42,28 @@ export default function FAQSection({ onOpenQuoteSheet }) {
           </p>
         </div>
 
-        {/* Hairline Accordion List */}
+        {/* Accessible Semantic Details / Summary Accordion List */}
         <div className="space-y-3">
-          {faqsData.map((faq) => {
-            const isOpen = openId === faq.id;
-
-            return (
-              <div
-                key={faq.id}
-                className="bg-white dark:bg-obsidian-card rounded-2xl border border-slate-200/80 dark:border-white/10 overflow-hidden shadow-sm transition-all"
-              >
-                <button
-                  type="button"
-                  onClick={() => toggleAccordion(faq.id)}
-                  aria-expanded={isOpen}
-                  className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 cursor-pointer select-none"
-                >
-                  <span className="text-sm sm:text-base font-bold text-slate-900 dark:text-white leading-snug">
-                    {faq.question}
-                  </span>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors ${
-                    isOpen 
-                      ? 'bg-brand-600 text-white' 
-                      : 'bg-slate-100 dark:bg-obsidian-surface text-slate-600 dark:text-slate-300'
-                  }`}>
-                    {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                  </div>
-                </button>
-
-                {/* Animated Height Container */}
-                <div
-                  className={`grid transition-all duration-300 ease-in-out ${
-                    isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <div className="px-5 pb-5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-white/5 pt-3">
-                      {faq.answer}
-                    </div>
-                  </div>
+          {faqsData.map((faq, index) => (
+            <details
+              key={faq.id}
+              open={index === 0}
+              className="group bg-white dark:bg-obsidian-card rounded-2xl border border-slate-200/80 dark:border-white/10 overflow-hidden shadow-sm transition-all duration-200 hover:border-brand-500/40"
+            >
+              <summary className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 rounded-2xl">
+                <span className="text-sm sm:text-base font-bold text-slate-900 dark:text-white leading-snug group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
+                  {faq.question}
+                </span>
+                <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 bg-slate-100 dark:bg-obsidian-surface text-slate-600 dark:text-slate-300 group-open:bg-brand-600 group-open:text-white transition-colors duration-200">
+                  <ChevronDown className="w-4 h-4 transition-transform duration-300 group-open:rotate-180" />
                 </div>
+              </summary>
 
+              <div className="px-5 pb-5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-white/5 pt-3 animate-fade-in">
+                {faq.answer}
               </div>
-            );
-          })}
+            </details>
+          ))}
         </div>
 
         {/* Bottom Help Box */}
@@ -96,10 +88,10 @@ export default function FAQSection({ onOpenQuoteSheet }) {
             <button
               type="button"
               onClick={() => onOpenQuoteSheet()}
-              className="flex-1 sm:flex-none min-h-[44px] px-5 py-2.5 rounded-xl bg-slate-900/40 border border-white/30 text-white font-extrabold text-xs hover:bg-slate-900/60 transition-colors flex items-center justify-center gap-2"
+              className="flex-1 sm:flex-none min-h-[44px] px-5 py-2.5 rounded-xl bg-slate-900/40 border border-white/30 text-white font-extrabold text-xs hover:bg-slate-900/60 transition-colors flex items-center justify-center gap-2 cursor-pointer"
             >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Free Inspection</span>
+              <Sparkles className="w-4 h-4 text-amber-300" />
+              <span>Book Free Inspection</span>
             </button>
           </div>
         </div>

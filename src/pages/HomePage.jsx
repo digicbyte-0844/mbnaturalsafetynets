@@ -14,9 +14,17 @@ import { Sparkles, Phone, ShieldCheck } from 'lucide-react';
 import { brandConfig } from '../data/brandConfig';
 import logoEmblem from '../assets/logo-emblem.png';
 
+import SEOHead from '../components/seo/SEOHead';
+
 export default function HomePage({ onOpenQuoteSheet }) {
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="Balcony Safety Nets Hyderabad | MB Natural Safety Nets"
+        description="Hyderabad's top certified specialist in high-rise balcony safety nets, bird spikes & SS 316 invisible grills. 30-min doorstep inspection & 5-yr stamped warranty."
+        canonicalPath="/"
+      />
+
       {/* 1. Hero with Interactive Changeable Balcony Views */}
       <Hero onOpenQuoteSheet={onOpenQuoteSheet} />
 

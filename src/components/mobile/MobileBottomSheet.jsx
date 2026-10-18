@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, CheckCircle, ShieldCheck, Clock, ArrowRight, ArrowLeft, Send } from 'lucide-react';
+import { X, CheckCircle, ShieldCheck, Clock, ArrowRight, ArrowLeft, Send, ChevronDown } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { servicesData } from '../../data/servicesData';
 import { allLocationsFlat } from '../../data/locationsData';
@@ -46,6 +46,17 @@ export default function MobileBottomSheet({ isOpen, onClose, initialServiceId = 
       document.body.style.overflow = 'unset';
     };
   }, [isOpen]);
+
+  // Close bottom sheet on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
 
   // Handle Touch Pull-down to Dismiss
   const handleTouchStart = (e) => {
@@ -120,7 +131,7 @@ export default function MobileBottomSheet({ isOpen, onClose, initialServiceId = 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center md:items-center bg-slate-950/70 backdrop-blur-sm transition-opacity duration-300">
+    <div className="fixed inset-0 z-50 flex items-end justify-center md:items-center bg-slate-950/70 backdrop-blur-sm transition-opacity duration-300 no-print">
       
       {/* Backdrop overlay dismiss */}
       <div className="absolute inset-0" onClick={onClose} />
@@ -260,7 +271,7 @@ export default function MobileBottomSheet({ isOpen, onClose, initialServiceId = 
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="e.g. Ramesh Reddy"
-                      className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-obsidian-surface border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-obsidian-surface border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-base focus:outline-none focus:ring-2 focus:ring-brand-500"
                     />
                   </div>
 
@@ -279,7 +290,7 @@ export default function MobileBottomSheet({ isOpen, onClose, initialServiceId = 
                         value={phone}
                         onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
                         placeholder="77024 54046"
-                        className="w-full pl-14 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-obsidian-surface border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm font-mono focus:outline-none focus:ring-2 focus:ring-brand-500"
+                        className="w-full pl-14 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-obsidian-surface border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-base font-mono focus:outline-none focus:ring-2 focus:ring-brand-500"
                       />
                     </div>
                     <span className="text-[11px] text-slate-400 mt-1 block">
@@ -312,37 +323,45 @@ export default function MobileBottomSheet({ isOpen, onClose, initialServiceId = 
               {step === 2 && (
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-                      Select Balcony Safety Solution *
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 flex items-center justify-between">
+                      <span>Select Balcony Safety Solution *</span>
+                      <span className="text-[10px] text-brand-600 dark:text-brand-400 font-semibold">5-Yr Stamped Warranty</span>
                     </label>
-                    <select
-                      value={selectedService}
-                      onChange={(e) => setSelectedService(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-obsidian-surface border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer"
-                    >
-                      {servicesData.map(s => (
-                        <option key={s.id} value={s.title}>
-                          {s.title} ({s.priceRange})
-                        </option>
-                      ))}
-                    </select>
+                    <div className="relative">
+                      <select
+                        value={selectedService}
+                        onChange={(e) => setSelectedService(e.target.value)}
+                        className="w-full pl-3.5 pr-10 py-3 rounded-xl bg-slate-50 dark:bg-obsidian-surface border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-base font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer appearance-none shadow-sm"
+                      >
+                        {servicesData.map(s => (
+                          <option key={s.id} value={s.title}>
+                            {s.title} ({s.priceRange})
+                          </option>
+                        ))}
+                      </select>
+                      <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-                      Hyderabad Locality / Apartment Community *
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 flex items-center justify-between">
+                      <span>Hyderabad Locality / Apartment Community *</span>
+                      <span className="text-[10px] text-emerald-500 font-semibold">30-Min SLA Hub</span>
                     </label>
-                    <select
-                      value={selectedLocality}
-                      onChange={(e) => setSelectedLocality(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-obsidian-surface border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer"
-                    >
-                      {allLocationsFlat.map(l => (
-                        <option key={`${l.name}-${l.pincode}`} value={l.name}>
-                          {l.name} ({l.pincode}) — SLA: {l.sla}
-                        </option>
-                      ))}
-                    </select>
+                    <div className="relative">
+                      <select
+                        value={selectedLocality}
+                        onChange={(e) => setSelectedLocality(e.target.value)}
+                        className="w-full pl-3.5 pr-10 py-3 rounded-xl bg-slate-50 dark:bg-obsidian-surface border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-base font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer appearance-none shadow-sm"
+                      >
+                        {allLocationsFlat.map(l => (
+                          <option key={`${l.name}-${l.pincode}`} value={l.name}>
+                            {l.name} ({l.pincode}) — SLA: {l.sla}
+                          </option>
+                        ))}
+                      </select>
+                      <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
@@ -350,17 +369,20 @@ export default function MobileBottomSheet({ isOpen, onClose, initialServiceId = 
                       <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
                         Preferred Inspection Date
                       </label>
-                      <select
-                        value={preferredDate}
-                        onChange={(e) => setPreferredDate(e.target.value)}
-                        className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-obsidian-surface border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-brand-500"
-                      >
-                        <option value="Earliest Available (Today / Tomorrow)">Earliest Available</option>
-                        <option value="Today Morning (9 AM - 1 PM)">Today Morning</option>
-                        <option value="Today Evening (3 PM - 7 PM)">Today Evening</option>
-                        <option value="Tomorrow Morning">Tomorrow Morning</option>
-                        <option value="Weekend Slot">This Weekend</option>
-                      </select>
+                      <div className="relative">
+                        <select
+                          value={preferredDate}
+                          onChange={(e) => setPreferredDate(e.target.value)}
+                          className="w-full pl-3 pr-8 py-2.5 rounded-xl bg-slate-50 dark:bg-obsidian-surface border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-base focus:outline-none focus:ring-2 focus:ring-brand-500 appearance-none shadow-sm cursor-pointer"
+                        >
+                          <option value="Earliest Available (Today / Tomorrow)">Earliest Available</option>
+                          <option value="Today Morning (9 AM - 1 PM)">Today Morning</option>
+                          <option value="Today Evening (3 PM - 7 PM)">Today Evening</option>
+                          <option value="Tomorrow Morning">Tomorrow Morning</option>
+                          <option value="Weekend Slot">This Weekend</option>
+                        </select>
+                        <ChevronDown className="w-3.5 h-3.5 text-slate-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      </div>
                     </div>
 
                     <div>
@@ -372,7 +394,7 @@ export default function MobileBottomSheet({ isOpen, onClose, initialServiceId = 
                         value={dimensions}
                         onChange={(e) => setDimensions(e.target.value)}
                         placeholder="e.g. 2 Balconies"
-                        className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-obsidian-surface border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-brand-500"
+                        className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-obsidian-surface border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-base focus:outline-none focus:ring-2 focus:ring-brand-500"
                       />
                     </div>
                   </div>

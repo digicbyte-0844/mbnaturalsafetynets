@@ -7,6 +7,7 @@ import Badge from '../components/ui/Badge';
 import WhatsAppIcon from '../components/ui/WhatsAppIcon';
 import { getDirectWhatsAppUrl } from '../utils/generateWhatsAppUrl';
 import logoEmblem from '../assets/logo-emblem.png';
+import SEOHead from '../components/seo/SEOHead';
 
 export default function ServiceDetailPage({ onOpenQuoteSheet }) {
   const { id } = useParams();
@@ -16,24 +17,69 @@ export default function ServiceDetailPage({ onOpenQuoteSheet }) {
     return <Navigate to="/services" replace />;
   }
 
-  const relatedServices = servicesData.filter(s => s.id !== service.id).slice(0, 3);
+  const sameCategory = servicesData.filter(s => s.id !== service.id && s.category === service.category);
+  const otherCategory = servicesData.filter(s => s.id !== service.id && s.category !== service.category);
+  const relatedServices = [...sameCategory, ...otherCategory].slice(0, 3);
 
   return (
-    <div className="pt-28 md:pt-36 pb-20 bg-canvas-light dark:bg-obsidian-canvas min-h-screen">
+    <div className="pt-8 sm:pt-12 md:pt-14 pb-20 bg-canvas-light dark:bg-obsidian-canvas min-h-screen">
+      <SEOHead
+        title={`${service.title} Hyderabad | MB Safety Nets`}
+        description={`${service.fullDescription.slice(0, 145)}... 5-Year Stamped Doorstep Warranty in Hyderabad.`}
+        canonicalPath={`/services/${service.id}`}
+        ogImage={service.heroImage}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Breadcrumb Navigation */}
         <div className="flex items-center gap-2 text-xs text-slate-500 mb-6">
           <Link to="/" className="hover:text-brand-600 transition-colors">Home</Link>
           <span>/</span>
-          <Link to="/services" className="hover:text-brand-600 transition-colors">Balcony Services</Link>
+          <Link to="/services" className="hover:text-brand-600 transition-colors">Our Services</Link>
           <span>/</span>
           <span className="text-slate-800 dark:text-slate-200 font-bold">{service.shortTitle}</span>
         </div>
 
-        {/* Cinematic Hero */}
+        {/* Cinematic Hero: Image First, Content Next */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16">
-          <div className="lg:col-span-7 space-y-4">
+          
+          {/* 1. FIRST: Visual Image Showcase Card (5 cols on desktop, 1st on mobile) */}
+          <div className="order-1 lg:col-span-5 relative aspect-[16/11] rounded-3xl overflow-hidden shadow-2xl bg-slate-900 border border-slate-200 dark:border-white/10 group select-none">
+            <img
+              src={service.heroImage}
+              alt={service.title}
+              draggable={false}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none pointer-events-none"
+              onError={(e) => {
+                e.currentTarget.src = '/images/hero-balcony.jpg';
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
+            
+            {/* Floating Top Price Tag */}
+            <div className="absolute top-3.5 left-3.5 px-3 py-1.5 rounded-xl bg-slate-900/90 backdrop-blur-md border border-white/20 text-white font-mono text-xs font-bold shadow-lg">
+              {service.priceRange}
+            </div>
+
+            {/* Floating Top Right Warranty Badge */}
+            <div className="absolute top-3.5 right-3.5 px-3 py-1.5 rounded-xl bg-emerald-500/90 text-white text-xs font-bold flex items-center gap-1 shadow-lg">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span>{service.badge}</span>
+            </div>
+
+            {/* Bottom Floating Rating Strip */}
+            <div className="absolute bottom-3.5 left-3.5 right-3.5 flex items-center justify-between text-white text-xs">
+              <span className="font-bold text-amber-300">
+                ★ {service.rating} ({service.reviewsCount} verified reviews)
+              </span>
+              <span className="text-[11px] font-mono text-slate-300">
+                Turnaround: {service.turnaround}
+              </span>
+            </div>
+          </div>
+
+          {/* 2. NEXT: High-Impact Typography & Specifications (7 cols on desktop, 2nd on mobile) */}
+          <div className="order-2 lg:col-span-7 space-y-4">
             <div className="flex items-center gap-2.5">
               <div className="w-10 h-7 flex items-center justify-center shrink-0">
                 <img
@@ -80,50 +126,55 @@ export default function ServiceDetailPage({ onOpenQuoteSheet }) {
                 className="min-h-[48px] px-8 py-3 rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-sky-400 hover:from-brand-500 hover:to-sky-300 text-white font-extrabold text-sm shadow-glow-azure flex items-center gap-2 cursor-pointer"
               >
                 <Sparkles className="w-4 h-4" />
-                <span>Book 30-Min Free Balcony Measurement</span>
+                <span>Book Free Laser Measurement & Estimate</span>
               </button>
 
               <a
                 href={getDirectWhatsAppUrl(`Hi MB Natural Safety Nets, I would like a quote for ${service.title} in Hyderabad.`)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="min-h-[48px] px-6 py-3 rounded-xl bg-[#25D366]/20 hover:bg-[#25D366]/30 text-[#25D366] font-bold text-xs flex items-center gap-2 border border-[#25D366]/30 transition-colors"
+                className="min-h-[48px] px-6 py-3 rounded-xl bg-[#25D366]/20 hover:bg-[#25D366]/30 text-[#25D366] font-bold text-xs flex items-center gap-2 border border-[#25D366]/30 transition-colors touch-target"
               >
                 <WhatsAppIcon className="w-4 h-4 fill-current" />
                 <span>WhatsApp Quote</span>
               </a>
+
+              <a
+                href={`tel:${brandConfig.phoneRaw}`}
+                className="min-h-[48px] px-6 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-bold text-xs flex items-center gap-2 border border-slate-200/80 dark:border-white/10 transition-colors touch-target"
+              >
+                <Phone className="w-4 h-4 text-emerald-500" />
+                <span>Call {brandConfig.phone}</span>
+              </a>
             </div>
           </div>
 
-          <div className="lg:col-span-5 relative aspect-[16/11] rounded-3xl overflow-hidden shadow-2xl bg-slate-900 border border-slate-200 dark:border-white/10">
-            <img
-              src={service.heroImage}
-              alt={service.title}
-              className="w-full h-full object-cover"
-            />
-          </div>
         </div>
 
-        {/* Interactive Balcony Installation Showcase */}
+        {/* Interactive Installation Showcase */}
         <div className="my-16 p-6 sm:p-10 rounded-3xl bg-white dark:bg-obsidian-card border border-slate-200 dark:border-white/10 shadow-xl">
           <div className="text-center max-w-2xl mx-auto mb-8">
             <Badge variant="emerald" size="sm" className="mb-2">
-              VERIFIED ARCHITECTURAL INSTALLATION
+              VERIFIED ARCHITECTURAL & SPORTS INSTALLATION
             </Badge>
             <h2 className="text-xl sm:text-3xl font-display font-extrabold text-slate-900 dark:text-white">
-              {service.title} in Real High-Rise Balconies
+              {service.title} in Real Site Installations
             </h2>
             <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-              Precision tensioned across luxury residential apartments in Hyderabad. Certified 5-Year Stamped Guarantee.
+              Precision tensioned across high-rise apartments, villas, sports academies, and grounds in Hyderabad. Certified 5-Year Stamped Guarantee.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-8 relative aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-900 shadow-2xl">
+            <div className="lg:col-span-8 relative aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-900 shadow-2xl select-none">
               <img
                 src={service.heroImage}
                 alt={service.title}
-                className="w-full h-full object-cover object-center"
+                draggable={false}
+                className="w-full h-full object-cover object-center select-none pointer-events-none"
+                onError={(e) => {
+                  e.currentTarget.src = '/images/hero-balcony.jpg';
+                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
               <div className="absolute top-4 left-4 px-3 py-1.5 rounded-xl bg-slate-900/90 text-white font-mono text-xs font-bold border border-white/20 shadow-md">
@@ -162,7 +213,7 @@ export default function ServiceDetailPage({ onOpenQuoteSheet }) {
                   className="w-full min-h-[46px] py-3 px-4 rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-safety-500 hover:from-brand-500 hover:to-safety-400 text-white font-extrabold text-xs shadow-md shadow-brand-500/25 flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all"
                 >
                   <Sparkles className="w-4 h-4 text-amber-300 animate-pulse" />
-                  <span>Book Free Balcony Laser Inspection</span>
+                  <span>Book Free Laser Inspection & Estimate</span>
                 </button>
               </div>
             </div>
@@ -204,7 +255,7 @@ export default function ServiceDetailPage({ onOpenQuoteSheet }) {
               PRECISION RIGGING PROTOCOL
             </span>
             <h2 className="text-xl sm:text-3xl font-display font-extrabold text-white">
-              5-Step Certified Balcony Installation Workflow
+              5-Step Certified Installation Protocol
             </h2>
           </div>
 
@@ -304,7 +355,7 @@ export default function ServiceDetailPage({ onOpenQuoteSheet }) {
         {/* Related Services */}
         <div className="mt-20 pt-10 border-t border-slate-200 dark:border-white/10">
           <h3 className="text-xl font-display font-extrabold text-slate-900 dark:text-white mb-6">
-            Complementary Balcony Safety Solutions
+            Complementary Netting & Protection Solutions
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {relatedServices.map((rel) => (
@@ -317,6 +368,9 @@ export default function ServiceDetailPage({ onOpenQuoteSheet }) {
                   src={rel.heroImage}
                   alt={rel.title}
                   className="w-16 h-16 rounded-xl object-cover shrink-0"
+                  onError={(e) => {
+                    e.currentTarget.src = '/images/hero-balcony.jpg';
+                  }}
                 />
                 <div>
                   <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-brand-600 transition-colors">

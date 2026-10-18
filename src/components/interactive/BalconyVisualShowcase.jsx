@@ -67,6 +67,22 @@ export default function BalconyVisualShowcase({ onOpenQuoteSheet }) {
       ]
     },
     {
+      id: 'pet-safety',
+      serviceId: 'balcony-pet-safety-net',
+      title: 'Balcony Pet & Dog Safety Netting',
+      subtitle: 'Bite-Resistant & Claw-Proof Micro-Grid',
+      description: 'Micro-mesh aperture prevents energetic dogs and household pets from squeezing through balcony railing bars. Lets pets bask in sunlight safely.',
+      image: '/images/balcony-pet-dog-safety.jpg',
+      price: '₹22 – ₹30 / sq.ft',
+      turnaround: '2 – 3 Hours',
+      badge: 'Bite-Resistant & Claw Proof',
+      highlights: ['20mm Anti-Squeeze Grid', 'Chew-Resistant Core', 'Flush Floor Sealing', 'Pet Sunlight Basking'],
+      hotspots: [
+        { top: '65%', left: '48%', title: 'Pet Safe Ledge Basking', desc: 'Allows household pets and dogs to look outside safely without fall hazards.' },
+        { top: '85%', left: '70%', title: 'Flush Floor Rigging', desc: 'Leaves zero floor clearance so puppies cannot wedge underneath.' }
+      ]
+    },
+    {
       id: 'duct-shaft',
       serviceId: 'balcony-duct-shaft-net',
       title: 'Balcony Utility Duct & AC Area Netting',
@@ -155,8 +171,9 @@ export default function BalconyVisualShowcase({ onOpenQuoteSheet }) {
               <img
                 src={currentItem.image}
                 alt={currentItem.title}
+                draggable={false}
                 key={currentItem.id}
-                className="w-full h-full object-cover object-center animate-fade-in group-hover:scale-102 transition-transform duration-500"
+                className="w-full h-full object-cover object-center animate-fade-in group-hover:scale-102 transition-transform duration-500 select-none pointer-events-none"
               />
 
               {/* Scrim Gradient for Text Legibility */}

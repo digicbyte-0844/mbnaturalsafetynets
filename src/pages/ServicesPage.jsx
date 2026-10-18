@@ -1,36 +1,28 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, Clock, Check, ArrowRight, Sparkles } from 'lucide-react';
-import { servicesData } from '../data/servicesData';
+import { servicesData, serviceCategories } from '../data/servicesData';
 import { brandConfig } from '../data/brandConfig';
 import Badge from '../components/ui/Badge';
 import EngineeringSection from '../components/sections/EngineeringSection';
 import logoEmblem from '../assets/logo-emblem.png';
+import SEOHead from '../components/seo/SEOHead';
 
 export default function ServicesPage({ onOpenQuoteSheet }) {
   const [activeCategory, setActiveCategory] = useState('all');
 
-  const categories = [
-    { id: 'all', label: 'All Balcony Solutions (5)' },
-    { id: 'pigeon', label: 'Balcony Pigeon Nets' },
-    { id: 'child', label: 'Child & Toddler Safety' },
-    { id: 'invisible', label: 'SS 316 Invisible Grills' },
-    { id: 'pet', label: 'Pet Safety Nets' },
-    { id: 'duct', label: 'Duct & Utility Shaft' }
-  ];
-
   const filteredServices = servicesData.filter(svc => {
     if (activeCategory === 'all') return true;
-    if (activeCategory === 'pigeon') return svc.id === 'balcony-pigeon-net';
-    if (activeCategory === 'child') return svc.id === 'balcony-child-safety-net';
-    if (activeCategory === 'invisible') return svc.id === 'balcony-invisible-grill';
-    if (activeCategory === 'pet') return svc.id === 'balcony-pet-safety-net';
-    if (activeCategory === 'duct') return svc.id === 'balcony-duct-shaft-net';
-    return true;
+    return svc.category === activeCategory;
   });
 
   return (
-    <div className="pt-28 md:pt-36 pb-20 bg-canvas-light dark:bg-obsidian-canvas min-h-screen">
+    <div className="pt-8 sm:pt-12 md:pt-14 pb-20 bg-canvas-light dark:bg-obsidian-canvas min-h-screen">
+      <SEOHead
+        title="11 Certified Safety Nets & Invisible Grills Hyderabad | MB"
+        description="Explore 11 certified high-rise safety nets, SS 316 invisible grills, bird spikes, cricket & football nets in Hyderabad. 30-min laser measurement & 5-yr warranty."
+        canonicalPath="/services"
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -48,25 +40,25 @@ export default function ServicesPage({ onOpenQuoteSheet }) {
             />
           </div>
           <Badge variant="azure" size="sm" className="mb-3">
-            5 CERTIFIED BALCONY SOLUTIONS • HYDERABAD
+            11 CERTIFIED SAFETY, SPORTS & BIRD SOLUTIONS • HYDERABAD
           </Badge>
           <h1 className="text-3xl sm:text-5xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Certified Balcony Safety Nets & <span className="text-brand-600 dark:text-brand-400">SS 316 Invisible Grills</span>
+            Certified Safety Nets, Invisible Grills & <span className="text-brand-600 dark:text-brand-400">Sports Enclosures</span>
           </h1>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-3">
-            Explore our specialized high-rise balcony netting solutions. Installed by certified rope-riggers with laser precision and backed by a 5-Year Stamped Doorstep Guarantee.
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
+            From high-rise residential balcony protection and humane pigeon exclusion to international standard cricket practice pitches, multi-sport turf arenas, and swimming pool safety nets. Installed by certified rope-riggers across Hyderabad with a 5-Year Stamped Doorstep Guarantee.
           </p>
         </div>
 
-        {/* Category Filter Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
-          {categories.map(cat => (
+        {/* Category Filter Tabs (Smooth horizontal scroll on mobile, centered on desktop) */}
+        <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-3 mb-10 no-scrollbar select-none">
+          {serviceCategories.map(cat => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`min-h-[44px] px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+              className={`shrink-0 min-h-[42px] px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
                 activeCategory === cat.id
-                  ? 'bg-brand-600 text-white shadow-glow-azure'
+                  ? 'bg-brand-600 text-white shadow-glow-azure scale-[1.02]'
                   : 'bg-white dark:bg-obsidian-card text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-white/10 hover:border-brand-500'
               }`}
             >
@@ -89,8 +81,12 @@ export default function ServicesPage({ onOpenQuoteSheet }) {
                   <img
                     src={service.heroImage}
                     alt={service.title}
-                    className="w-full h-full object-cover"
+                    draggable={false}
+                    className="w-full h-full object-cover select-none pointer-events-none"
                     loading="lazy"
+                    onError={(e) => {
+                      e.currentTarget.src = '/images/hero-balcony.jpg';
+                    }}
                   />
                   <div className="absolute top-3 left-3 px-3 py-1 rounded-xl bg-slate-900/90 text-white font-mono text-xs font-bold shadow-md">
                     {service.priceRange}
@@ -132,7 +128,7 @@ export default function ServicesPage({ onOpenQuoteSheet }) {
                     {/* 3-Tier Packages Horizontal Scroll / Grid */}
                     <div className="mt-4 pt-4 border-t border-slate-100 dark:border-white/5">
                       <span className="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-2">
-                        Available Balcony Packages:
+                        Available Packages & Specifications:
                       </span>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                         {service.packages.map((pkg, pIdx) => (
@@ -173,7 +169,7 @@ export default function ServicesPage({ onOpenQuoteSheet }) {
                       className="min-h-[44px] px-6 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-400 text-white font-bold text-xs shadow-glow-azure flex items-center gap-2 cursor-pointer"
                     >
                       <Sparkles className="w-4 h-4" />
-                      <span>Book Free Balcony Measurement</span>
+                      <span>Book Free Doorstep Inspection</span>
                     </button>
 
                     <Link

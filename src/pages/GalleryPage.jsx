@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import { Sparkles, MapPin, X, ZoomIn } from 'lucide-react';
+import { Sparkles, MapPin, ShieldCheck, ArrowRight } from 'lucide-react';
 import Badge from '../components/ui/Badge';
 import { brandConfig } from '../data/brandConfig';
 import logoEmblem from '../assets/logo-emblem.png';
+import SEOHead from '../components/seo/SEOHead';
 
 export default function GalleryPage({ onOpenQuoteSheet }) {
   const [activeCategory, setActiveCategory] = useState('all');
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
 
   const categories = [
-    { id: 'all', label: 'All Balcony Photos (12)' },
-    { id: 'pigeon-net', label: 'Balcony Pigeon Nets' },
-    { id: 'child-safety', label: 'Child Balcony Nets' },
-    { id: 'invisible-grill', label: 'Balcony Invisible Grills' },
-    { id: 'pet-net', label: 'Pet & Cat Balcony Nets' },
-    { id: 'ducts', label: 'Balcony Duct & AC Area' }
+    { id: 'all', label: 'All Photos (17)' },
+    { id: 'safety-nets', label: 'Balcony & Child Safety' },
+    { id: 'bird-control', label: 'Pigeon Nets & Bird Spikes' },
+    { id: 'invisible-grill', label: 'SS 316 Invisible Grills' },
+    { id: 'sports-nets', label: 'Cricket & Sports Turf' },
+    { id: 'specialized', label: 'Pool & Construction' }
   ];
 
   const galleryItems = [
@@ -28,7 +28,7 @@ export default function GalleryPage({ onOpenQuoteSheet }) {
     },
     {
       id: 2,
-      category: 'pigeon-net',
+      category: 'bird-control',
       title: 'Ultra-Clear Balcony Pigeon Netting',
       community: 'Prestige High Fields, Financial District',
       spec: '30mm Copolymer • Invisible from 10ft',
@@ -36,83 +36,123 @@ export default function GalleryPage({ onOpenQuoteSheet }) {
     },
     {
       id: 3,
-      category: 'child-safety',
+      category: 'bird-control',
+      title: 'Architectural SS 304 Anti-Bird Spikes on Ledges',
+      community: 'Banjara Hills Luxury Residences',
+      spec: 'SS 304 Marine Spikes • UV Polycarbonate Base',
+      image: '/images/bird-spikes.jpg'
+    },
+    {
+      id: 4,
+      category: 'sports-nets',
+      title: 'Rooftop Cricket Practice Net Pitch Enclosure',
+      community: 'Gachibowli Sports Academy',
+      spec: 'Heavy-Duty Garware Nylon • Multi-Box Framing',
+      image: '/images/cricket-practice-net.jpg'
+    },
+    {
+      id: 5,
+      category: 'sports-nets',
+      title: 'Multi-Sport Futsal & Turf Perimeter Barrier Net',
+      community: 'Jubilee Hills Sports Arena',
+      spec: '20ft High High-Tensile Polyethylene Barrier',
+      image: '/images/football-sports-net.jpg'
+    },
+    {
+      id: 6,
+      category: 'specialized',
+      title: 'Swimming Pool Anti-Drowning Tension Safety Net',
+      community: 'Financial District Luxury Villa',
+      spec: 'Brass Flush Anchors • Central Tension Float',
+      image: '/images/swimming-pool-net.jpg'
+    },
+    {
+      id: 7,
+      category: 'specialized',
+      title: 'High-Rise Construction & Debris Containment Net',
+      community: 'HITEC City Commercial Tower',
+      spec: 'IS 5175 Certified Personnel Fall Arrest',
+      image: '/images/construction-safety-net.jpg'
+    },
+    {
+      id: 8,
+      category: 'safety-nets',
       title: 'Child & Toddler Balcony Fall Prevention Net',
       community: 'Aparna Sarovar Zenith, Nallagandla',
       spec: '180kg Impact Load • Railing Gap Lock',
       image: '/images/invisible-grill-toddler.jpg'
     },
     {
-      id: 4,
-      category: 'pigeon-net',
+      id: 9,
+      category: 'bird-control',
       title: 'High-Rise Balcony Pigeon Protection Netting',
       community: 'Ramky One Galaxia, Gachibowli',
       spec: 'Garware Monofilament • Zero View Blockage',
       image: '/images/balcony-after-clean.jpg'
     },
     {
-      id: 5,
-      category: 'ducts',
+      id: 10,
+      category: 'bird-control',
       title: 'Balcony Utility Duct & AC Compressor Quarantine',
       community: 'Lanco Hills, Manikonda',
       spec: 'Garware Copolymer • YKK Zipper Hatches',
       image: '/images/balcony-duct-shaft.jpg'
     },
     {
-      id: 6,
-      category: 'child-safety',
+      id: 11,
+      category: 'safety-nets',
       title: 'Balcony Railing Bottom Crawl Gap Seal',
       community: 'Incor One City, KPHB Kukatpally',
       spec: 'Multi-Point Steel Cable Lock',
-      image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80'
+      image: '/images/invisible-grill-toddler.jpg'
     },
     {
-      id: 7,
+      id: 12,
       category: 'invisible-grill',
       title: 'Corner Balcony High-Tensile Grills',
       community: 'Prestige Tranquil, Kokapet',
       spec: 'Extruded Aluminum Track • 10-Yr Rust Free',
-      image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80'
+      image: '/images/hero-balcony.jpg'
     },
     {
-      id: 8,
-      category: 'pigeon-net',
-      title: 'Master Bedroom French Window Net',
-      community: 'Jayabheri The Peak, Nanakramguda',
-      spec: 'Zero Sag SS Turnbuckle Rigging',
-      image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      id: 9,
-      category: 'child-safety',
+      id: 13,
+      category: 'safety-nets',
       title: 'Floor-to-Ceiling High-Rise Balcony Shield',
       community: 'My Home Mangala, Kondapur',
       spec: 'High-Tenacity Heat-Set Braided Nylon',
-      image: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=1200&q=80'
+      image: '/images/invisible-grill-toddler.jpg'
     },
     {
-      id: 10,
-      category: 'pet-net',
-      title: 'Dog Balcony Fall Prevention Net',
+      id: 14,
+      category: 'safety-nets',
+      title: 'Balcony Pet & Dog Safety Netting',
       community: 'Salarpuria Sattva Magnolia, Gachibowli',
       spec: 'Claw-Proof & Chew-Proof Finish',
-      image: 'https://images.unsplash.com/photo-1584467735871-8e85353a8413?auto=format&fit=crop&w=1200&q=80'
+      image: '/images/balcony-pet-dog-safety.jpg'
     },
     {
-      id: 11,
+      id: 15,
       category: 'invisible-grill',
       title: 'Penthouse Panoramic Skyline Invisible Grills',
       community: 'Lodha Bellezza, KPHB Colony',
       spec: 'SS 316 Marine Grade • Quick-Cut Fire Safe',
-      image: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80'
+      image: '/images/hero-balcony.jpg'
     },
     {
-      id: 12,
-      category: 'pigeon-net',
+      id: 16,
+      category: 'bird-control',
       title: 'Double Balcony Pigeon Netting & Sanitization',
       community: 'My Home Tarkshya, Kokapet',
       spec: 'UV-Treated Copolymer Monofilament',
-      image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1200&q=80'
+      image: '/images/balcony-pigeon-net.jpg'
+    },
+    {
+      id: 17,
+      category: 'safety-nets',
+      title: 'Full Balcony Fall Arrest Safety Netting',
+      community: 'My Home Avatar, Puppalaguda',
+      spec: '180kg Multi-Point Breaking Load • 5-Yr Warranty',
+      image: '/images/hero-balcony.jpg'
     }
   ];
 
@@ -122,7 +162,13 @@ export default function GalleryPage({ onOpenQuoteSheet }) {
   });
 
   return (
-    <div className="pt-28 md:pt-36 pb-20 bg-canvas-light dark:bg-obsidian-canvas min-h-screen">
+    <div className="pt-8 sm:pt-12 md:pt-14 pb-20 bg-canvas-light dark:bg-obsidian-canvas min-h-screen">
+      <SEOHead
+        title="Safety Nets & Invisible Grills Photo Gallery Hyderabad | MB"
+        description="Explore real installation photos of balcony safety nets, pigeon nets, bird spikes, cricket nets & SS 316 invisible grills across Hyderabad high-rise societies."
+        canonicalPath="/gallery"
+        image="/images/hero-balcony.jpg"
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -140,25 +186,25 @@ export default function GalleryPage({ onOpenQuoteSheet }) {
             />
           </div>
           <Badge variant="azure" size="sm" className="mb-3">
-            VERIFIED BALCONY INSTALLATIONS IN HYDERABAD
+            VERIFIED SITE INSTALLATIONS ACROSS HYDERABAD
           </Badge>
           <h1 className="text-3xl sm:text-5xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Hyderabad Balcony Netting <span className="text-brand-600 dark:text-brand-400">Photo Portfolio</span>
+            Safety Nets, Sports & Invisible Grills <span className="text-brand-600 dark:text-brand-400">Photo Portfolio</span>
           </h1>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-3">
-            High-clarity photographs of real balcony netting, child fall-protection barriers, and SS 316 invisible grills installed across premium Hyderabad high-rise apartments.
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
+            High-clarity photographs of genuine safety netting, pigeon spikes, rooftop cricket practice pitches, sports turf arenas, and SS 316 invisible grills installed across premium residential and sports properties in Hyderabad.
           </p>
         </div>
 
-        {/* Filter Categories */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+        {/* Filter Categories (Smooth horizontal scroll on mobile, centered on desktop) */}
+        <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-3 mb-10 no-scrollbar select-none">
           {categories.map(cat => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`min-h-[44px] px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+              className={`shrink-0 min-h-[42px] px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
                 activeCategory === cat.id
-                  ? 'bg-brand-600 text-white shadow-glow-azure'
+                  ? 'bg-brand-600 text-white shadow-glow-azure scale-[1.02]'
                   : 'bg-white dark:bg-obsidian-card text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-white/10 hover:border-brand-500'
               }`}
             >
@@ -172,26 +218,22 @@ export default function GalleryPage({ onOpenQuoteSheet }) {
           {filteredItems.map(item => (
             <div
               key={item.id}
-              onClick={() => setSelectedPhoto(item)}
-              className="group bg-white dark:bg-obsidian-card rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 shadow-lg hover:shadow-card-hover transition-all cursor-pointer flex flex-col justify-between"
+              className="group bg-white dark:bg-obsidian-card rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 shadow-lg hover:shadow-card-hover transition-all flex flex-col justify-between select-none"
             >
-              <div className="relative aspect-[16/11] overflow-hidden bg-slate-900">
+              <div className="relative aspect-[16/11] overflow-hidden bg-slate-900 select-none">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  draggable={false}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
                   loading="lazy"
+                  onError={(e) => {
+                    e.currentTarget.src = '/images/hero-balcony.jpg';
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
 
-                {/* Hover overlay hint */}
-                <div className="absolute inset-0 bg-brand-900/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <div className="w-10 h-10 rounded-full bg-white text-slate-900 flex items-center justify-center shadow-lg">
-                    <ZoomIn className="w-5 h-5" />
-                  </div>
-                </div>
-
-                <div className="absolute bottom-3 left-3 right-3 text-white">
+                <div className="absolute bottom-3 left-3 right-3 text-white pointer-events-none">
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-brand-600 text-white inline-block mb-1">
                     {item.spec}
                   </span>
@@ -201,69 +243,22 @@ export default function GalleryPage({ onOpenQuoteSheet }) {
                 </div>
               </div>
 
-              <div className="p-4 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+              <div className="p-4 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-white/5">
                 <div className="flex items-center gap-1.5 truncate">
                   <MapPin className="w-3.5 h-3.5 text-brand-500 shrink-0" />
-                  <span className="truncate">{item.community}</span>
+                  <span className="truncate font-medium">{item.community}</span>
                 </div>
-                <span className="text-brand-600 dark:text-brand-400 font-bold shrink-0">
-                  Inspect →
-                </span>
+                <button
+                  type="button"
+                  onClick={() => onOpenQuoteSheet(null, item.community)}
+                  className="text-brand-600 dark:text-brand-400 hover:text-brand-500 font-bold shrink-0 flex items-center gap-1 cursor-pointer transition-colors"
+                >
+                  <span>Book Free Quote →</span>
+                </button>
               </div>
             </div>
           ))}
         </div>
-
-        {/* Lightbox Modal */}
-        {selectedPhoto && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md">
-            <div className="relative w-full max-w-4xl bg-slate-900 text-white rounded-3xl overflow-hidden border border-white/20 shadow-2xl">
-              
-              <button
-                onClick={() => setSelectedPhoto(null)}
-                aria-label="Close photo preview"
-                className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/60 text-white hover:bg-black flex items-center justify-center transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              <div className="aspect-[16/10] w-full bg-black">
-                <img
-                  src={selectedPhoto.image}
-                  alt={selectedPhoto.title}
-                  className="w-full h-full object-contain"
-                />
-              </div>
-
-              <div className="p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-slate-950 border-t border-white/10">
-                <div>
-                  <span className="text-xs font-mono text-brand-400 block mb-0.5">
-                    {selectedPhoto.spec}
-                  </span>
-                  <h3 className="text-lg font-bold text-white">
-                    {selectedPhoto.title}
-                  </h3>
-                  <p className="text-xs text-slate-400 flex items-center gap-1 mt-1">
-                    <MapPin className="w-3.5 h-3.5 text-brand-400" />
-                    <span>{selectedPhoto.community}</span>
-                  </p>
-                </div>
-
-                <button
-                  onClick={() => {
-                    setSelectedPhoto(null);
-                    onOpenQuoteSheet(null, selectedPhoto.community);
-                  }}
-                  className="w-full sm:w-auto min-h-[44px] px-6 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-400 text-white font-extrabold text-xs shadow-glow-azure flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <Sparkles className="w-4 h-4" />
-                  <span>I Want This Installed in My Balcony</span>
-                </button>
-              </div>
-
-            </div>
-          </div>
-        )}
 
       </div>
     </div>

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, Clock, ArrowRight, Check, ChevronDown, ChevronUp, Sparkles } from 'lucide-react';
-import { servicesData } from '../../data/servicesData';
+import { servicesData, serviceCategories } from '../../data/servicesData';
 import Badge from '../ui/Badge';
 
 export default function ServicesSection({ onOpenQuoteSheet }) {
+  const [activeCategory, setActiveCategory] = useState('all');
   const [expandedSpecs, setExpandedSpecs] = useState({});
 
   const toggleSpecs = (id) => {
@@ -14,26 +15,48 @@ export default function ServicesSection({ onOpenQuoteSheet }) {
     }));
   };
 
+  const filteredServices = servicesData.filter(svc => {
+    if (activeCategory === 'all') return true;
+    return svc.category === activeCategory;
+  });
+
   return (
     <section id="services" className="py-16 sm:py-24 bg-canvas-light dark:bg-obsidian-canvas">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <Badge variant="azure" size="sm" className="mb-3">
-            5 CERTIFIED BALCONY SAFETY SOLUTIONS • HYDERABAD
+            11 CERTIFIED SAFETY, SPORTS & BIRD NETTING SOLUTIONS • HYDERABAD
           </Badge>
           <h2 className="text-2xl sm:text-4xl md:text-5xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Engineered for Balconies. <span className="text-brand-600 dark:text-brand-400">Invisible to Sight.</span>
+            Engineered Protection for Balconies, <span className="text-brand-600 dark:text-brand-400">Birds & Sports Enclosures</span>
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-3">
-            Residential balcony pigeon nets, high-tensile child fall-prevention barriers, and SS 316 invisible grills installed by certified high-altitude rigging technicians.
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
+            From high-rise residential pigeon nets and toddler safety barriers to rooftop cricket pitches, multi-sport turf grounds, and anti-drowning swimming pool nets. Installed by certified technicians across Hyderabad.
           </p>
+        </div>
+
+        {/* Category Tabs */}
+        <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-3 mb-10 no-scrollbar select-none">
+          {serviceCategories.map(cat => (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.id)}
+              className={`shrink-0 min-h-[40px] px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
+                activeCategory === cat.id
+                  ? 'bg-brand-600 text-white shadow-glow-azure scale-[1.02]'
+                  : 'bg-white dark:bg-obsidian-card text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-white/10 hover:border-brand-500'
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))}
         </div>
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {servicesData.map((service) => {
+          {filteredServices.map((service) => {
             const isSpecsExpanded = !!expandedSpecs[service.id];
 
             return (
@@ -47,8 +70,12 @@ export default function ServicesSection({ onOpenQuoteSheet }) {
                     <img
                       src={service.heroImage}
                       alt={service.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      draggable={false}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 select-none pointer-events-none"
                       loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.src = '/images/hero-balcony.jpg';
+                      }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
 
@@ -104,7 +131,7 @@ export default function ServicesSection({ onOpenQuoteSheet }) {
                         onClick={() => toggleSpecs(service.id)}
                         className="w-full flex items-center justify-between text-xs font-bold text-brand-600 dark:text-brand-400 py-1 hover:underline cursor-pointer"
                       >
-                        <span>{isSpecsExpanded ? 'Hide Balcony Specifications' : '+ View 6 Balcony Rigging Specs'}</span>
+                        <span>{isSpecsExpanded ? 'Hide Specifications' : '+ View 6 Technical Rigging Specs'}</span>
                         {isSpecsExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                       </button>
 
@@ -131,7 +158,7 @@ export default function ServicesSection({ onOpenQuoteSheet }) {
                     className="flex-1 min-h-[44px] py-2.5 px-3 rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-400 text-white font-bold text-xs shadow-glow-azure flex items-center justify-center gap-1.5 active:scale-95 transition-all cursor-pointer"
                   >
                     <Sparkles className="w-3.5 h-3.5" />
-                    <span>Free Balcony Quote</span>
+                    <span>Free Doorstep Quote</span>
                   </button>
 
                   <Link

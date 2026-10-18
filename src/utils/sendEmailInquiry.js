@@ -1,7 +1,10 @@
 import { brandConfig } from '../data/brandConfig';
+import { getUtmParams } from './utmTracker';
 
 export async function sendEmailInquiry(formData) {
   try {
+    const utm = getUtmParams();
+
     const payload = {
       _subject: `🚨 [MB NATURAL BALCONY SAFETY NETS HYDERABAD] ${formData.service || 'Balcony Net'} - ${formData.name || 'Resident'} (${formData.locality || 'Hyderabad'})`,
       _template: "table",
@@ -14,6 +17,9 @@ export async function sendEmailInquiry(formData) {
       "Balcony Dimensions / Count": formData.dimensions || "Standard Balcony",
       "Customer Notes": formData.notes || "None provided",
       "Submission Source": formData.source || "Website Booking Form",
+      "Marketing UTM Source": utm.utm_source || "Direct / Organic",
+      "Marketing UTM Campaign": utm.utm_campaign || "None",
+      "Marketing UTM Medium": utm.utm_medium || "None",
       "Recipient Mailbox": brandConfig.email,
       "Timestamp (IST)": new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })
     };

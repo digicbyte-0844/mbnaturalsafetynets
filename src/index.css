@@ -7,13 +7,18 @@
     -webkit-tap-highlight-color: transparent;
   }
 
+  html, body {
+    overflow-x: clip;
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
   html {
     scroll-behavior: smooth;
     font-family: 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
   }
 
   body {
-    overflow-x: hidden;
     margin: 0;
     padding: 0;
   }
@@ -21,6 +26,22 @@
   /* Headings use Outfit */
   h1, h2, h3, h4, .font-display {
     font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  }
+
+  /* Enforce 16px minimum font size on all input elements to prevent iOS Safari auto-zoom on focus */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+
+  /* Prevent image selection and dragging across all browsers */
+  img {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
   }
 }
 
@@ -154,3 +175,75 @@
 .animate-pulse-glow {
   animation: pulseGlow 2s infinite ease-in-out;
 }
+
+/* Touch Target Minimum (44px x 44px WCAG 2.1 compliance) */
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* Print Stylesheet for A4 Quotation and Specification Sheets */
+@media print {
+  /* Hide non-printable navigation, mobile docks, floating action buttons, footer, dark theme glows */
+  header,
+  footer,
+  nav,
+  aside,
+  #mobile-drawer,
+  #unified-mobile-dock,
+  .mobile-bottom-dock,
+  .no-print,
+  button:not(.print-show) {
+    display: none !important;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Ensure cards and tables print cleanly without dark backgrounds */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .glass-light,
+  .glass-dark,
+  .glass-card-light,
+  .glass-card-dark {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+  }
+
+  /* Force table and grid readability */
+  table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+  }
+
+  th, td {
+    border: 1px solid #cbd5e1 !important;
+    padding: 6px 8px !important;
+    color: #0f172a !important;
+  }
+
+  /* Page breaks */
+  .page-break {
+    page-break-before: always;
+  }
+}
+

@@ -1,3 +1,13 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /api
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /dashboard/
+Disallow: /login
+Disallow: /login/
+Disallow: /*?q=*
+
 Sitemap: https://mbnaturalsafetynets.com/sitemap.xml

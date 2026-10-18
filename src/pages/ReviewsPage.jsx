@@ -4,6 +4,7 @@ import Badge from '../components/ui/Badge';
 import { Building2, Award, ShieldCheck, Sparkles, CheckCircle2 } from 'lucide-react';
 import { brandConfig } from '../data/brandConfig';
 import logoEmblem from '../assets/logo-emblem.png';
+import SEOHead from '../components/seo/SEOHead';
 
 export default function ReviewsPage({ onOpenQuoteSheet }) {
   const caseStudies = [
@@ -24,7 +25,13 @@ export default function ReviewsPage({ onOpenQuoteSheet }) {
   ];
 
   return (
-    <div className="pt-28 md:pt-36 pb-20 bg-canvas-light dark:bg-obsidian-canvas min-h-screen">
+    <div className="pt-8 sm:pt-12 md:pt-14 pb-20 bg-canvas-light dark:bg-obsidian-canvas min-h-screen">
+      <SEOHead
+        title="Customer Reviews & Ratings | MB Safety Nets Hyderabad"
+        description="Read 3,850+ verified customer reviews for balcony safety nets, pigeon nets, and invisible grills across Hyderabad high-rise apartments. 4.98-star rating."
+        canonicalPath="/reviews"
+        image="/images/hero-balcony.jpg"
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}

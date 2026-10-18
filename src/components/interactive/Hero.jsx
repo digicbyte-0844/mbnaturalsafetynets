@@ -20,6 +20,7 @@ export default function Hero({ onOpenQuoteSheet }) {
     {
       id: 'invisible-grill',
       title: 'SS 316 Invisible Grills',
+      shortLabel: 'SS 316 Grills',
       tag: '400kg+ Tensile Load',
       subtitle: 'DuPont Teflon 316 Marine Stainless Steel',
       image: '/images/hero-balcony.jpg',
@@ -27,7 +28,8 @@ export default function Hero({ onOpenQuoteSheet }) {
     },
     {
       id: 'pigeon-net',
-      title: 'Pigeon Safety Nets',
+      title: 'Balcony Pigeon Safety Nets',
+      shortLabel: 'Pigeon Nets',
       tag: '100% Invisible from 10ft',
       subtitle: 'UV-Stabilized Copolymer Monofilament',
       image: '/images/balcony-pigeon-net.jpg',
@@ -35,31 +37,50 @@ export default function Hero({ onOpenQuoteSheet }) {
     },
     {
       id: 'child-safety',
-      title: 'Child Balcony Nets',
+      title: 'Child Balcony Safety Nets',
+      shortLabel: 'Child Safety',
       tag: '180kg Impact Certified',
       subtitle: 'Zero Railing-Bottom Crawl Gap Seal',
       image: '/images/invisible-grill-toddler.jpg',
       stat: 'Toddler Safe'
+    },
+    {
+      id: 'pet-safety',
+      title: 'Balcony Pet & Dog Safety Nets',
+      shortLabel: 'Pet & Dog',
+      tag: 'Bite & Claw Proof',
+      subtitle: 'Reinforced Micro-Grid Fall Prevention',
+      image: '/images/balcony-pet-dog-safety.jpg',
+      stat: 'Pet Safe'
+    },
+    {
+      id: 'duct-shaft',
+      title: 'Balcony Utility Duct & Shaft Nets',
+      shortLabel: 'Duct & AC Shaft',
+      tag: 'YKK Zipper Access',
+      subtitle: 'Balcony AC Compressor Pigeon Quarantine',
+      image: '/images/balcony-duct-shaft.jpg',
+      stat: 'Pest Quarantine'
     }
   ];
 
   const [activeHeroViewIndex, setActiveHeroViewIndex] = useState(0);
   const activeView = heroViews[activeHeroViewIndex];
 
-  // Auto-cycle through views every 6 seconds unless user interacts
+  // Auto-cycle through views every 5 seconds unless user interacts
   const [userInteracted, setUserInteracted] = useState(false);
   useEffect(() => {
     if (userInteracted) return;
 
     const interval = setInterval(() => {
       setActiveHeroViewIndex((prev) => (prev + 1) % heroViews.length);
-    }, 6000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [userInteracted, heroViews.length]);
 
   return (
-    <section className="relative min-h-[92svh] md:min-h-[88vh] flex items-center justify-center overflow-hidden bg-obsidian-canvas pt-24 sm:pt-28 md:pt-36 pb-14 sm:pb-20">
+    <section className="relative min-h-[92svh] md:min-h-[88vh] flex items-center justify-center overflow-hidden bg-obsidian-canvas pt-8 sm:pt-12 md:pt-14 pb-14 sm:pb-20">
       
       {/* Dynamic Ambient Background Glows */}
       <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-brand-600/15 rounded-full blur-[120px] pointer-events-none" />
@@ -70,8 +91,75 @@ export default function Hero({ onOpenQuoteSheet }) {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           
-          {/* Left Column: High-Impact Typography & Conversion (7 cols) */}
-          <div className="lg:col-span-7 text-center lg:text-left flex flex-col items-center lg:items-start">
+          {/* 1. FIRST: Interactive Changeable Hero Visual Card (5 cols on desktop, 1st on mobile) */}
+          <div className="order-1 lg:col-span-5 w-full">
+            <div className="relative rounded-3xl p-2 sm:p-2.5 bg-gradient-to-b from-white/15 to-white/5 border border-white/15 backdrop-blur-xl shadow-2xl overflow-hidden group">
+              
+              {/* Main Image Frame with Smooth Ken Burns Effect */}
+              <div className="relative aspect-[16/11] sm:aspect-[4/3] rounded-2xl overflow-hidden bg-slate-950">
+                <img
+                  src={activeView.image}
+                  alt={activeView.title}
+                  draggable={false}
+                  key={activeView.id}
+                  className="w-full h-full object-cover object-center animate-fade-in group-hover:scale-105 transition-transform duration-700 select-none pointer-events-none"
+                  onError={(e) => {
+                    e.currentTarget.src = '/images/hero-balcony.jpg';
+                  }}
+                />
+
+                {/* Scrim Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-transparent pointer-events-none" />
+
+                {/* Floating Top Badge: Strength Certified */}
+                <div className="absolute top-3 left-3 px-3 py-1.5 rounded-xl bg-slate-900/90 backdrop-blur-md border border-white/20 text-white text-[11px] font-bold flex items-center gap-1.5 shadow-lg">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>{activeView.tag}</span>
+                </div>
+
+                {/* Floating Top Right Badge: View Status */}
+                <div className="absolute top-3 right-3 px-2.5 py-1.5 rounded-xl bg-brand-600/90 text-white text-[11px] font-mono font-bold shadow-lg">
+                  {activeView.stat}
+                </div>
+
+                {/* Bottom Overlay Title & Subtitle */}
+                <div className="absolute bottom-3 left-3.5 right-3.5 text-white">
+                  <span className="text-xs sm:text-sm font-display font-extrabold block drop-shadow-md">
+                    {activeView.title}
+                  </span>
+                  <span className="text-[11px] text-slate-300 font-medium block">
+                    {activeView.subtitle}
+                  </span>
+                </div>
+              </div>
+
+              {/* Interactive Changeable Tabs (5 views with horizontal smooth scroll) */}
+              <div className="mt-2.5 pt-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
+                {heroViews.map((view, idx) => (
+                  <button
+                    key={view.id}
+                    onClick={() => {
+                      setUserInteracted(true);
+                      setActiveHeroViewIndex(idx);
+                    }}
+                    className={`shrink-0 py-2 px-3 rounded-xl text-center transition-all cursor-pointer ${
+                      activeHeroViewIndex === idx
+                        ? 'bg-gradient-to-r from-brand-600 to-safety-600 text-white font-extrabold shadow-md scale-[1.02]'
+                        : 'bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-[11px] font-semibold border border-white/5'
+                    }`}
+                  >
+                    <span className="text-[11px] leading-tight block whitespace-nowrap">
+                      {view.shortLabel}
+                    </span>
+                  </button>
+                ))}
+              </div>
+
+            </div>
+          </div>
+
+          {/* 2. NEXT: High-Impact Typography & Conversion (7 cols on desktop, 2nd on mobile) */}
+          <div className="order-2 lg:col-span-7 text-center lg:text-left flex flex-col items-center lg:items-start">
             
             {/* High-Trust Animated Eyebrow Badge */}
             <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-amber-400/30 text-amber-300 backdrop-blur-md mb-4 shadow-lg shadow-amber-950/40">
@@ -146,69 +234,6 @@ export default function Hero({ onOpenQuoteSheet }) {
               </span>
             </div>
 
-          </div>
-
-          {/* Right Column: Interactive Changeable Hero Visual Card (5 cols) */}
-          <div className="lg:col-span-5 w-full">
-            <div className="relative rounded-3xl p-2 sm:p-2.5 bg-gradient-to-b from-white/15 to-white/5 border border-white/15 backdrop-blur-xl shadow-2xl overflow-hidden group">
-              
-              {/* Main Image Frame with Smooth Ken Burns Effect */}
-              <div className="relative aspect-[16/11] sm:aspect-[4/3] rounded-2xl overflow-hidden bg-slate-950">
-                <img
-                  src={activeView.image}
-                  alt={activeView.title}
-                  key={activeView.id}
-                  className="w-full h-full object-cover object-center animate-fade-in group-hover:scale-105 transition-transform duration-700"
-                />
-
-                {/* Scrim Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-transparent pointer-events-none" />
-
-                {/* Floating Top Badge: Strength Certified */}
-                <div className="absolute top-3 left-3 px-3 py-1.5 rounded-xl bg-slate-900/90 backdrop-blur-md border border-white/20 text-white text-[11px] font-bold flex items-center gap-1.5 shadow-lg">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>{activeView.tag}</span>
-                </div>
-
-                {/* Floating Top Right Badge: View Status */}
-                <div className="absolute top-3 right-3 px-2.5 py-1.5 rounded-xl bg-brand-600/90 text-white text-[11px] font-mono font-bold shadow-lg">
-                  {activeView.stat}
-                </div>
-
-                {/* Bottom Overlay Title & Subtitle */}
-                <div className="absolute bottom-3 left-3.5 right-3.5 text-white">
-                  <span className="text-xs font-display font-extrabold block drop-shadow-md">
-                    {activeView.title}
-                  </span>
-                  <span className="text-[11px] text-slate-300 font-medium block">
-                    {activeView.subtitle}
-                  </span>
-                </div>
-              </div>
-
-              {/* Interactive Changeable Tabs (Tap to change view instantly) */}
-              <div className="mt-2.5 pt-2 grid grid-cols-4 gap-1.5">
-                {heroViews.map((view, idx) => (
-                  <button
-                    key={view.id}
-                    onClick={() => {
-                      setUserInteracted(true);
-                      setActiveHeroViewIndex(idx);
-                    }}
-                    className={`py-2 px-1 rounded-xl text-center transition-all cursor-pointer ${
-                      activeHeroViewIndex === idx
-                        ? 'bg-gradient-to-r from-brand-600 to-safety-600 text-white font-extrabold shadow-md scale-[1.02]'
-                        : 'bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-[10px] font-semibold border border-white/5'
-                    }`}
-                  >
-                    <span className="text-[10px] leading-tight block truncate">
-                      {view.title.split(' ')[0]}
-                    </span>
-                  </button>
-                ))}
-              </div>
-
-            </div>
           </div>
 
         </div>

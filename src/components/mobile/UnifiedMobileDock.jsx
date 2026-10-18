@@ -1,70 +1,72 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Phone, Sparkles } from 'lucide-react';
 import WhatsAppIcon from '../ui/WhatsAppIcon';
 import { brandConfig } from '../../data/brandConfig';
 
+/**
+ * Mobile Right-Side Vertically-Centered Action Dock
+ * Displays identical-sized rounded icons at the vertical center of the screen on the right edge.
+ */
 export default function UnifiedMobileDock({ onOpenQuoteSheet }) {
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-
-  // Auto-hides on rapid downward scroll; reappears immediately on upward flick
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY > lastScrollY && currentScrollY > 120) {
-        setIsVisible(false); // Scrolling down
-      } else {
-        setIsVisible(true);  // Scrolling up or near top
-      }
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : 'https://mbnaturalsafetynets.com';
+  const whatsappUrl = `https://wa.me/${brandConfig.whatsapp}?text=${encodeURIComponent(`Hi MB Natural Safety Nets, I am inquiring about balcony safety netting from: ${currentUrl}`)}`;
 
   return (
-    <div
-      className={`fixed bottom-3 inset-x-3 z-40 md:hidden max-w-md mx-auto transition-all duration-300 transform ${
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-28 opacity-0 pointer-events-none'
-      }`}
-      style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
+    <aside
+      id="unified-mobile-dock"
+      aria-label="Quick Balcony Contact"
+      className="fixed right-2 sm:right-3 top-1/2 -translate-y-1/2 z-40 md:hidden flex flex-col items-center gap-2.5 p-1.5 rounded-full bg-slate-950/60 dark:bg-obsidian-card/75 backdrop-blur-xl border border-white/15 shadow-2xl pointer-events-auto select-none transition-all duration-300 no-print"
     >
-      <div className="bg-slate-900/95 dark:bg-obsidian-card/95 backdrop-blur-xl border border-white/20 dark:border-white/15 rounded-2xl p-1.5 shadow-2xl flex items-center justify-between gap-1.5 text-white">
-        
-        {/* Direct Phone Helpline */}
-        <a
-          href={`tel:${brandConfig.phoneRaw}`}
-          aria-label={`Call ${brandConfig.brandName}`}
-          className="flex-1 min-h-[46px] flex flex-col items-center justify-center py-1 px-1.5 rounded-xl bg-white/10 active:bg-white/20 active:scale-95 transition-all text-slate-100 hover:text-white"
-        >
-          <Phone className="w-4 h-4 text-emerald-400 mb-0.5" />
-          <span className="text-[10px] font-bold tracking-tight">Call Now</span>
-        </a>
+      {/* 1. WhatsApp Button (Identical Size w-12 h-12, w-5.5 h-5.5 icon) */}
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp (30-Min SLA)"
+        className="group relative w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg shadow-emerald-500/35 border border-white/30 active:scale-90 transition-all cursor-pointer"
+      >
+        {/* Active Online Status Beacon */}
+        <span className="absolute -top-0.5 -right-0.5 flex h-3 w-3">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-200 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-400 border border-white"></span>
+        </span>
 
-        {/* WhatsApp Direct Chat */}
-        <a
-          href={`https://wa.me/${brandConfig.whatsapp}?text=Hi%20MB%20Natural%20Safety%20Nets%2C%20I%20would%20like%20a%20free%20doorstep%20balcony%20inspection%20and%20quote%20in%20Hyderabad.`}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="WhatsApp Quick Lead"
-          className="flex-1 min-h-[46px] flex flex-col items-center justify-center py-1 px-1.5 rounded-xl bg-[#25D366]/20 text-[#25D366] active:bg-[#25D366]/30 active:scale-95 transition-all border border-[#25D366]/30"
-        >
-          <WhatsAppIcon className="w-4 h-4 fill-current mb-0.5" />
-          <span className="text-[10px] font-bold tracking-tight">WhatsApp</span>
-        </a>
+        <WhatsAppIcon className="w-5.5 h-5.5 fill-white" />
 
-        {/* Primary Booking Trigger */}
-        <button
-          onClick={onOpenQuoteSheet}
-          aria-label="Open Balcony Quote Sheet"
-          className="flex-[1.9] min-h-[46px] flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-safety-500 hover:from-brand-500 hover:to-safety-400 text-white font-extrabold text-xs shadow-lg shadow-brand-600/30 active:scale-95 transition-all cursor-pointer"
-        >
-          <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
-          <span className="truncate">Free Inspection (30m)</span>
-        </button>
+        {/* Floating Tooltip Label */}
+        <span className="absolute right-14 px-2.5 py-1 rounded-xl bg-slate-900/95 text-white text-[10px] font-bold whitespace-nowrap shadow-xl border border-white/15 opacity-0 pointer-events-none group-hover:opacity-100 group-active:opacity-100 transition-opacity">
+          WhatsApp 24/7
+        </span>
+      </a>
 
-      </div>
-    </div>
+      {/* 2. Phone Helpline Button (Identical Size w-12 h-12, w-5.5 h-5.5 icon) */}
+      <a
+        href={`tel:${brandConfig.phoneRaw}`}
+        aria-label={`Call ${brandConfig.brandName} helpline`}
+        className="group relative w-12 h-12 rounded-full bg-slate-900/90 dark:bg-obsidian-surface/90 text-white flex items-center justify-center shadow-lg shadow-slate-950/40 border border-white/20 active:scale-90 transition-all cursor-pointer"
+      >
+        <Phone className="w-5.5 h-5.5 text-emerald-400" />
+
+        {/* Floating Tooltip Label */}
+        <span className="absolute right-14 px-2.5 py-1 rounded-xl bg-slate-900/95 text-white text-[10px] font-bold whitespace-nowrap shadow-xl border border-white/15 opacity-0 pointer-events-none group-hover:opacity-100 group-active:opacity-100 transition-opacity">
+          Call: {brandConfig.phone}
+        </span>
+      </a>
+
+      {/* 3. Free Balcony Inspection FAB (Identical Size w-12 h-12, w-5.5 h-5.5 icon) */}
+      <button
+        type="button"
+        onClick={onOpenQuoteSheet}
+        aria-label="Book 30-Min Free Balcony Inspection"
+        className="group relative w-12 h-12 rounded-full bg-gradient-to-tr from-brand-600 via-brand-500 to-safety-500 text-white flex items-center justify-center shadow-lg shadow-brand-600/35 border border-white/25 active:scale-90 transition-all cursor-pointer"
+      >
+        <Sparkles className="w-5.5 h-5.5 text-amber-300 animate-pulse" />
+
+        {/* Floating Tooltip Label */}
+        <span className="absolute right-14 px-2.5 py-1 rounded-xl bg-slate-900/95 text-white text-[10px] font-bold whitespace-nowrap shadow-xl border border-white/15 opacity-0 pointer-events-none group-hover:opacity-100 group-active:opacity-100 transition-opacity">
+          Free 30-Min Quote
+        </span>
+      </button>
+    </aside>
   );
 }

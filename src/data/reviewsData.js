@@ -28,11 +28,11 @@ export const reviewsData = [
     name: "Capt. Rajesh Varma",
     community: "Aparna Sarovar Zenith, Nallagandla",
     unit: "Penthouse Wing",
-    service: "Balcony Cat & Pet Safety Netting",
+    service: "Balcony Pet & Dog Safety Netting",
     rating: 5,
     date: "Verified Installation • August 2026",
     avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",
-    reviewText: "We have two Persian cats that loved jumping onto the balcony railing edge. MB Natural Safety Nets installed bite-resistant pet micro-nets right down flush with the floor tiles. The turnbuckle tension is incredible. Best balcony pet safety service in Hyderabad.",
+    reviewText: "We have an active Golden Retriever puppy that loved putting its paws on the balcony railing edge. MB Natural Safety Nets installed bite-resistant pet micro-nets right down flush with the floor tiles leaving zero gap. The turnbuckle tension is incredible. Best balcony pet safety service in Hyderabad.",
     tags: ["Balcony Pet Safety", "Bite-Resistant", "Aparna Sarovar"]
   },
   {

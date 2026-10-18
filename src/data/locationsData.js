@@ -113,10 +113,34 @@ export const locationsZones = [
   },
   {
     id: "north-hyderabad",
-    name: "Secunderabad & North Hyderabad",
-    sla: "25 – 35 Minutes",
-    description: "Cantonment, Established Townships & Balcony High-Rises",
+    name: "North Hyderabad & Headquarter Hub",
+    sla: "15 – 30 Minutes",
+    description: "Office Hub, Industrial Corridors & Premium Villa Townships",
     locations: [
+      { 
+        name: "Gagillapur (Office Hub)", 
+        pincode: "500043", 
+        popular: true, 
+        sla: "15 mins", 
+        landmark: "i-Tech City, ORR Exit 5 & Dundigal Highway",
+        topSocieties: ["Praneeth Pranav Antilia", "i-Tech City Estates", "Gagillapur Luxury Enclave"]
+      },
+      { 
+        name: "Balanagar", 
+        pincode: "500037", 
+        popular: true, 
+        sla: "20 mins", 
+        landmark: "Balanagar X Roads, Industrial Hub & Metro",
+        topSocieties: ["Balanagar High-Rise Residences", "IDPL Colony Apartments"]
+      },
+      { 
+        name: "Dundigal", 
+        pincode: "500043", 
+        popular: true, 
+        sla: "20 mins", 
+        landmark: "Air Force Academy, MLRIT & Gandimaisamma",
+        topSocieties: ["Dundigal Villa Enclaves", "Gandimaisamma Gated Townships"]
+      },
       { 
         name: "Secunderabad", 
         pincode: "500003", 
