@@ -213,6 +213,7 @@ export default function InteractiveCalculator({ onOpenQuoteSheet }) {
           {/* Action Triggers */}
           <div className="space-y-2.5 pt-2">
             <button
+              type="button"
               onClick={() => onOpenQuoteSheet(activeService.id)}
               className="w-full min-h-[48px] py-3.5 px-4 rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-safety-500 hover:from-brand-500 hover:to-safety-400 text-white font-extrabold text-sm shadow-lg shadow-brand-600/30 flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer"
             >

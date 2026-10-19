@@ -126,8 +126,8 @@ Each item from the technical checklist has been audited against the codebase and
 | **Form success state** | `[ALREADY_COMPLETE]` | Fires confetti animation (`canvas-confetti`), displays success confirmation card, and provides immediate WhatsApp booking button. |
 | **Form error state** | `[ALREADY_COMPLETE]` | Inline error alert banner displays retry prompt and direct telephone bypass if network or submission fails. |
 | **Persistent labels** | `[ALREADY_COMPLETE]` | Form fields utilize clear persistent field labels positioned above inputs, avoiding disappearing placeholder antipatterns. |
-| **Empty states** | `[ALREADY_COMPLETE]` | Category filters in `ServicesPage.jsx` and `GalleryPage.jsx` render dedicated empty-state cards if no items match active filters. |
-| **Error boundaries** | `[TODO_MANDATORY]` | Implement a top-level React Error Boundary (`ErrorBoundary.jsx`) to prevent white-screen crashes if a sub-component throws an unexpected runtime error. |
+| **Empty states** | `[ALREADY_COMPLETE]` | Category filters in `ServicesPage.jsx` and `GalleryPage.jsx` render dedicated `<EmptyState />` cards with reset buttons if no items match active filters. |
+| **Error boundaries** | `[ALREADY_COMPLETE]` | Verified: `src/components/ui/ErrorBoundary.jsx` catches runtime exceptions, renders accessible fallback UI with Reload, Back-to-Home, and direct Helpline actions, wrapping `<App />` in `src/main.jsx`. |
 | **Password visibility toggle** | `[SKIP_NOT_APPLICABLE]` | *No user authentication accounts exist.* |
 | **Signup / login / logout flows** | `[SKIP_NOT_APPLICABLE]` | *Lead-gen site requires zero login.* |
 | **Protected route guards (RBAC)** | `[SKIP_NOT_APPLICABLE]` | *Public lead-gen has no auth.* |
@@ -177,8 +177,8 @@ Each item from the technical checklist has been audited against the codebase and
    - Implement a lightweight `<SeoHead>` component or route listener that dynamically updates `document.title`, `<meta name="description">`, and `<link rel="canonical">` for all 11 services and utility pages.
 5. **Comprehensive `sitemap.xml` Regeneration:**
    - Expand `public/sitemap.xml` from 5 services to include all 11 active service slugs (`balcony-safety-net`, `balcony-pigeon-net`, `bird-spikes`, `balcony-duct-shaft-net`, `balcony-invisible-grill`, `balcony-child-safety-net`, `balcony-pet-safety-net`, `cricket-practice-net`, `football-sports-net`, `swimming-pool-net`, `construction-safety-net`), plus legal and calculator routes.
-6. **Top-Level React Error Boundary (`ErrorBoundary.jsx`):**
-   - Wrap the main application tree with a resilient React Error Boundary to catch unexpected rendering exceptions gracefully.
+6. **Top-Level React Error Boundary (`ErrorBoundary.jsx` - Completed):**
+   - Wrapped the main application tree in `src/main.jsx` with a resilient React Error Boundary (`src/components/ui/ErrorBoundary.jsx`) to catch unexpected rendering exceptions gracefully.
 7. **Production Security Headers & Edge Redirects (`public/_headers`):**
    - Configure HTTP security headers: `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, and HTTPS redirect rules.
 

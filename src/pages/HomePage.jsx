@@ -69,6 +69,8 @@ export default function HomePage({ onOpenQuoteSheet }) {
         <div className="max-w-4xl mx-auto px-4 relative z-10 flex flex-col items-center">
           <div className="w-20 h-14 mb-4 flex items-center justify-center">
             <img
+              loading="lazy"
+              decoding="async"
               src={logoEmblem}
               alt="MB Natural Safety Nets"
               className="w-full h-full object-contain filter drop-shadow"
@@ -87,6 +89,7 @@ export default function HomePage({ onOpenQuoteSheet }) {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <button
+              type="button"
               onClick={() => onOpenQuoteSheet()}
               className="w-full sm:w-auto min-h-[50px] px-8 py-3 rounded-2xl bg-white text-slate-900 font-extrabold text-sm shadow-2xl hover:bg-slate-100 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
             >

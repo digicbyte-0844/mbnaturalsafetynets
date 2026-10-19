@@ -35,6 +35,8 @@ export default function NotFoundPage({ onOpenQuoteSheet }) {
         <div className="flex flex-col items-center justify-center space-y-4">
           <div className="w-16 h-14 flex items-center justify-center">
             <img
+              loading="lazy"
+              decoding="async"
               src={logoEmblem}
               alt={brandConfig.brandName}
               className="w-full h-full object-contain filter drop-shadow"

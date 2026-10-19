@@ -23,7 +23,7 @@ export default function Hero({ onOpenQuoteSheet }) {
       shortLabel: 'SS 316 Grills',
       tag: '400kg+ Tensile Load',
       subtitle: 'DuPont Teflon 316 Marine Stainless Steel',
-      image: '/images/hero-balcony.jpg',
+      image: '/images/hero-balcony.webp',
       stat: '0% View Blockage'
     },
     {
@@ -32,7 +32,7 @@ export default function Hero({ onOpenQuoteSheet }) {
       shortLabel: 'Pigeon Nets',
       tag: '100% Invisible from 10ft',
       subtitle: 'UV-Stabilized Copolymer Monofilament',
-      image: '/images/balcony-pigeon-net.jpg',
+      image: '/images/balcony-pigeon-net.webp',
       stat: 'Zero Droppings'
     },
     {
@@ -41,7 +41,7 @@ export default function Hero({ onOpenQuoteSheet }) {
       shortLabel: 'Child Safety',
       tag: '180kg Impact Certified',
       subtitle: 'Zero Railing-Bottom Crawl Gap Seal',
-      image: '/images/invisible-grill-toddler.jpg',
+      image: '/images/invisible-grill-toddler.webp',
       stat: 'Toddler Safe'
     },
     {
@@ -50,7 +50,7 @@ export default function Hero({ onOpenQuoteSheet }) {
       shortLabel: 'Pet & Dog',
       tag: 'Bite & Claw Proof',
       subtitle: 'Reinforced Micro-Grid Fall Prevention',
-      image: '/images/balcony-pet-dog-safety.jpg',
+      image: '/images/balcony-pet-dog-safety.webp',
       stat: 'Pet Safe'
     },
     {
@@ -59,7 +59,7 @@ export default function Hero({ onOpenQuoteSheet }) {
       shortLabel: 'Duct & AC Shaft',
       tag: 'YKK Zipper Access',
       subtitle: 'Balcony AC Compressor Pigeon Quarantine',
-      image: '/images/balcony-duct-shaft.jpg',
+      image: '/images/balcony-duct-shaft.webp',
       stat: 'Pest Quarantine'
     }
   ];
@@ -100,6 +100,11 @@ export default function Hero({ onOpenQuoteSheet }) {
                 <img
                   src={activeView.image}
                   alt={activeView.title}
+                  width="800"
+                  height="550"
+                  loading="eager"
+                  fetchpriority="high"
+                  decoding="async"
                   draggable={false}
                   key={activeView.id}
                   className="w-full h-full object-cover object-center animate-fade-in group-hover:scale-105 transition-transform duration-700 select-none pointer-events-none"
@@ -137,6 +142,7 @@ export default function Hero({ onOpenQuoteSheet }) {
               <div className="mt-2.5 pt-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
                 {heroViews.map((view, idx) => (
                   <button
+                    type="button"
                     key={view.id}
                     onClick={() => {
                       setUserInteracted(true);
@@ -164,6 +170,10 @@ export default function Hero({ onOpenQuoteSheet }) {
             {/* High-Trust Animated Eyebrow Badge */}
             <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-amber-400/30 text-amber-300 backdrop-blur-md mb-4 shadow-lg shadow-amber-950/40">
               <img
+                width="20"
+                height="20"
+                loading="eager"
+                decoding="async"
                 src={logoEmblem}
                 alt="MB Natural Safety Nets"
                 className="w-5 h-5 object-contain filter drop-shadow-sm"

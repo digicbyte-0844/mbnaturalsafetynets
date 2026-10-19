@@ -2,6 +2,7 @@ import React from 'react';
 import { Minus, Plus } from 'lucide-react';
 
 export default function TouchStepperInput({ 
+  id,
   label, 
   value, 
   min, 
@@ -11,6 +12,8 @@ export default function TouchStepperInput({
   onChange,
   helperText
 }) {
+  const inputId = id || `stepper-${label.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
+
   const handleDecrement = (e) => {
     e.preventDefault();
     if (value > min) onChange(Math.max(min, value - step));
@@ -25,9 +28,9 @@ export default function TouchStepperInput({
     <div className="bg-canvas-muted dark:bg-obsidian-surface p-3.5 sm:p-4 rounded-2xl border border-canvas-border dark:border-obsidian-border transition-colors">
       <div className="flex items-center justify-between mb-2.5">
         <div>
-          <span className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 block">
+          <label htmlFor={inputId} className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 block cursor-pointer">
             {label}
-          </span>
+          </label>
           {helperText && (
             <span className="text-[11px] text-slate-500 dark:text-slate-400">
               {helperText}
@@ -55,11 +58,17 @@ export default function TouchStepperInput({
         {/* Range Slider Track */}
         <div className="flex-1 px-1">
           <input
+            id={inputId}
             type="range"
             min={min}
             max={max}
             step={step}
             value={value}
+            aria-label={label}
+            aria-valuenow={value}
+            aria-valuemin={min}
+            aria-valuemax={max}
+            aria-valuetext={`${value} ${unit}`}
             onChange={(e) => onChange(Number(e.target.value))}
             className="w-full h-2.5 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-brand-600 dark:accent-brand-400 focus:outline-none"
           />

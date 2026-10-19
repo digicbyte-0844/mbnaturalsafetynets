@@ -73,6 +73,10 @@ export default function BeforeAfterSlider({
         <img
           src={afterImage}
           alt={afterLabel}
+          width="800"
+          height="500"
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
         />
 
@@ -90,6 +94,10 @@ export default function BeforeAfterSlider({
           <img
             src={beforeImage}
             alt={beforeLabel}
+            width="800"
+            height="500"
+            loading="lazy"
+            decoding="async"
             className="absolute inset-0 w-full h-full object-cover object-center max-w-none pointer-events-none filter brightness-90"
             style={{
               width: containerRef.current ? `${containerRef.current.offsetWidth}px` : '100%',

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, ShieldCheck, Sparkles, CheckCircle, ChevronDown } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, ShieldCheck, Sparkles, CheckCircle, ChevronDown, AlertCircle, Loader2, Send } from 'lucide-react';
 import { brandConfig } from '../data/brandConfig';
 import { servicesData } from '../data/servicesData';
 import { allLocationsFlat } from '../data/locationsData';
@@ -23,50 +23,136 @@ export default function ContactPage() {
     dimensions: '',
     notes: ''
   });
+  const [errors, setErrors] = useState({});
+  const [submitError, setSubmitError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
+  const validateField = (name, value) => {
+    let error = '';
+    if (name === 'name') {
+      const trimmed = value.trim();
+      if (!trimmed) {
+        error = 'Full name is required.';
+      } else if (trimmed.length < 3) {
+        error = 'Name must be at least 3 characters.';
+      } else if (trimmed.length > 60) {
+        error = 'Name cannot exceed 60 characters.';
+      }
+    } else if (name === 'phone') {
+      const digits = value.replace(/\D/g, '');
+      if (!digits) {
+        error = '10-digit mobile number is required.';
+      } else if (!/^[6-9]\d{9}$/.test(digits)) {
+        error = 'Enter a valid 10-digit Indian mobile number (starts with 6-9).';
+      }
+    }
+    return error;
+  };
+
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [name]: value
     }));
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
+    if (submitError) {
+      setSubmitError('');
+    }
+  };
+
+  const handlePhoneChange = (e) => {
+    const rawVal = e.target.value.replace(/\D/g, '').slice(0, 10);
+    setFormData(prev => ({ ...prev, phone: rawVal }));
+    if (errors.phone) {
+      setErrors(prev => ({ ...prev, phone: '' }));
+    }
+    if (submitError) {
+      setSubmitError('');
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    const error = validateField(name, value);
+    if (error) {
+      setErrors(prev => ({ ...prev, [name]: error }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.name.trim() || formData.phone.length < 10) {
-      alert('Please fill out your name and a valid 10-digit mobile number.');
+    setSubmitError('');
+
+    const nameErr = validateField('name', formData.name);
+    const phoneErr = validateField('phone', formData.phone);
+    if (nameErr || phoneErr) {
+      setErrors({
+        name: nameErr,
+        phone: phoneErr
+      });
       return;
     }
 
     setIsSubmitting(true);
     const payload = {
       ...formData,
+      phone: formData.phone.replace(/\D/g, ''),
       source: "Contact Page Dedicated Form (MB Natural Safety Nets)"
     };
 
-    // 1. Send FormSubmit AJAX in background to mahimanohar47@gmail.com
-    sendEmailInquiry(payload);
-
-    // 2. Confetti
     try {
-      confetti({
-        particleCount: 70,
-        spread: 60,
-        origin: { y: 0.6 }
-      });
-    } catch {}
+      const result = await sendEmailInquiry(payload);
+      if (!result || !result.success) {
+        setSubmitError(
+          'Online email dispatch experienced a connection delay. Your details are intact below. You can retry or chat directly on WhatsApp.'
+        );
+        setIsSubmitting(false);
+        return;
+      }
 
-    setIsSubmitting(false);
-    setIsSuccess(true);
+      // Confetti celebration
+      try {
+        confetti({
+          particleCount: 70,
+          spread: 60,
+          origin: { y: 0.6 }
+        });
+      } catch {}
 
-    // 3. Open WhatsApp after short delay
-    setTimeout(() => {
-      const url = generateWhatsAppUrl(payload);
-      window.open(url, '_blank');
-    }, 1200);
+      setIsSubmitting(false);
+      setIsSuccess(true);
+
+      // Open WhatsApp after short delay
+      setTimeout(() => {
+        const url = generateWhatsAppUrl(payload);
+        window.open(url, '_blank');
+      }, 1200);
+    } catch (err) {
+      console.error('Contact form submission error:', err);
+      setSubmitError('A network error occurred while submitting. Please retry or contact us directly on WhatsApp or phone.');
+      setIsSubmitting(false);
+    }
   };
+
+  const handleResetForm = () => {
+    setFormData({
+      name: '',
+      phone: '',
+      service: servicesData[0].title,
+      locality: 'Gachibowli',
+      preferredDate: 'Earliest Available (Today / Tomorrow)',
+      dimensions: '',
+      notes: ''
+    });
+    setErrors({});
+    setSubmitError('');
+    setIsSuccess(false);
+  };
+
 
   return (
     <div className="pt-8 sm:pt-12 md:pt-14 pb-20 bg-canvas-light dark:bg-obsidian-canvas min-h-screen">
@@ -82,6 +168,8 @@ export default function ContactPage() {
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="w-20 h-14 mx-auto mb-4 flex items-center justify-center">
             <img
+              loading="lazy"
+              decoding="async"
               src={logoEmblem}
               alt="MB Natural Safety Nets"
               className="w-full h-full object-contain filter drop-shadow-sm"
@@ -211,55 +299,141 @@ export default function ContactPage() {
                     Our rigging supervisor in <strong>{formData.locality}</strong> is connecting with you now. Notification sent to <strong>{brandConfig.email}</strong>, and opening WhatsApp!
                   </p>
                   <button
-                    onClick={() => setIsSuccess(false)}
-                    className="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300"
+                    type="button"
+                    onClick={handleResetForm}
+                    className="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                   >
                     Submit Another Balcony Request
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} noValidate className="space-y-4">
+                  {/* Top-level submission network/API failure alert */}
+                  {submitError && (
+                    <div
+                      role="alert"
+                      aria-live="assertive"
+                      className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-900 dark:text-amber-200 mb-4 flex items-start gap-3"
+                    >
+                      <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+                      <div className="flex-1 text-xs">
+                        <p className="font-bold mb-1">Submission Notice</p>
+                        <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-3">
+                          {submitError}
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          <button
+                            type="button"
+                            onClick={handleSubmit}
+                            disabled={isSubmitting}
+                            className="px-3 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-bold text-xs flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+                          >
+                            <Loader2 className={`w-3.5 h-3.5 ${isSubmitting ? 'animate-spin' : ''}`} />
+                            <span>Retry Online Dispatch</span>
+                          </button>
+                          <a
+                            href={generateWhatsAppUrl({ ...formData, phone: formData.phone.replace(/\D/g, '') })}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1.5 cursor-pointer"
+                          >
+                            <Send className="w-3.5 h-3.5" />
+                            <span>Chat on WhatsApp Directly</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                      <label
+                        htmlFor="contact-name"
+                        className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5"
+                      >
                         Your Full Name *
                       </label>
                       <input
+                        id="contact-name"
                         type="text"
                         name="name"
                         required
+                        aria-required="true"
+                        aria-invalid={!!errors.name}
+                        aria-describedby={errors.name ? "contact-name-error" : undefined}
                         value={formData.name}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         placeholder="e.g. Vikram Reddy"
-                        className="w-full px-4 py-3 rounded-xl bg-canvas-muted dark:bg-obsidian-surface border border-canvas-border dark:border-obsidian-border text-slate-900 dark:text-white text-base focus:outline-none focus:ring-2 focus:ring-brand-500"
+                        className={`w-full px-4 py-3 rounded-xl bg-canvas-muted dark:bg-obsidian-surface border ${
+                          errors.name
+                            ? 'border-rose-500 focus:ring-rose-500 bg-rose-500/5'
+                            : 'border-canvas-border dark:border-obsidian-border focus:ring-brand-500'
+                        } text-slate-900 dark:text-white text-base focus:outline-none focus:ring-2 transition-colors`}
                       />
+                      {errors.name && (
+                        <p
+                          id="contact-name-error"
+                          role="alert"
+                          className="text-xs text-rose-500 dark:text-rose-400 font-semibold mt-1 flex items-center gap-1"
+                        >
+                          <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                          <span>{errors.name}</span>
+                        </p>
+                      )}
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-                        Phone Number *
+                      <label
+                        htmlFor="contact-phone"
+                        className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5"
+                      >
+                        Phone Number (10-Digit Mobile) *
                       </label>
                       <input
+                        id="contact-phone"
                         type="tel"
                         name="phone"
                         required
+                        aria-required="true"
+                        aria-invalid={!!errors.phone}
+                        aria-describedby={errors.phone ? "contact-phone-error" : undefined}
                         maxLength={10}
                         value={formData.phone}
-                        onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value.replace(/\D/g, '') }))}
-                        placeholder="10-digit mobile"
-                        className="w-full px-4 py-3 rounded-xl bg-canvas-muted dark:bg-obsidian-surface border border-canvas-border dark:border-obsidian-border text-slate-900 dark:text-white text-base font-mono focus:outline-none focus:ring-2 focus:ring-brand-500"
+                        onChange={handlePhoneChange}
+                        onBlur={handleBlur}
+                        placeholder="9876543210"
+                        className={`w-full px-4 py-3 rounded-xl bg-canvas-muted dark:bg-obsidian-surface border ${
+                          errors.phone
+                            ? 'border-rose-500 focus:ring-rose-500 bg-rose-500/5'
+                            : 'border-canvas-border dark:border-obsidian-border focus:ring-brand-500'
+                        } text-slate-900 dark:text-white text-base font-mono focus:outline-none focus:ring-2 transition-colors`}
                       />
+                      {errors.phone && (
+                        <p
+                          id="contact-phone-error"
+                          role="alert"
+                          className="text-xs text-rose-500 dark:text-rose-400 font-semibold mt-1 flex items-center gap-1"
+                        >
+                          <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                          <span>{errors.phone}</span>
+                        </p>
+                      )}
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 flex items-center justify-between">
+                      <label
+                        htmlFor="contact-service"
+                        className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 flex items-center justify-between"
+                      >
                         <span>Balcony Safety Solution *</span>
                         <span className="text-[10px] text-brand-600 dark:text-brand-400 font-semibold">5-Yr Warranty</span>
                       </label>
                       <div className="relative">
                         <select
+                          id="contact-service"
                           name="service"
                           value={formData.service}
                           onChange={handleChange}
@@ -274,12 +448,16 @@ export default function ContactPage() {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 flex items-center justify-between">
+                      <label
+                        htmlFor="contact-locality"
+                        className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 flex items-center justify-between"
+                      >
                         <span>Hyderabad Locality *</span>
                         <span className="text-[10px] text-emerald-500 font-semibold">30-Min SLA Hub</span>
                       </label>
                       <div className="relative">
                         <select
+                          id="contact-locality"
                           name="locality"
                           value={formData.locality}
                           onChange={handleChange}
@@ -298,11 +476,15 @@ export default function ContactPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                      <label
+                        htmlFor="contact-preferredDate"
+                        className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5"
+                      >
                         Preferred Inspection Slot
                       </label>
                       <div className="relative">
                         <select
+                          id="contact-preferredDate"
                           name="preferredDate"
                           value={formData.preferredDate}
                           onChange={handleChange}
@@ -319,10 +501,14 @@ export default function ContactPage() {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                      <label
+                        htmlFor="contact-dimensions"
+                        className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5"
+                      >
                         Balcony Count / Dimensions (Optional)
                       </label>
                       <input
+                        id="contact-dimensions"
                         type="text"
                         name="dimensions"
                         value={formData.dimensions}
@@ -334,10 +520,14 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                    <label
+                      htmlFor="contact-notes"
+                      className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5"
+                    >
                       Apartment Community Name / Special Notes
                     </label>
                     <textarea
+                      id="contact-notes"
                       name="notes"
                       rows={2}
                       value={formData.notes}
@@ -350,10 +540,13 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full min-h-[50px] py-3.5 px-6 rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-sky-400 hover:from-brand-500 hover:to-sky-300 text-white font-extrabold text-sm shadow-glow-azure flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer"
+                    className="w-full min-h-[50px] py-3.5 px-6 rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-sky-400 hover:from-brand-500 hover:to-sky-300 text-white font-extrabold text-sm shadow-glow-azure flex items-center justify-center gap-2 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100 transition-all cursor-pointer"
                   >
                     {isSubmitting ? (
-                      <span>Dispatching Balcony Request...</span>
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Dispatching Balcony Request...</span>
+                      </>
                     ) : (
                       <>
                         <Sparkles className="w-4 h-4" />

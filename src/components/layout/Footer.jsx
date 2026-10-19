@@ -86,6 +86,8 @@ export default function Footer({ onOpenQuoteSheet }) {
                   className="w-full h-full object-contain filter drop-shadow"
                   width="64"
                   height="48"
+                  loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     e.currentTarget.src = '/logo.jpeg';
                   }}
@@ -226,6 +228,7 @@ export default function Footer({ onOpenQuoteSheet }) {
                 {zone.locations.map((loc, lIdx) => (
                   <span key={loc.name}>
                     <button
+                      type="button"
                       onClick={() => onOpenQuoteSheet(null, loc.name)}
                       className="hover:text-brand-300 underline decoration-slate-700 underline-offset-2 transition-colors cursor-pointer"
                     >
@@ -272,6 +275,7 @@ export default function Footer({ onOpenQuoteSheet }) {
 
             {/* Back to Top */}
             <button
+              type="button"
               onClick={scrollToTop}
               aria-label="Scroll back to top"
               className="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all cursor-pointer shadow-md hover:scale-105 active:scale-95"

@@ -146,6 +146,7 @@ export default function BalconyVisualShowcase({ onOpenQuoteSheet }) {
         <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar">
           {showcaseItems.map((item, idx) => (
             <button
+              type="button"
               key={item.id}
               onClick={() => selectItem(idx)}
               className={`shrink-0 min-h-[44px] px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 cursor-pointer ${
@@ -171,6 +172,10 @@ export default function BalconyVisualShowcase({ onOpenQuoteSheet }) {
               <img
                 src={currentItem.image}
                 alt={currentItem.title}
+                width="800"
+                height="500"
+                loading="lazy"
+                decoding="async"
                 draggable={false}
                 key={currentItem.id}
                 className="w-full h-full object-cover object-center animate-fade-in group-hover:scale-102 transition-transform duration-500 select-none pointer-events-none"
@@ -316,6 +321,7 @@ export default function BalconyVisualShowcase({ onOpenQuoteSheet }) {
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
               {showcaseItems.map((item, idx) => (
                 <button
+                  type="button"
                   key={item.id}
                   onClick={() => selectItem(idx)}
                   className={`p-2 rounded-2xl text-left border transition-all cursor-pointer flex items-center gap-2.5 ${
@@ -325,6 +331,10 @@ export default function BalconyVisualShowcase({ onOpenQuoteSheet }) {
                   }`}
                 >
                   <img
+                    width="40"
+                    height="40"
+                    loading="lazy"
+                    decoding="async"
                     src={item.image}
                     alt={item.title}
                     className="w-10 h-10 rounded-xl object-cover shrink-0"

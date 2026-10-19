@@ -21,6 +21,8 @@ export default function CalculatorPage({ onOpenQuoteSheet }) {
         <div className="text-center max-w-3xl mx-auto mb-10">
           <div className="w-20 h-14 mx-auto mb-4 flex items-center justify-center">
             <img
+              loading="lazy"
+              decoding="async"
               src={logoEmblem}
               alt="MB Natural Safety Nets"
               className="w-full h-full object-contain filter drop-shadow-sm"

@@ -14,6 +14,8 @@ export default function ReviewsSection() {
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="w-20 h-14 mx-auto mb-3 flex items-center justify-center">
             <img
+              loading="lazy"
+              decoding="async"
               src={logoEmblem}
               alt="MB Natural Safety Nets"
               className="w-full h-full object-contain filter drop-shadow-sm"
@@ -95,8 +97,11 @@ export default function ReviewsSection() {
                 <img
                   src={review.avatar}
                   alt={review.name}
-                  className="w-10 h-10 rounded-full object-cover border border-brand-500/30"
+                  width="40"
+                  height="40"
                   loading="lazy"
+                  decoding="async"
+                  className="w-10 h-10 rounded-full object-cover border border-brand-500/30"
                 />
                 <div>
                   <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">

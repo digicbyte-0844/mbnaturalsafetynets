@@ -40,6 +40,8 @@ export default function EngineeringSection() {
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="w-20 h-14 mx-auto mb-3 flex items-center justify-center">
             <img
+              loading="lazy"
+              decoding="async"
               src={logoEmblem}
               alt="MB Natural Safety Nets"
               className="w-full h-full object-contain filter drop-shadow-sm"
@@ -93,10 +95,13 @@ export default function EngineeringSection() {
         <div className="mb-14 rounded-3xl overflow-hidden border border-slate-200 dark:border-white/10 bg-white dark:bg-obsidian-surface shadow-xl grid grid-cols-1 lg:grid-cols-12 items-center">
           <div className="lg:col-span-5 relative aspect-[16/10] lg:aspect-auto lg:h-full min-h-[260px] bg-slate-900 overflow-hidden">
             <img
-              src="/images/technician-install.jpg"
+              width="600"
+              height="400"
+              loading="lazy"
+              decoding="async"
+              src="/images/technician-install.webp"
               alt="Certified Balcony Rigging Technician with Laser Measure"
               className="w-full h-full object-cover"
-              loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
             <div className="absolute bottom-3 left-4 right-4 text-white text-xs">

@@ -7,6 +7,8 @@ import Badge from '../components/ui/Badge';
 import EngineeringSection from '../components/sections/EngineeringSection';
 import logoEmblem from '../assets/logo-emblem.png';
 import SEOHead from '../components/seo/SEOHead';
+import EmptyState from '../components/ui/EmptyState';
+
 
 export default function ServicesPage({ onOpenQuoteSheet }) {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -29,6 +31,8 @@ export default function ServicesPage({ onOpenQuoteSheet }) {
         <div className="text-center max-w-3xl mx-auto mb-10">
           <div className="w-20 h-14 mx-auto mb-4 flex items-center justify-center">
             <img
+              loading="lazy"
+              decoding="async"
               src={logoEmblem}
               alt="MB Natural Safety Nets"
               className="w-full h-full object-contain filter drop-shadow-sm"
@@ -54,6 +58,7 @@ export default function ServicesPage({ onOpenQuoteSheet }) {
         <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-3 mb-10 no-scrollbar select-none">
           {serviceCategories.map(cat => (
             <button
+              type="button"
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
               className={`shrink-0 min-h-[42px] px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
@@ -67,9 +72,17 @@ export default function ServicesPage({ onOpenQuoteSheet }) {
           ))}
         </div>
 
-        {/* Services List / Cards */}
-        <div className="space-y-12">
-          {filteredServices.map(service => (
+        {/* Services List / Cards or Empty State */}
+        {filteredServices.length === 0 ? (
+          <EmptyState
+            title="No Services Found"
+            description="No safety netting services found matching this category filter. Reset the filter to view all 11 certified solutions."
+            actionLabel="View All Services"
+            onAction={() => setActiveCategory('all')}
+          />
+        ) : (
+          <div className="space-y-12">
+            {filteredServices.map(service => (
             <div
               key={service.id}
               className="bg-white dark:bg-obsidian-card rounded-3xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-xl p-6 sm:p-8"
@@ -79,11 +92,14 @@ export default function ServicesPage({ onOpenQuoteSheet }) {
                 {/* Photo & Quick Badges (5 cols) */}
                 <div className="lg:col-span-5 relative aspect-[16/10] rounded-2xl overflow-hidden bg-slate-900 shadow-md">
                   <img
+                    width="600"
+                    height="400"
+                    loading="lazy"
+                    decoding="async"
                     src={service.heroImage}
                     alt={service.title}
                     draggable={false}
                     className="w-full h-full object-cover select-none pointer-events-none"
-                    loading="lazy"
                     onError={(e) => {
                       e.currentTarget.src = '/images/hero-balcony.jpg';
                     }}
@@ -165,6 +181,7 @@ export default function ServicesPage({ onOpenQuoteSheet }) {
                   {/* Actions */}
                   <div className="mt-6 pt-4 border-t border-slate-100 dark:border-white/5 flex flex-wrap items-center gap-3">
                     <button
+                      type="button"
                       onClick={() => onOpenQuoteSheet(service.id)}
                       className="min-h-[44px] px-6 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-400 text-white font-bold text-xs shadow-glow-azure flex items-center gap-2 cursor-pointer"
                     >
@@ -187,6 +204,7 @@ export default function ServicesPage({ onOpenQuoteSheet }) {
             </div>
           ))}
         </div>
+      )}
 
       </div>
 

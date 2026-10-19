@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import ScrollToTop from './components/layout/ScrollToTop';
@@ -12,17 +12,32 @@ import AnalyticsLoader from './components/analytics/AnalyticsLoader';
 import ScrollProgressBar from './components/ui/ScrollProgressBar';
 import BackToTop from './components/ui/BackToTop';
 
-// Pages
-import HomePage from './pages/HomePage';
-import ServicesPage from './pages/ServicesPage';
-import ServiceDetailPage from './pages/ServiceDetailPage';
-import CalculatorPage from './pages/CalculatorPage';
-import GalleryPage from './pages/GalleryPage';
-import ReviewsPage from './pages/ReviewsPage';
-import ContactPage from './pages/ContactPage';
-import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
-import TermsConditionsPage from './pages/TermsConditionsPage';
-import NotFoundPage from './pages/NotFoundPage';
+// Lazy-loaded Pages for Maximum Performance & Code Splitting
+const HomePage = lazy(() => import('./pages/HomePage'));
+const ServicesPage = lazy(() => import('./pages/ServicesPage'));
+const ServiceDetailPage = lazy(() => import('./pages/ServiceDetailPage'));
+const CalculatorPage = lazy(() => import('./pages/CalculatorPage'));
+const GalleryPage = lazy(() => import('./pages/GalleryPage'));
+const ReviewsPage = lazy(() => import('./pages/ReviewsPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
+const TermsConditionsPage = lazy(() => import('./pages/TermsConditionsPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+
+function RouteLoadingFallback() {
+  return (
+    <div
+      role="status"
+      aria-label="Loading page content"
+      className="min-h-[50vh] flex flex-col items-center justify-center p-8 text-center"
+    >
+      <div className="w-9 h-9 rounded-full border-2 border-brand-500/20 border-t-brand-600 animate-spin mb-3" />
+      <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+        Loading MB Natural Safety Nets...
+      </span>
+    </div>
+  );
+}
 
 export default function App() {
   const [isQuoteSheetOpen, setIsQuoteSheetOpen] = useState(false);
@@ -68,20 +83,22 @@ export default function App() {
 
           {/* Main Routing Outlet */}
           <main id="main-content" className="flex-1 outline-none" tabIndex="-1">
-            <Routes>
-              <Route path="/" element={<HomePage onOpenQuoteSheet={handleOpenQuoteSheet} />} />
-              <Route path="/services" element={<ServicesPage onOpenQuoteSheet={handleOpenQuoteSheet} />} />
-              <Route path="/services/:id" element={<ServiceDetailPage onOpenQuoteSheet={handleOpenQuoteSheet} />} />
-              <Route path="/calculator" element={<CalculatorPage onOpenQuoteSheet={handleOpenQuoteSheet} />} />
-              <Route path="/gallery" element={<GalleryPage onOpenQuoteSheet={handleOpenQuoteSheet} />} />
-              <Route path="/reviews" element={<ReviewsPage onOpenQuoteSheet={handleOpenQuoteSheet} />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-              <Route path="/privacy" element={<Navigate to="/privacy-policy" replace />} />
-              <Route path="/terms-and-conditions" element={<TermsConditionsPage />} />
-              <Route path="/terms" element={<Navigate to="/terms-and-conditions" replace />} />
-              <Route path="*" element={<NotFoundPage onOpenQuoteSheet={handleOpenQuoteSheet} />} />
-            </Routes>
+            <Suspense fallback={<RouteLoadingFallback />}>
+              <Routes>
+                <Route path="/" element={<HomePage onOpenQuoteSheet={handleOpenQuoteSheet} />} />
+                <Route path="/services" element={<ServicesPage onOpenQuoteSheet={handleOpenQuoteSheet} />} />
+                <Route path="/services/:id" element={<ServiceDetailPage onOpenQuoteSheet={handleOpenQuoteSheet} />} />
+                <Route path="/calculator" element={<CalculatorPage onOpenQuoteSheet={handleOpenQuoteSheet} />} />
+                <Route path="/gallery" element={<GalleryPage onOpenQuoteSheet={handleOpenQuoteSheet} />} />
+                <Route path="/reviews" element={<ReviewsPage onOpenQuoteSheet={handleOpenQuoteSheet} />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+                <Route path="/privacy" element={<Navigate to="/privacy-policy" replace />} />
+                <Route path="/terms-and-conditions" element={<TermsConditionsPage />} />
+                <Route path="/terms" element={<Navigate to="/terms-and-conditions" replace />} />
+                <Route path="*" element={<NotFoundPage onOpenQuoteSheet={handleOpenQuoteSheet} />} />
+              </Routes>
+            </Suspense>
           </main>
 
           {/* Deep SEO Footer */}

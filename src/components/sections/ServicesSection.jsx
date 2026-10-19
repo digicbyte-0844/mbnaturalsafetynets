@@ -41,6 +41,7 @@ export default function ServicesSection({ onOpenQuoteSheet }) {
         <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-3 mb-10 no-scrollbar select-none">
           {serviceCategories.map(cat => (
             <button
+              type="button"
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
               className={`shrink-0 min-h-[40px] px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
@@ -70,9 +71,12 @@ export default function ServicesSection({ onOpenQuoteSheet }) {
                     <img
                       src={service.heroImage}
                       alt={service.title}
+                      width="600"
+                      height="400"
+                      loading="lazy"
+                      decoding="async"
                       draggable={false}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 select-none pointer-events-none"
-                      loading="lazy"
                       onError={(e) => {
                         e.currentTarget.src = '/images/hero-balcony.jpg';
                       }}

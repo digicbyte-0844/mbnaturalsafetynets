@@ -48,6 +48,11 @@ export default function ServiceDetailPage({ onOpenQuoteSheet }) {
             <img
               src={service.heroImage}
               alt={service.title}
+              width="800"
+              height="550"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
               draggable={false}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none pointer-events-none"
               onError={(e) => {
@@ -85,6 +90,10 @@ export default function ServiceDetailPage({ onOpenQuoteSheet }) {
                 <img
                   src={logoEmblem}
                   alt="MB Natural Safety Nets"
+                  width="40"
+                  height="28"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-contain filter drop-shadow-sm"
                   onError={(e) => {
                     e.currentTarget.src = '/logo.jpeg';
@@ -122,6 +131,7 @@ export default function ServiceDetailPage({ onOpenQuoteSheet }) {
 
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <button
+                type="button"
                 onClick={() => onOpenQuoteSheet(service.id)}
                 className="min-h-[48px] px-8 py-3 rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-sky-400 hover:from-brand-500 hover:to-sky-300 text-white font-extrabold text-sm shadow-glow-azure flex items-center gap-2 cursor-pointer"
               >
@@ -168,6 +178,10 @@ export default function ServiceDetailPage({ onOpenQuoteSheet }) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8 relative aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-900 shadow-2xl select-none">
               <img
+                width="600"
+                height="400"
+                loading="lazy"
+                decoding="async"
                 src={service.heroImage}
                 alt={service.title}
                 draggable={false}
@@ -336,6 +350,7 @@ export default function ServiceDetailPage({ onOpenQuoteSheet }) {
 
                 <div className="mt-8 pt-4 border-t border-slate-100 dark:border-white/5">
                   <button
+                    type="button"
                     onClick={() => onOpenQuoteSheet(service.id)}
                     className={`w-full min-h-[44px] py-3 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 cursor-pointer transition-transform active:scale-95 ${
                       pkg.recommended
@@ -367,6 +382,10 @@ export default function ServiceDetailPage({ onOpenQuoteSheet }) {
                 <img
                   src={rel.heroImage}
                   alt={rel.title}
+                  width="64"
+                  height="64"
+                  loading="lazy"
+                  decoding="async"
                   className="w-16 h-16 rounded-xl object-cover shrink-0"
                   onError={(e) => {
                     e.currentTarget.src = '/images/hero-balcony.jpg';

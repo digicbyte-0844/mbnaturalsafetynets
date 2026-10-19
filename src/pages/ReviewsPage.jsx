@@ -38,6 +38,8 @@ export default function ReviewsPage({ onOpenQuoteSheet }) {
         <div className="text-center max-w-3xl mx-auto mb-10">
           <div className="w-20 h-14 mx-auto mb-4 flex items-center justify-center">
             <img
+              loading="lazy"
+              decoding="async"
               src={logoEmblem}
               alt="MB Natural Safety Nets"
               className="w-full h-full object-contain filter drop-shadow-sm"
@@ -105,6 +107,7 @@ export default function ReviewsPage({ onOpenQuoteSheet }) {
                 <div className="mt-6 pt-4 border-t border-slate-100 dark:border-white/5 flex items-center justify-between">
                   <span className="text-xs text-slate-500">5-Year Stamped Doorstep Warranty</span>
                   <button
+                    type="button"
                     onClick={() => onOpenQuoteSheet(null, study.location)}
                     className="text-xs font-bold text-brand-600 dark:text-brand-400 hover:underline cursor-pointer"
                   >

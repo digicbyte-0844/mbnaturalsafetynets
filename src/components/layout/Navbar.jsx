@@ -116,6 +116,7 @@ export default function Navbar({ isMobileDrawerOpen = false, onOpenMobileDrawer,
                   width="64"
                   height="44"
                   loading="eager"
+                  decoding="async"
                   onError={(e) => {
                     e.currentTarget.src = "/logo.jpeg";
                   }}

@@ -91,6 +91,8 @@ export default function MobileDrawer({ isOpen, onClose, onOpenQuoteSheet }) {
                   className="w-full h-full object-contain filter drop-shadow-sm group-hover:scale-105 transition-transform"
                   width="44"
                   height="36"
+                  loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     e.currentTarget.src = '/logo.jpeg';
                   }}
@@ -108,6 +110,7 @@ export default function MobileDrawer({ isOpen, onClose, onOpenQuoteSheet }) {
             </Link>
 
             <button
+              type="button"
               onClick={onClose}
               aria-label="Close navigation menu"
               className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white flex items-center justify-center cursor-pointer active:scale-95 transition-transform touch-target"
@@ -300,6 +303,7 @@ export default function MobileDrawer({ isOpen, onClose, onOpenQuoteSheet }) {
             <div className="flex flex-wrap gap-1.5">
               {['Gachibowli', 'HITEC City', 'Kondapur', 'Kokapet', 'Madhapur', 'Kukatpally', 'Secunderabad', 'Financial District'].map((loc) => (
                 <button
+                  type="button"
                   key={loc}
                   onClick={() => {
                     onClose();
@@ -329,6 +333,7 @@ export default function MobileDrawer({ isOpen, onClose, onOpenQuoteSheet }) {
           </div>
 
           <button
+            type="button"
             onClick={() => {
               onClose();
               onOpenQuoteSheet();
