@@ -30,7 +30,7 @@ export default function ReviewsPage({ onOpenQuoteSheet }) {
         title="Customer Reviews & Ratings | MB Safety Nets Hyderabad"
         description="Read 3,850+ verified customer reviews for balcony safety nets, pigeon nets, and invisible grills across Hyderabad high-rise apartments. 4.98-star rating."
         canonicalPath="/reviews"
-        image="/images/hero-balcony.jpg"
+        ogImage="/images/hero-balcony.jpg"
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         

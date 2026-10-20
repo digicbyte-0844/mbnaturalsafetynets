@@ -106,7 +106,7 @@ export default function GalleryPage({ onOpenQuoteSheet }) {
       title: 'Balcony Railing Bottom Crawl Gap Seal',
       community: 'Incor One City, KPHB Kukatpally',
       spec: 'Multi-Point Steel Cable Lock',
-      image: '/images/invisible-grill-toddler.webp'
+      image: '/images/balcony-railing-bottom-gap.webp'
     },
     {
       id: 12,
@@ -114,7 +114,7 @@ export default function GalleryPage({ onOpenQuoteSheet }) {
       title: 'Corner Balcony High-Tensile Grills',
       community: 'Prestige Tranquil, Kokapet',
       spec: 'Extruded Aluminum Track • 10-Yr Rust Free',
-      image: '/images/hero-balcony.webp'
+      image: '/images/corner-balcony-invisible-grill.webp'
     },
     {
       id: 13,
@@ -122,7 +122,7 @@ export default function GalleryPage({ onOpenQuoteSheet }) {
       title: 'Floor-to-Ceiling High-Rise Balcony Shield',
       community: 'My Home Mangala, Kondapur',
       spec: 'High-Tenacity Heat-Set Braided Nylon',
-      image: '/images/invisible-grill-toddler.webp'
+      image: '/images/technician-install.webp'
     },
     {
       id: 14,
@@ -138,7 +138,7 @@ export default function GalleryPage({ onOpenQuoteSheet }) {
       title: 'Penthouse Panoramic Skyline Invisible Grills',
       community: 'Lodha Bellezza, KPHB Colony',
       spec: 'SS 316 Marine Grade • Quick-Cut Fire Safe',
-      image: '/images/hero-balcony.webp'
+      image: '/images/penthouse-panoramic-grills.webp'
     },
     {
       id: 16,
@@ -146,7 +146,7 @@ export default function GalleryPage({ onOpenQuoteSheet }) {
       title: 'Double Balcony Pigeon Netting & Sanitization',
       community: 'My Home Tarkshya, Kokapet',
       spec: 'UV-Treated Copolymer Monofilament',
-      image: '/images/balcony-pigeon-net.webp'
+      image: '/images/double-balcony-pigeon-net.webp'
     },
     {
       id: 17,
@@ -154,7 +154,7 @@ export default function GalleryPage({ onOpenQuoteSheet }) {
       title: 'Full Balcony Fall Arrest Safety Netting',
       community: 'My Home Avatar, Puppalaguda',
       spec: '180kg Multi-Point Breaking Load • 5-Yr Warranty',
-      image: '/images/hero-balcony.webp'
+      image: '/images/balcony-safety-net.webp'
     }
   ];
 
@@ -169,7 +169,7 @@ export default function GalleryPage({ onOpenQuoteSheet }) {
         title="Safety Nets & Invisible Grills Photo Gallery Hyderabad | MB"
         description="Explore real installation photos of balcony safety nets, pigeon nets, bird spikes, cricket nets & SS 316 invisible grills across Hyderabad high-rise societies."
         canonicalPath="/gallery"
-        image="/images/hero-balcony.webp"
+        ogImage="/images/hero-balcony.webp"
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         

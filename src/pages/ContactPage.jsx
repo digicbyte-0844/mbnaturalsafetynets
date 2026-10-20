@@ -7,6 +7,7 @@ import GoogleMapsSection from '../components/sections/GoogleMapsSection';
 import Badge from '../components/ui/Badge';
 import WhatsAppIcon from '../components/ui/WhatsAppIcon';
 import { generateWhatsAppUrl } from '../utils/generateWhatsAppUrl';
+import { generateEmailUrl } from '../utils/generateEmailUrl';
 import { sendEmailInquiry } from '../utils/sendEmailInquiry';
 import confetti from 'canvas-confetti';
 import logoEmblem from '../assets/logo-emblem.png';
@@ -27,6 +28,10 @@ export default function ContactPage() {
   const [submitError, setSubmitError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+
+  const dynamicWhatsAppUrl = generateWhatsAppUrl(formData);
+  const dynamicEmailUrl = generateEmailUrl(formData);
+  const hasUserDetails = Boolean((formData.name && formData.name.trim()) || (formData.phone && formData.phone.trim()));
 
   const validateField = (name, value) => {
     let error = '';
@@ -217,7 +222,7 @@ export default function ContactPage() {
           </a>
 
           <a
-            href={`https://wa.me/${brandConfig.whatsapp}`}
+            href={dynamicWhatsAppUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="p-6 rounded-3xl bg-white dark:bg-obsidian-card border border-slate-200 dark:border-white/10 shadow-sm hover:border-emerald-500 transition-all flex flex-col justify-between"
@@ -232,11 +237,11 @@ export default function ContactPage() {
               </div>
               <h3 className="text-base font-bold text-slate-900 dark:text-white mt-0.5">{brandConfig.phone}</h3>
             </div>
-            <span className="text-xs font-bold text-emerald-500 mt-3">Start WhatsApp Chat →</span>
+            <span className="text-xs font-bold text-emerald-500 mt-3">{hasUserDetails ? "Send Details on WhatsApp →" : "Start WhatsApp Chat →"}</span>
           </a>
 
           <a
-            href={`mailto:${brandConfig.email}`}
+            href={dynamicEmailUrl}
             className="p-6 rounded-3xl bg-white dark:bg-obsidian-card border border-slate-200 dark:border-white/10 shadow-sm hover:border-sky-500 transition-all flex flex-col justify-between"
           >
             <div>
@@ -249,7 +254,7 @@ export default function ContactPage() {
               </div>
               <h3 className="text-xs font-bold text-slate-900 dark:text-white mt-0.5 break-all">{brandConfig.email}</h3>
             </div>
-            <span className="text-[11px] text-sky-500 mt-3">Direct Inquiries & Quotations →</span>
+            <span className="text-[11px] text-sky-500 mt-3">{hasUserDetails ? "Send Details via Email →" : "Direct Inquiries & Quotations →"}</span>
           </a>
 
           <a

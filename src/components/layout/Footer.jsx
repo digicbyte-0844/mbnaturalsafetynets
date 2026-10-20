@@ -19,6 +19,8 @@ import { brandConfig } from '../../data/brandConfig';
 import { servicesData } from '../../data/servicesData';
 import { locationsZones } from '../../data/locationsData';
 import WhatsAppIcon from '../ui/WhatsAppIcon';
+import { getDirectWhatsAppUrl } from '../../utils/generateWhatsAppUrl';
+import { getDirectEmailUrl } from '../../utils/generateEmailUrl';
 import logoEmblem from '../../assets/logo-emblem.png';
 
 export default function Footer({ onOpenQuoteSheet }) {
@@ -184,14 +186,14 @@ export default function Footer({ onOpenQuoteSheet }) {
                 <span>{brandConfig.phone}</span>
               </a>
 
-              <a href={`https://wa.me/${brandConfig.whatsapp}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 group">
+              <a href={getDirectWhatsAppUrl()} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 group">
                 <div className="w-7 h-7 rounded-lg bg-[#25D366]/15 text-[#25D366] flex items-center justify-center shrink-0 group-hover:bg-[#25D366] group-hover:text-white transition-colors">
                   <WhatsAppIcon className="w-3.5 h-3.5 fill-current" />
                 </div>
                 <span>WhatsApp: {brandConfig.whatsapp}</span>
               </a>
 
-              <a href={`mailto:${brandConfig.email}`} className="flex items-center gap-2 text-sky-400 hover:text-sky-300 break-all group">
+              <a href={getDirectEmailUrl()} className="flex items-center gap-2 text-sky-400 hover:text-sky-300 break-all group">
                 <div className="w-7 h-7 rounded-lg bg-sky-500/10 text-sky-400 flex items-center justify-center shrink-0 group-hover:bg-sky-500 group-hover:text-white transition-colors">
                   <Mail className="w-3.5 h-3.5" />
                 </div>

@@ -95,7 +95,7 @@ export default class ErrorBoundary extends React.Component {
             </div>
 
             {/* Developer Error Detail (in development only) */}
-            {process.env.NODE_ENV !== 'production' && this.state.error && (
+            {Boolean((typeof import.meta !== 'undefined' && import.meta.env?.DEV) || (typeof process !== 'undefined' && process.env?.NODE_ENV !== 'production')) && this.state.error && (
               <details className="mt-6 text-left p-3 rounded-xl bg-slate-950 text-rose-400 font-mono text-[11px] overflow-auto max-h-48 border border-rose-500/30">
                 <summary className="cursor-pointer font-bold text-rose-300 mb-2">
                   Technical Stack Trace (Dev Only)

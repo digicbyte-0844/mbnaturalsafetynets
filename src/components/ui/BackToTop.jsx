@@ -4,6 +4,7 @@ import { ArrowUp } from 'lucide-react';
 /**
  * Floating Back-to-Top Button
  * Appears dynamically when window.scrollY > 500 and smoothly scrolls to top.
+ * Hidden on small screens (hidden sm:flex) to prevent collisions with the full-width mobile cookie banner.
  */
 export default function BackToTop() {
   const [isVisible, setIsVisible] = useState(false);
@@ -31,7 +32,7 @@ export default function BackToTop() {
       type="button"
       onClick={scrollToTop}
       aria-label="Scroll back to top"
-      className="fixed bottom-6 right-6 z-40 p-3 rounded-2xl bg-slate-900/90 dark:bg-obsidian-card/95 text-white shadow-2xl border border-white/20 backdrop-blur-xl hover:bg-brand-600 hover:border-brand-500 active:scale-90 transition-all duration-300 flex items-center justify-center cursor-pointer animate-fade-in group no-print focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+      className="hidden sm:flex fixed bottom-6 right-6 z-40 p-3 rounded-2xl bg-slate-900/90 dark:bg-obsidian-card/95 text-white shadow-2xl border border-white/20 backdrop-blur-xl hover:bg-brand-600 hover:border-brand-500 active:scale-90 transition-all duration-300 items-center justify-center cursor-pointer animate-fade-in group no-print focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
     >
       <ArrowUp className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" />
       <span className="sr-only">Scroll back to top</span>

@@ -102,6 +102,9 @@ export default function ReviewsSection() {
                   loading="lazy"
                   decoding="async"
                   className="w-10 h-10 rounded-full object-cover border border-brand-500/30"
+                  onError={(e) => {
+                    e.currentTarget.src = logoEmblem;
+                  }}
                 />
                 <div>
                   <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">

@@ -79,21 +79,23 @@ export default function HyderabadLocationsSection({ onOpenQuoteSheet }) {
         {/* Localities Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
           {activeZone.locations.map((loc) => (
-            <div
+            <button
               key={`${loc.name}-${loc.pincode}`}
+              type="button"
               onClick={() => handleCardClick(loc)}
-              className="group p-4 rounded-2xl bg-white dark:bg-obsidian-card border border-slate-200 dark:border-white/10 hover:border-brand-500 dark:hover:border-brand-400 shadow-sm hover:shadow-card-hover transition-all cursor-pointer flex flex-col justify-between active:scale-[0.98]"
+              aria-label={`Book 30-min balcony safety net measurement in ${loc.name}, Pincode ${loc.pincode}`}
+              className="group p-4 rounded-2xl bg-white dark:bg-obsidian-card border border-slate-200 dark:border-white/10 hover:border-brand-500 dark:hover:border-brand-400 shadow-sm hover:shadow-card-hover transition-all cursor-pointer flex flex-col justify-between active:scale-[0.98] text-left w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
             >
-              <div>
+              <div className="w-full">
                 <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center gap-1.5 min-w-0">
                     <MapPin className="w-4 h-4 text-brand-500 shrink-0" />
-                    <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
+                    <span className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors truncate">
                       {loc.name}
-                    </h3>
+                    </span>
                   </div>
                   {loc.popular && (
-                    <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded-md bg-amber-500/15 text-amber-700 dark:text-amber-400">
+                    <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded-md bg-amber-500/15 text-amber-700 dark:text-amber-400 shrink-0 ml-1">
                       High Demand
                     </span>
                   )}
@@ -114,7 +116,7 @@ export default function HyderabadLocationsSection({ onOpenQuoteSheet }) {
                 )}
               </div>
 
-              <div className="mt-3 pt-2.5 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
+              <div className="mt-3 pt-2.5 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs w-full">
                 <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
                   <Clock className="w-3 h-3" />
                   <span>ETA: {loc.sla}</span>
@@ -124,7 +126,7 @@ export default function HyderabadLocationsSection({ onOpenQuoteSheet }) {
                   <ChevronRight className="w-3 h-3" />
                 </span>
               </div>
-            </div>
+            </button>
           ))}
         </div>
 
