@@ -9,8 +9,7 @@ import { generateWhatsAppUrl } from '../../utils/generateWhatsAppUrl';
  * Displays identical-sized rounded icons at the vertical center of the screen on the right edge.
  */
 export default function UnifiedMobileDock({ onOpenQuoteSheet }) {
-  const currentUrl = typeof window !== 'undefined' ? window.location.href : 'https://mbnaturalsafetynets.com';
-  const whatsappUrl = generateWhatsAppUrl({ pageUrl: currentUrl });
+  const whatsappUrl = generateWhatsAppUrl();
 
   return (
     <aside
