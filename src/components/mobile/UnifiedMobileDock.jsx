@@ -2,7 +2,7 @@ import React from 'react';
 import { Phone, Sparkles } from 'lucide-react';
 import WhatsAppIcon from '../ui/WhatsAppIcon';
 import { brandConfig } from '../../data/brandConfig';
-import { getDirectWhatsAppUrl } from '../../utils/generateWhatsAppUrl';
+import { generateWhatsAppUrl } from '../../utils/generateWhatsAppUrl';
 
 /**
  * Mobile Right-Side Vertically-Centered Action Dock
@@ -10,7 +10,7 @@ import { getDirectWhatsAppUrl } from '../../utils/generateWhatsAppUrl';
  */
 export default function UnifiedMobileDock({ onOpenQuoteSheet }) {
   const currentUrl = typeof window !== 'undefined' ? window.location.href : 'https://mbnaturalsafetynets.com';
-  const whatsappUrl = getDirectWhatsAppUrl(`*INQUIRY: BALCONY SAFETY NETS - MB NATURAL HYDERABAD* 🛡️\n\nHello MB Natural Safety Nets Team,\nI would like a free 30-minute doorstep laser inspection for balcony netting.\n\n📍 Page Reference: ${currentUrl}\n\nPlease share pricing and technician availability.`);
+  const whatsappUrl = generateWhatsAppUrl({ pageUrl: currentUrl });
 
   return (
     <aside

@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { brandConfig } from '../data/brandConfig';
 import WhatsAppIcon from '../components/ui/WhatsAppIcon';
+import { getDirectWhatsAppUrl } from '../utils/generateWhatsAppUrl';
 import logoEmblem from '../assets/logo-emblem.png';
 import SEOHead from '../components/seo/SEOHead';
 
@@ -140,7 +141,7 @@ export default function NotFoundPage({ onOpenQuoteSheet }) {
             </a>
 
             <a
-              href={`https://wa.me/${brandConfig.whatsapp}`}
+              href={getDirectWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 py-2 rounded-xl bg-[#25D366]/15 text-[#25D366] font-bold hover:bg-[#25D366]/25 transition-colors flex items-center gap-1.5 touch-target"

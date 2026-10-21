@@ -21,6 +21,7 @@ import { brandConfig } from '../../data/brandConfig';
 import { servicesData } from '../../data/servicesData';
 import { useTheme } from '../../context/ThemeContext';
 import WhatsAppIcon from '../ui/WhatsAppIcon';
+import { getDirectWhatsAppUrl } from '../../utils/generateWhatsAppUrl';
 import logoEmblem from '../../assets/logo-emblem.png';
 
 export default function MobileDrawer({ isOpen, onClose, onOpenQuoteSheet }) {
@@ -130,7 +131,7 @@ export default function MobileDrawer({ isOpen, onClose, onOpenQuoteSheet }) {
             </a>
 
             <a
-              href={`https://wa.me/${brandConfig.whatsapp}?text=Hi%20MB%20Natural%20Safety%20Nets%2C%20I%20would%20like%20a%20free%20doorstep%20balcony%20inspection%20in%20Hyderabad.`}
+              href={getDirectWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
               className="min-h-[46px] p-2 rounded-xl bg-[#25D366]/15 border border-[#25D366]/30 text-[#25D366] flex items-center justify-center gap-2 text-xs font-bold active:scale-95 transition-transform"

@@ -5,7 +5,7 @@ import { servicesData } from '../data/servicesData';
 import { brandConfig } from '../data/brandConfig';
 import Badge from '../components/ui/Badge';
 import WhatsAppIcon from '../components/ui/WhatsAppIcon';
-import { getDirectWhatsAppUrl } from '../utils/generateWhatsAppUrl';
+import { generateWhatsAppUrl } from '../utils/generateWhatsAppUrl';
 import logoEmblem from '../assets/logo-emblem.png';
 import SEOHead from '../components/seo/SEOHead';
 
@@ -140,7 +140,7 @@ export default function ServiceDetailPage({ onOpenQuoteSheet }) {
               </button>
 
               <a
-                href={getDirectWhatsAppUrl(`Hi MB Natural Safety Nets, I would like a quote for ${service.title} in Hyderabad.`)}
+                href={generateWhatsAppUrl({ service: service.title })}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="min-h-[48px] px-6 py-3 rounded-xl bg-[#25D366]/20 hover:bg-[#25D366]/30 text-[#25D366] font-bold text-xs flex items-center gap-2 border border-[#25D366]/30 transition-colors touch-target"
