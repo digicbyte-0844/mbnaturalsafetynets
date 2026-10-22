@@ -2,5 +2,8 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "mbnaturalsafetynets",
   "compatibility_date": "2026-10-22",
-  "pages_build_output_dir": "./dist"
+  "pages_build_output_dir": "./dist",
+  "assets": {
+    "directory": "./dist"
+  }
 }
