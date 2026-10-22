@@ -21,5 +21,20 @@
 /*.jpg
   Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
 
+/favicon.png
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/favicon.svg
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/site.webmanifest
+  Cache-Control: public, max-age=86400, stale-while-revalidate=43200
+
+/sitemap.xml
+  Cache-Control: public, max-age=86400, stale-while-revalidate=43200
+
+/robots.txt
+  Cache-Control: public, max-age=86400, stale-while-revalidate=43200
+
 /index.html
   Cache-Control: public, max-age=0, must-revalidate
