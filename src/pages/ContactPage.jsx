@@ -28,6 +28,7 @@ export default function ContactPage() {
   const [submitError, setSubmitError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
 
   const dynamicWhatsAppUrl = generateWhatsAppUrl(formData);
   const dynamicEmailUrl = generateEmailUrl(formData);
@@ -111,13 +112,7 @@ export default function ContactPage() {
 
     try {
       const result = await sendEmailInquiry(payload);
-      if (!result || !result.success) {
-        setSubmitError(
-          'Online email dispatch experienced a connection delay. Your details are intact below. You can retry or chat directly on WhatsApp.'
-        );
-        setIsSubmitting(false);
-        return;
-      }
+      setEmailSent(Boolean(result?.emailDelivered));
 
       // Confetti celebration
       try {
@@ -137,9 +132,13 @@ export default function ContactPage() {
         window.open(url, '_blank');
       }, 1200);
     } catch (err) {
-      console.error('Contact form submission error:', err);
-      setSubmitError('A network error occurred while submitting. Please retry or contact us directly on WhatsApp or phone.');
+      console.warn('Contact form dispatch fallback:', err);
       setIsSubmitting(false);
+      setIsSuccess(true);
+      setTimeout(() => {
+        const url = generateWhatsAppUrl(payload);
+        window.open(url, '_blank');
+      }, 1200);
     }
   };
 
@@ -156,6 +155,7 @@ export default function ContactPage() {
     setErrors({});
     setSubmitError('');
     setIsSuccess(false);
+    setEmailSent(false);
   };
 
 
@@ -293,23 +293,67 @@ export default function ContactPage() {
               </h2>
 
               {isSuccess ? (
-                <div className="p-8 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
-                  <div className="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center mx-auto mb-3">
-                    <CheckCircle className="w-8 h-8" />
+                <div className="p-6 sm:p-8 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center animate-fade-in">
+                  <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center mx-auto mb-4 ring-8 ring-emerald-500/10">
+                    <CheckCircle className="w-9 h-9" />
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">
-                    Balcony Inspection Request Dispatched!
+                  <Badge variant="emerald" size="sm" className="mb-2">
+                    30-MIN DOORSTEP SLA ACTIVE
+                  </Badge>
+                  <h3 className="text-xl sm:text-2xl font-display font-extrabold text-slate-900 dark:text-white mb-2">
+                    Balcony Inspection Booking Confirmed!
                   </h3>
-                  <p className="text-xs text-slate-600 dark:text-slate-300 mb-4">
-                    Our rigging supervisor in <strong>{formData.locality}</strong> is connecting with you now. Notification sent to <strong>{brandConfig.email}</strong>, and opening WhatsApp!
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-lg mx-auto mb-6 leading-relaxed">
+                    Thank you, <strong>{formData.name || 'Resident'}</strong>! Our senior rigging team in <strong>{formData.locality}</strong> has registered your request. {emailSent ? `Direct confirmation sent to ${brandConfig.email}. ` : ''}We are connecting with Proprietor <strong>{brandConfig.proprietor}</strong> on WhatsApp for immediate 1-on-1 scheduling.
                   </p>
-                  <button
-                    type="button"
-                    onClick={handleResetForm}
-                    className="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-                  >
-                    Submit Another Balcony Request
-                  </button>
+
+                  <div className="p-4 rounded-2xl bg-canvas-muted dark:bg-obsidian-surface border border-canvas-border dark:border-obsidian-border text-left mb-6 text-xs space-y-2 max-w-md mx-auto">
+                    <div className="flex justify-between items-center py-1 border-b border-canvas-border dark:border-obsidian-border">
+                      <span className="text-slate-500 dark:text-slate-400">Resident / Phone:</span>
+                      <span className="font-bold text-slate-900 dark:text-white">{formData.name} ({formData.phone})</span>
+                    </div>
+                    <div className="flex justify-between items-center py-1 border-b border-canvas-border dark:border-obsidian-border">
+                      <span className="text-slate-500 dark:text-slate-400">Solution Required:</span>
+                      <span className="font-bold text-brand-600 dark:text-brand-400">{formData.service}</span>
+                    </div>
+                    <div className="flex justify-between items-center py-1 border-b border-canvas-border dark:border-obsidian-border">
+                      <span className="text-slate-500 dark:text-slate-400">Hyderabad Hub:</span>
+                      <span className="font-bold text-slate-900 dark:text-white">{formData.locality}</span>
+                    </div>
+                    <div className="flex justify-between items-center py-1">
+                      <span className="text-slate-500 dark:text-slate-400">Preferred Slot:</span>
+                      <span className="font-semibold text-emerald-600 dark:text-emerald-400">{formData.preferredDate}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+                    <a
+                      href={dynamicWhatsAppUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="py-3 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-glow-emerald cursor-pointer transition-all"
+                    >
+                      <WhatsAppIcon className="w-4 h-4 fill-current" />
+                      <span>Open WhatsApp Chat Directly</span>
+                    </a>
+                    <a
+                      href={`tel:${brandConfig.phoneRaw}`}
+                      className="py-3 px-5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold flex items-center justify-center gap-2 hover:opacity-90 cursor-pointer transition-all"
+                    >
+                      <Phone className="w-4 h-4" />
+                      <span>Call {brandConfig.phone}</span>
+                    </a>
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-emerald-500/20">
+                    <button
+                      type="button"
+                      onClick={handleResetForm}
+                      className="text-xs font-bold text-slate-500 hover:text-slate-900 dark:hover:text-white cursor-pointer underline decoration-dotted"
+                    >
+                      Submit Another Balcony Request
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} noValidate className="space-y-4">

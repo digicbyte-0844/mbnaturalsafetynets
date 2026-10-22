@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, CheckCircle, ShieldCheck, Clock, ArrowRight, ArrowLeft, Send, ChevronDown, AlertCircle, Loader2 } from 'lucide-react';
+import { X, CheckCircle, ShieldCheck, Clock, ArrowRight, ArrowLeft, Send, ChevronDown, AlertCircle, Loader2, Phone } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { servicesData } from '../../data/servicesData';
 import { allLocationsFlat } from '../../data/locationsData';
@@ -21,6 +21,7 @@ export default function MobileBottomSheet({ isOpen, onClose, initialServiceId = 
   const [submitError, setSubmitError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
   const [touchStartY, setTouchStartY] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
   const sheetRef = useRef(null);
@@ -151,13 +152,7 @@ export default function MobileBottomSheet({ isOpen, onClose, initialServiceId = 
 
     try {
       const result = await sendEmailInquiry(leadData);
-      if (!result || !result.success) {
-        setSubmitError(
-          'Online dispatch experienced a connection delay. Your details are intact. You can retry or chat directly on WhatsApp.'
-        );
-        setIsSubmitting(false);
-        return;
-      }
+      setEmailSent(Boolean(result?.emailDelivered));
 
       // 2. Trigger Confetti celebration
       try {
@@ -178,9 +173,13 @@ export default function MobileBottomSheet({ isOpen, onClose, initialServiceId = 
         window.open(waUrl, '_blank');
       }, 1200);
     } catch (err) {
-      console.error('Sheet submit error:', err);
-      setSubmitError('A network error occurred. Please try again or reach us immediately on WhatsApp.');
+      console.warn('Sheet submit fallback:', err);
       setIsSubmitting(false);
+      setIsSuccess(true);
+      setTimeout(() => {
+        const waUrl = generateWhatsAppUrl(leadData);
+        window.open(waUrl, '_blank');
+      }, 1200);
     }
   };
 
@@ -255,49 +254,62 @@ export default function MobileBottomSheet({ isOpen, onClose, initialServiceId = 
         {/* Modal Body */}
         <div className="p-5">
           {isSuccess ? (
-            <div className="text-center py-6">
-              <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-500 mx-auto flex items-center justify-center mb-4">
+            <div className="text-center py-6 animate-fade-in">
+              <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-500 mx-auto flex items-center justify-center mb-4 ring-8 ring-emerald-500/10">
                 <CheckCircle className="w-10 h-10" />
               </div>
               <h4 className="text-xl font-display font-extrabold text-slate-900 dark:text-white mb-2">
                 Balcony Inspection Confirmed!
               </h4>
-              <p className="text-sm text-slate-600 dark:text-slate-300 max-w-sm mx-auto mb-6">
-                Thank you, <strong>{name}</strong>. Our senior rigger in <strong>{selectedLocality}</strong> has received your request. An email notification has been dispatched to <strong>{brandConfig.email}</strong>, and we are connecting via WhatsApp!
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-sm mx-auto mb-6 leading-relaxed">
+                Thank you, <strong>{name}</strong>! Our senior rigging team in <strong>{selectedLocality}</strong> has received your request. {emailSent ? `Notification dispatched to ${brandConfig.email}. ` : ''}Connecting you directly with Proprietor <strong>{brandConfig.proprietor}</strong> on WhatsApp for 30-min slot scheduling.
               </p>
               
-              <div className="p-4 rounded-2xl bg-canvas-muted dark:bg-obsidian-surface border border-canvas-border dark:border-obsidian-border text-left mb-6 text-xs space-y-1.5">
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Solution:</span>
-                  <span className="font-bold text-slate-800 dark:text-slate-200">{selectedService}</span>
+              <div className="p-4 rounded-2xl bg-canvas-muted dark:bg-obsidian-surface border border-canvas-border dark:border-obsidian-border text-left mb-6 text-xs space-y-2">
+                <div className="flex justify-between items-center py-1 border-b border-canvas-border dark:border-obsidian-border">
+                  <span className="text-slate-500 dark:text-slate-400">Resident / Mobile:</span>
+                  <span className="font-bold text-slate-900 dark:text-white">{name} ({phone})</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Locality:</span>
-                  <span className="font-bold text-slate-800 dark:text-slate-200">{selectedLocality}</span>
+                <div className="flex justify-between items-center py-1 border-b border-canvas-border dark:border-obsidian-border">
+                  <span className="text-slate-500 dark:text-slate-400">Solution:</span>
+                  <span className="font-bold text-brand-600 dark:text-brand-400">{selectedService}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Warranty:</span>
+                <div className="flex justify-between items-center py-1 border-b border-canvas-border dark:border-obsidian-border">
+                  <span className="text-slate-500 dark:text-slate-400">Locality:</span>
+                  <span className="font-bold text-slate-900 dark:text-white">{selectedLocality}</span>
+                </div>
+                <div className="flex justify-between items-center py-1">
+                  <span className="text-slate-500 dark:text-slate-400">Warranty:</span>
                   <span className="font-bold text-emerald-500">5-Year Stamped Doorstep Guarantee</span>
                 </div>
               </div>
 
-              <div className="flex gap-3">
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="flex-1 py-3 px-4 rounded-xl border border-slate-300 dark:border-slate-700 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
-                >
-                  Done
-                </button>
+              <div className="flex flex-col gap-2.5">
                 <a
-                  href={generateWhatsAppUrl({ name, phone, locality: selectedLocality, service: selectedService, preferredDate })}
+                  href={generateWhatsAppUrl({ name, phone, locality: selectedLocality, service: selectedService, preferredDate, dimensions })}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold flex items-center justify-center gap-1.5 shadow-glow-emerald cursor-pointer"
+                  className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold flex items-center justify-center gap-2 shadow-glow-emerald cursor-pointer transition-all"
                 >
                   <Send className="w-4 h-4" />
-                  Chat on WhatsApp
+                  <span>Chat on WhatsApp Directly</span>
                 </a>
+                <div className="flex gap-2">
+                  <a
+                    href={`tel:${brandConfig.phoneRaw}`}
+                    className="flex-1 py-2.5 px-3 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer transition-all"
+                  >
+                    <Phone className="w-3.5 h-3.5" />
+                    <span>Call Helpline</span>
+                  </a>
+                  <button
+                    type="button"
+                    onClick={onClose}
+                    className="flex-1 py-2.5 px-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
             </div>
           ) : (

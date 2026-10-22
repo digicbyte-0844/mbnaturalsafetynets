@@ -214,6 +214,8 @@ assert(headersContent.includes('Strict-Transport-Security'), 'HSTS header config
 assert(headersContent.includes('X-Frame-Options: SAMEORIGIN'), 'X-Frame-Options configured in public/_headers');
 assert(headersContent.includes('X-Content-Type-Options: nosniff'), 'nosniff header configured in public/_headers');
 assert(headersContent.includes('Content-Security-Policy'), 'CSP policy configured in public/_headers');
+assert(headersContent.includes('https://static.cloudflareinsights.com'), 'CSP script-src allows Cloudflare Insights beacon');
+assert(headersContent.includes('https://cloudflareinsights.com'), 'CSP connect-src allows Cloudflare Insights analytics');
 assert(headersContent.includes('Cache-Control: public, max-age=31536000'), 'Long-term immutable caching configured for assets');
 
 const wranglerContent = fs.readFileSync(path.join(__dirname, '../wrangler.json'), 'utf8');
