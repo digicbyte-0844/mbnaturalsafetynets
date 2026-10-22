@@ -128,7 +128,7 @@ export default function PrivacyPolicyPage() {
               <strong>We do NOT sell, lease, monetize, or disclose your personal data to third parties.</strong>
             </p>
             <p>
-              Lead form submissions are securely processed through FormSubmit AJAX endpoints directly transmitting encrypted form payloads to our administrative inbox (<a href={`mailto:${brandConfig.email}`} className="text-brand-600 dark:text-brand-400 hover:underline"><code>{brandConfig.email}</code></a>) and customer WhatsApp API handoffs. Our field technicians operate under strict non-disclosure obligations regarding customer residential addresses and floor plans.
+              Lead form submissions are securely processed through FormSubmit AJAX endpoints directly transmitting encrypted form payloads to our administrative inbox (<a href={`mailto:${brandConfig.email}`} target="_blank" rel="noopener noreferrer" className="text-brand-600 dark:text-brand-400 hover:underline"><code>{brandConfig.email}</code></a>) and customer WhatsApp API handoffs. Our field technicians operate under strict non-disclosure obligations regarding customer residential addresses and floor plans.
             </p>
           </section>
 
@@ -179,7 +179,7 @@ export default function PrivacyPolicyPage() {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-sky-500 shrink-0" />
-                <a href={`mailto:${brandConfig.email}`} className="text-brand-600 dark:text-brand-400 hover:underline">
+                <a href={`mailto:${brandConfig.email}`} target="_blank" rel="noopener noreferrer" className="text-brand-600 dark:text-brand-400 hover:underline">
                   {brandConfig.email}
                 </a>
               </div>

@@ -240,10 +240,7 @@ export default function ContactPage() {
             <span className="text-xs font-bold text-emerald-500 mt-3">{hasUserDetails ? "Send Details on WhatsApp →" : "Start WhatsApp Chat →"}</span>
           </a>
 
-          <a
-            href={dynamicEmailUrl}
-            className="p-6 rounded-3xl bg-white dark:bg-obsidian-card border border-slate-200 dark:border-white/10 shadow-sm hover:border-sky-500 transition-all flex flex-col justify-between"
-          >
+          <div className="p-6 rounded-3xl bg-white dark:bg-obsidian-card border border-slate-200 dark:border-white/10 shadow-sm hover:border-sky-500 transition-all flex flex-col justify-between">
             <div>
               <div className="w-10 h-10 rounded-2xl bg-cyan-500/10 text-cyan-500 flex items-center justify-center mb-3">
                 <Mail className="w-5 h-5" />
@@ -252,10 +249,36 @@ export default function ContactPage() {
                 <span className="text-[10px] font-extrabold uppercase text-slate-400">Official Admin Email</span>
                 <CopyButton textToCopy={brandConfig.email} label="Copy email address" />
               </div>
-              <h3 className="text-xs font-bold text-slate-900 dark:text-white mt-0.5 break-all">{brandConfig.email}</h3>
+              <a
+                href={dynamicEmailUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-bold text-slate-900 dark:text-white mt-0.5 break-all hover:text-sky-500 block transition-colors"
+                title="Send inquiry email"
+              >
+                {brandConfig.email}
+              </a>
             </div>
-            <span className="text-[11px] text-sky-500 mt-3">{hasUserDetails ? "Send Details via Email →" : "Direct Inquiries & Quotations →"}</span>
-          </a>
+            <div className="mt-3 flex items-center justify-between pt-2 border-t border-slate-100 dark:border-white/5">
+              <a
+                href={dynamicEmailUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] font-bold text-sky-500 hover:text-sky-400 flex items-center gap-1 cursor-pointer transition-colors"
+              >
+                <span>{hasUserDetails ? "Send Details via Email →" : "Direct Email Inquiry →"}</span>
+              </a>
+              <a
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${brandConfig.email}&su=Inquiry:+Balcony+Safety+Nets+Hyderabad`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] text-slate-400 hover:text-sky-500 font-semibold transition-colors"
+                title="Compose directly in Gmail web"
+              >
+                Open in Gmail ↗
+              </a>
+            </div>
+          </div>
 
           <a
             href={brandConfig.hubMapUrl}

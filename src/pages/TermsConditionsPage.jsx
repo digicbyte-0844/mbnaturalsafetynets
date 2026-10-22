@@ -172,7 +172,7 @@ export default function TermsConditionsPage() {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-sky-500 shrink-0" />
-                <a href={`mailto:${brandConfig.email}`} className="text-brand-600 dark:text-brand-400 hover:underline">
+                <a href={`mailto:${brandConfig.email}`} target="_blank" rel="noopener noreferrer" className="text-brand-600 dark:text-brand-400 hover:underline">
                   {brandConfig.email}
                 </a>
               </div>

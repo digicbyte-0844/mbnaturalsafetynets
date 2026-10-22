@@ -57,6 +57,15 @@ export default function MobileDrawer({ isOpen, onClose, onOpenQuoteSheet }) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
+  // Blur focus when drawer closes to prevent aria-hidden accessibility warning
+  useEffect(() => {
+    if (!isOpen && typeof document !== 'undefined' && document.activeElement) {
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+    }
+  }, [isOpen]);
+
   return (
     <div 
       id="mobile-drawer" 
@@ -65,7 +74,8 @@ export default function MobileDrawer({ isOpen, onClose, onOpenQuoteSheet }) {
       }`} 
       role="dialog" 
       aria-modal="true"
-      aria-hidden={!isOpen}
+      aria-hidden={!isOpen ? "true" : undefined}
+      inert={!isOpen ? "" : undefined}
     >
       {/* Backdrop */}
       <div 

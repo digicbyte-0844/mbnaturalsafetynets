@@ -67,7 +67,7 @@ export default function GoogleMapsSection() {
                     </a>
                   </p>
                   <p className="text-xs text-slate-500 dark:text-slate-400">
-                    <a href={`mailto:${brandConfig.email}`} className="text-sky-500 hover:underline">
+                    <a href={`mailto:${brandConfig.email}`} target="_blank" rel="noopener noreferrer" className="text-sky-500 hover:underline">
                       {brandConfig.email}
                     </a>
                   </p>

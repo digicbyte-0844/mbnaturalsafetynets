@@ -193,7 +193,12 @@ export default function Footer({ onOpenQuoteSheet }) {
                 <span>WhatsApp: {brandConfig.whatsapp}</span>
               </a>
 
-              <a href={getDirectEmailUrl()} className="flex items-center gap-2 text-sky-400 hover:text-sky-300 break-all group">
+              <a 
+                href={getDirectEmailUrl()} 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sky-400 hover:text-sky-300 break-all group"
+              >
                 <div className="w-7 h-7 rounded-lg bg-sky-500/10 text-sky-400 flex items-center justify-center shrink-0 group-hover:bg-sky-500 group-hover:text-white transition-colors">
                   <Mail className="w-3.5 h-3.5" />
                 </div>
