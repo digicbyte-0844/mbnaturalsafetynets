@@ -220,12 +220,12 @@ const wranglerContent = fs.readFileSync(path.join(__dirname, '../wrangler.json')
 assert(wranglerContent.includes('"not_found_handling": "single-page-application"'), 'Cloudflare SPA fallback configured via wrangler.json');
 
 const sitemapContent = fs.readFileSync(path.join(__dirname, '../public/sitemap.xml'), 'utf8');
-assert(sitemapContent.includes('https://mbnaturalsafetynets.com/'), 'Sitemap production domain verified');
+assert(sitemapContent.includes('https://mbnaturalsafetynets.in/'), 'Sitemap production domain verified');
 assert(sitemapContent.includes('/services/balcony-safety-net'), 'Sitemap covers all 11 services');
 assert(sitemapContent.includes('<lastmod>'), 'Sitemap contains <lastmod> timestamps');
 
 const robotsContent = fs.readFileSync(path.join(__dirname, '../public/robots.txt'), 'utf8');
-assert(robotsContent.includes('Sitemap: https://mbnaturalsafetynets.com/sitemap.xml'), 'Robots.txt declares sitemap URI');
+assert(robotsContent.includes('Sitemap: https://mbnaturalsafetynets.in/sitemap.xml'), 'Robots.txt declares sitemap URI');
 assert(robotsContent.includes('Disallow: /admin/'), 'Robots.txt blocks private paths');
 
 // ---------------------------------------------------------------------

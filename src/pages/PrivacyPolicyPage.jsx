@@ -42,7 +42,7 @@ export default function PrivacyPolicyPage() {
           </h1>
 
           <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-            <strong>Operating Entity:</strong> {brandConfig.legalEntity} • <strong>Proprietor:</strong> {brandConfig.proprietor} • <strong>Website:</strong> <a href="https://mbnaturalsafetynets.com" className="text-brand-600 dark:text-brand-400 hover:underline">mbnaturalsafetynets.com</a>
+            <strong>Operating Entity:</strong> {brandConfig.legalEntity} • <strong>Proprietor:</strong> {brandConfig.proprietor} • <strong>Website:</strong> <a href="https://mbnaturalsafetynets.in" className="text-brand-600 dark:text-brand-400 hover:underline">mbnaturalsafetynets.in</a>
           </p>
         </div>
 
@@ -58,7 +58,7 @@ export default function PrivacyPolicyPage() {
               At <strong>{brandConfig.brandName}</strong> (also registered and doing business as <em>{brandConfig.legalEntity}</em>), we are committed to upholding transparency, data minimization, and user privacy in accordance with the <strong>Digital Personal Data Protection Act, 2023 (DPDP Act, India)</strong>, the <strong>Information Technology Act, 2000</strong>, and global <strong>General Data Protection Regulation (GDPR)</strong> baselines.
             </p>
             <p>
-              This Privacy Policy applies to personal data collected when you visit our website (<code>https://mbnaturalsafetynets.com</code>), utilize our Balcony Cost Estimator, request a 30-minute doorstep laser measurement, or correspond with our central dispatch desk in Hyderabad via telephone or WhatsApp.
+              This Privacy Policy applies to personal data collected when you visit our website (<code>https://mbnaturalsafetynets.in</code>), utilize our Balcony Cost Estimator, request a 30-minute doorstep laser measurement, or correspond with our central dispatch desk in Hyderabad via telephone or WhatsApp.
             </p>
           </section>
 

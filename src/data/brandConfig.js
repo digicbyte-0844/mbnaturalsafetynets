@@ -23,7 +23,7 @@ export const brandConfig = {
   warrantyYears: 5,
   slaMinutes: 30,
   workingHours: "Monday – Sunday, 07:00 AM – 09:00 PM IST",
-  primaryDomain: "https://mbnaturalsafetynets.com",
+  primaryDomain: "https://mbnaturalsafetynets.in",
   logo: "/logo.png",
   logoEmblem: "/images/logo-emblem.png",
   logoTight: "/images/logo-tight.png",

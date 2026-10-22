@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const BASE_URL = 'https://mbnaturalsafetynets.com';
+const BASE_URL = 'https://mbnaturalsafetynets.in';
 const DEFAULT_IMAGE = `${BASE_URL}/og-preview.jpg`;
 
 /**

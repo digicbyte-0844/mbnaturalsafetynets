@@ -42,7 +42,7 @@ export default function TermsConditionsPage() {
           </h1>
 
           <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-            <strong>Registered Entity:</strong> {brandConfig.legalEntity} • <strong>Managing Director:</strong> {brandConfig.proprietor} • <strong>Website:</strong> <a href="https://mbnaturalsafetynets.com" className="text-brand-600 dark:text-brand-400 hover:underline">mbnaturalsafetynets.com</a>
+            <strong>Registered Entity:</strong> {brandConfig.legalEntity} • <strong>Managing Director:</strong> {brandConfig.proprietor} • <strong>Website:</strong> <a href="https://mbnaturalsafetynets.in" className="text-brand-600 dark:text-brand-400 hover:underline">mbnaturalsafetynets.in</a>
           </p>
         </div>
 
