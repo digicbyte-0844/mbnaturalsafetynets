@@ -20,7 +20,7 @@ import { servicesData } from '../../data/servicesData';
 import { locationsZones } from '../../data/locationsData';
 import WhatsAppIcon from '../ui/WhatsAppIcon';
 import { getDirectWhatsAppUrl } from '../../utils/generateWhatsAppUrl';
-import { getDirectEmailUrl } from '../../utils/generateEmailUrl';
+import { getDirectGmailUrl } from '../../utils/generateGmailUrl';
 import logoEmblem from '../../assets/logo-emblem.png';
 
 export default function Footer({ onOpenQuoteSheet }) {
@@ -194,10 +194,11 @@ export default function Footer({ onOpenQuoteSheet }) {
               </a>
 
               <a 
-                href={getDirectEmailUrl()} 
+                href={getDirectGmailUrl()} 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-sky-400 hover:text-sky-300 break-all group"
+                title="Compose inquiry in Gmail"
               >
                 <div className="w-7 h-7 rounded-lg bg-sky-500/10 text-sky-400 flex items-center justify-center shrink-0 group-hover:bg-sky-500 group-hover:text-white transition-colors">
                   <Mail className="w-3.5 h-3.5" />

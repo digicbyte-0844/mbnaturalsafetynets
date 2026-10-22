@@ -7,7 +7,7 @@ import GoogleMapsSection from '../components/sections/GoogleMapsSection';
 import Badge from '../components/ui/Badge';
 import WhatsAppIcon from '../components/ui/WhatsAppIcon';
 import { generateWhatsAppUrl } from '../utils/generateWhatsAppUrl';
-import { generateEmailUrl } from '../utils/generateEmailUrl';
+import { generateGmailUrl } from '../utils/generateGmailUrl';
 import { sendEmailInquiry } from '../utils/sendEmailInquiry';
 import confetti from 'canvas-confetti';
 import logoEmblem from '../assets/logo-emblem.png';
@@ -31,7 +31,7 @@ export default function ContactPage() {
   const [emailSent, setEmailSent] = useState(false);
 
   const dynamicWhatsAppUrl = generateWhatsAppUrl(formData);
-  const dynamicEmailUrl = generateEmailUrl(formData);
+  const dynamicGmailUrl = generateGmailUrl(formData);
   const hasUserDetails = Boolean((formData.name && formData.name.trim()) || (formData.phone && formData.phone.trim()));
 
   const validateField = (name, value) => {
@@ -240,45 +240,26 @@ export default function ContactPage() {
             <span className="text-xs font-bold text-emerald-500 mt-3">{hasUserDetails ? "Send Details on WhatsApp →" : "Start WhatsApp Chat →"}</span>
           </a>
 
-          <div className="p-6 rounded-3xl bg-white dark:bg-obsidian-card border border-slate-200 dark:border-white/10 shadow-sm hover:border-sky-500 transition-all flex flex-col justify-between">
+          <a
+            href={dynamicGmailUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-6 rounded-3xl bg-white dark:bg-obsidian-card border border-slate-200 dark:border-white/10 shadow-sm hover:border-red-500 transition-all flex flex-col justify-between group"
+          >
             <div>
-              <div className="w-10 h-10 rounded-2xl bg-cyan-500/10 text-cyan-500 flex items-center justify-center mb-3">
-                <Mail className="w-5 h-5" />
+              <div className="w-10 h-10 rounded-2xl bg-red-500/10 text-red-500 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+                <Mail className="w-5 h-5 text-red-500" />
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-extrabold uppercase text-slate-400">Official Admin Email</span>
-                <CopyButton textToCopy={brandConfig.email} label="Copy email address" />
+                <span className="text-[10px] font-extrabold uppercase text-slate-400">Official Gmail Desk</span>
+                <CopyButton textToCopy={brandConfig.email} label="Copy Gmail address" />
               </div>
-              <a
-                href={dynamicEmailUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs font-bold text-slate-900 dark:text-white mt-0.5 break-all hover:text-sky-500 block transition-colors"
-                title="Send inquiry email"
-              >
-                {brandConfig.email}
-              </a>
+              <h3 className="text-xs font-bold text-slate-900 dark:text-white mt-0.5 break-all">{brandConfig.email}</h3>
             </div>
-            <div className="mt-3 flex items-center justify-between pt-2 border-t border-slate-100 dark:border-white/5">
-              <a
-                href={dynamicEmailUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[11px] font-bold text-sky-500 hover:text-sky-400 flex items-center gap-1 cursor-pointer transition-colors"
-              >
-                <span>{hasUserDetails ? "Send Details via Email →" : "Direct Email Inquiry →"}</span>
-              </a>
-              <a
-                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${brandConfig.email}&su=Inquiry:+Balcony+Safety+Nets+Hyderabad`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[10px] text-slate-400 hover:text-sky-500 font-semibold transition-colors"
-                title="Compose directly in Gmail web"
-              >
-                Open in Gmail ↗
-              </a>
-            </div>
-          </div>
+            <span className="text-xs font-bold text-red-500 mt-3 flex items-center gap-1">
+              <span>{hasUserDetails ? "Send Details via Gmail →" : "Start Gmail Inquiry →"}</span>
+            </span>
+          </a>
 
           <a
             href={brandConfig.hubMapUrl}
@@ -354,17 +335,26 @@ export default function ContactPage() {
                       href={dynamicWhatsAppUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="py-3 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-glow-emerald cursor-pointer transition-all"
+                      className="py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-glow-emerald cursor-pointer transition-all"
                     >
                       <WhatsAppIcon className="w-4 h-4 fill-current" />
-                      <span>Open WhatsApp Chat Directly</span>
+                      <span>Chat on WhatsApp</span>
+                    </a>
+                    <a
+                      href={dynamicGmailUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="py-3 px-4 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-md cursor-pointer transition-all"
+                    >
+                      <Mail className="w-4 h-4" />
+                      <span>Send via Gmail</span>
                     </a>
                     <a
                       href={`tel:${brandConfig.phoneRaw}`}
-                      className="py-3 px-5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold flex items-center justify-center gap-2 hover:opacity-90 cursor-pointer transition-all"
+                      className="py-3 px-4 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold flex items-center justify-center gap-2 hover:opacity-90 cursor-pointer transition-all"
                     >
                       <Phone className="w-4 h-4" />
-                      <span>Call {brandConfig.phone}</span>
+                      <span>Call Now</span>
                     </a>
                   </div>
 

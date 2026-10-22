@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import { brandConfig } from '../../data/brandConfig';
-import { getDirectEmailUrl } from '../../utils/generateEmailUrl';
+import { getDirectGmailUrl } from '../../utils/generateGmailUrl';
 import { servicesData } from '../../data/servicesData';
 import WhatsAppIcon from '../ui/WhatsAppIcon';
 import logoEmblem from '../../assets/logo-emblem.png';
@@ -77,10 +77,11 @@ export default function Navbar({ isMobileDrawerOpen = false, onOpenMobileDrawer,
           {/* Right: Direct Helplines */}
           <div className="flex items-center gap-4">
             <a 
-              href={getDirectEmailUrl()}
+              href={getDirectGmailUrl()}
               target="_blank"
               rel="noopener noreferrer"
               className="text-slate-300 hover:text-white transition-colors hidden lg:flex items-center gap-1"
+              title="Compose inquiry in Gmail"
             >
               <Mail className="w-3 h-3 text-brand-400" />
               <span>{brandConfig.email}</span>

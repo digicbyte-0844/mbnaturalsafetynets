@@ -105,6 +105,13 @@ assert(deadAnchors === 0, `Zero dead anchor ('href="#"') tags found across all v
 assert(invalidTel === 0, `All tel: links point to validated proprietor phone raw format (+917702454046)`);
 assert(invalidMailto === 0, `All mailto: links point to verified recipient address (mahimanohar47@gmail.com)`);
 
+// Verify Gmail URL generator integration
+const { generateGmailUrl } = require('../src/utils/generateGmailUrl.js');
+const testGmailUrl = generateGmailUrl({ name: 'Vikram', phone: '9876543210', locality: 'Gachibowli' });
+assert(testGmailUrl.startsWith('https://mail.google.com/mail/?view=cm'), 'Gmail generator uses official Google web compose endpoint');
+assert(testGmailUrl.includes('to=mahimanohar47%40gmail.com'), 'Gmail generator targets proprietor mailbox');
+assert(testGmailUrl.includes('Vikram') && testGmailUrl.includes('Gachibowli'), 'Gmail generator pre-populates resident details in subject and body');
+
 // ---------------------------------------------------------------------
 // TEST 3: FORM VALIDATION ENGINE (HAPPY & UNHAPPY PATHS)
 // ---------------------------------------------------------------------
