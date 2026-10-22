@@ -216,8 +216,8 @@ assert(headersContent.includes('X-Content-Type-Options: nosniff'), 'nosniff head
 assert(headersContent.includes('Content-Security-Policy'), 'CSP policy configured in public/_headers');
 assert(headersContent.includes('Cache-Control: public, max-age=31536000'), 'Long-term immutable caching configured for assets');
 
-const redirectsContent = fs.readFileSync(path.join(__dirname, '../public/_redirects'), 'utf8');
-assert(/\/\*\s+\/index\.html\s+200/.test(redirectsContent), 'Cloudflare Pages / Netlify SPA fallback configured in public/_redirects');
+const wranglerContent = fs.readFileSync(path.join(__dirname, '../wrangler.json'), 'utf8');
+assert(wranglerContent.includes('"not_found_handling": "single-page-application"'), 'Cloudflare SPA fallback configured via wrangler.json');
 
 const sitemapContent = fs.readFileSync(path.join(__dirname, '../public/sitemap.xml'), 'utf8');
 assert(sitemapContent.includes('https://mbnaturalsafetynets.com/'), 'Sitemap production domain verified');

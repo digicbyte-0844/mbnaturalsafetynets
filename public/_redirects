@@ -1,2 +1,3 @@
-# Cloudflare Pages / Netlify SPA Routing Redirect
-/*    /index.html   200
+# Edge Routing Redirects
+/privacy    /privacy-policy   301
+/terms      /terms-and-conditions   301
