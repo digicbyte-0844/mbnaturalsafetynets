@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Status Ads Preview | MB Natural Safety Nets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #080c16;
+      color: #f1f5f9;
+      min-height: 100vh;
+      padding: 30px 20px 80px;
+    }
+    .header {
+      max-width: 1300px;
+      margin: 0 auto 35px;
+      text-align: center;
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.7));
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+    }
+    .brand-pill {
+      display: inline-block;
+      background: #f59e0b;
+      color: #0f172a;
+      font-weight: 800;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 6px 18px;
+      border-radius: 50px;
+      margin-bottom: 12px;
+    }
+    h1 { font-size: 34px; font-weight: 800; margin-bottom: 10px; color: #fff; }
+    p.lead { font-size: 16px; color: #94a3b8; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+    
+    .section-title {
+      max-width: 1300px;
+      margin: 30px auto 16px;
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .card.featured {
+      border: 2px solid #f59e0b;
+      background: linear-gradient(180deg, rgba(24, 38, 64, 0.9), rgba(15, 23, 42, 0.95));
+      box-shadow: 0 10px 30px rgba(245, 158, 11, 0.15);
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #38bdf8;
+    }
+    .card-header {
+      margin-bottom: 14px;
+    }
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-badge {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 700;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+    .badge-gold { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.5); }
+    .badge-cyan { background: rgba(14, 165, 233, 0.2); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.5); }
+    .badge-green { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.5); }
+    
+    /* Phone frame mockup */
+    .phone-mockup {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      border: 3px solid #1e293b;
+      background: #000;
+      margin-bottom: 18px;
+    }
+    .phone-mockup img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+    }
+    .btn {
+      flex: 1;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.9; }
+    .btn-download {
+      background: #2563eb;
+      color: #fff;
+    }
+    .btn-download.gold {
+      background: #f59e0b;
+      color: #0f172a;
+    }
+    .btn-caption {
+      background: #1e293b;
+      color: #cbd5e1;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    
+    .caption-box {
+      margin-top: 14px;
+      background: #080d1a;
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.5;
+      display: none;
+    }
+    .caption-box.active { display: block; }
+    .caption-box textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: #e2e8f0;
+      font-family: inherit;
+      font-size: 13px;
+      resize: vertical;
+      min-height: 100px;
+      outline: none;
+    }
+    .copy-btn {
+      margin-top: 8px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: #10b981;
+      color: #fff;
+      font-weight: 600;
+      font-size: 12px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="brand-pill">MB Natural Safety Nets Hyderabad</div>
+    <h1>Mobile Status & Story Ad Creatives (9:16)</h1>
+    <p class="lead">Complete marketing ad creatives formatted in <strong>1080 × 1920 px (9:16 vertical ratio)</strong>. Featuring official brand logo, name, website (<code>www.mbnaturalsafetynets.in</code>), direct call, WhatsApp integration, and full service details.</p>
+  </div>
+
+  <!-- FEATURED MASTER ADS -->
+  <div class="section-title">🔥 Featured Master Status Ads (All-in-One Details)</div>
+  <div class="grid" style="margin-bottom: 50px;">
+    
+    <!-- MASTER AD 1 -->
+    <div class="card featured">
+      <div class="card-header">
+        <span class="card-badge badge-gold">★ Complete Brand & Services Master Ad</span>
+        <h3 class="card-title">Master Ad 1: Complete Services + Contact Dock</h3>
+      </div>
+      <div class="phone-mockup">
+        <img src="/images/ads/master_complete_brand_ad_status.jpg" alt="Complete Services Status Ad">
+      </div>
+      <div class="actions">
+        <a href="/images/ads/master_complete_brand_ad_status.png" download="MB_SafetyNets_Master_Complete_Ad.png" class="btn btn-download gold">⬇️ Download (1080x1920)</a>
+        <button class="btn btn-caption" onclick="toggleCaption('m1')">📋 Status Caption</button>
+      </div>
+      <div id="m1" class="caption-box">
+        <textarea readonly>🛡️ MB NATURAL SAFETY NETS HYDERABAD 🛡️
+Hyderabad's #1 Rated Balcony Safety & Pigeon Control Specialists!
+⭐ 4.98 Rating (3,850+ Google Reviews) | 12,500+ Homes Protected!
+
+OUR CERTIFIED SERVICES:
+✅ Balcony Safety Nets (180kg+ Multi-Point Breaking Load)
+✅ Pigeon & Bird Protection Nets (100% Bird-Proof & Clean)
+✅ SS 316 Marine Invisible Grills (Panoramic Skyline Views)
+✅ Children & Pet Fall Prevention Nets
+✅ Cricket Turf & Sports Practice Nets
+✅ Duct Area & Anti-Roost Bird Spikes
+
+⚡ 5-Year Stamped Physical Warranty Certificate
+⚡ Free Doorstep Measurement in 30 Minutes
+⚡ Factory Direct Prices Starting ₹18 / sq.ft
+
+🌐 Official Website: www.mbnaturalsafetynets.in
+📞 Call Manohar: +91 77024 54046
+💬 WhatsApp: +91 77024 54046
+📍 Fast Doorstep Service Across All Hyderabad & Secunderabad!</textarea>
+        <button class="copy-btn" onclick="copyCaption('m1')">Copy Caption</button>
+      </div>
+    </div>
+
+    <!-- MASTER AD 2 -->
+    <div class="card featured">
+      <div class="card-header">
+        <span class="card-badge badge-cyan">★ Triple Visual Hero Showcase</span>
+        <h3 class="card-title">Master Ad 2: Triple Visual Hero & Quick Dial</h3>
+      </div>
+      <div class="phone-mockup">
+        <img src="/images/ads/master_luxury_visual_ad_status.jpg" alt="Triple Visual Showcase Ad">
+      </div>
+      <div class="actions">
+        <a href="/images/ads/master_luxury_visual_ad_status.png" download="MB_SafetyNets_Triple_Visual_Ad.png" class="btn btn-download gold">⬇️ Download (1080x1920)</a>
+        <button class="btn btn-caption" onclick="toggleCaption('m2')">📋 Status Caption</button>
+      </div>
+      <div id="m2" class="caption-box">
+        <textarea readonly>✨ Protect Your High-Rise Balcony with MB Natural Safety Nets! ✨
+
+Say goodbye to pigeon mess, dirty balconies, and fall anxiety. 
+Enjoy pure peace of mind with Hyderabad's most trusted netting specialists:
+
+🔹 Balcony Child & Family Fall Protection (180kg+ Tested)
+🔹 Clean, Hygienic & Odor-Free Pigeon Nets
+🔹 Ultra-Sleek Marine Grade SS 316 Invisible Grills
+🔹 Terrace Cricket & Sports Practice Nets
+
+🛡️ 5-Year Replacement Warranty
+⏱️ Fast 30-Min On-Site Quote & Free Measurement
+💰 Transparent Factory Rates from ₹18 / sq.ft
+
+🌐 Visit Website: www.mbnaturalsafetynets.in
+📞 Call Manohar: +91 77024 54046
+💬 WhatsApp: +91 77024 54046
+📍 Same-Day Installation across Gachibowli, Kondapur, Hitec City, Miyapur, Kukatpally & all Hyderabad!</textarea>
+        <button class="copy-btn" onclick="copyCaption('m2')">Copy Caption</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SPECIALIZED CAMPAIGN ADS -->
+  <div class="section-title">🎯 Targeted Niche Status Ads</div>
+  <div class="grid">
+    <!-- Ad 1 -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-badge badge-gold">Child Safety Hook</span>
+        <h3 class="card-title">Balcony Child Safety Net</h3>
+      </div>
+      <div class="phone-mockup">
+        <img src="/images/ads/ad1_child_balcony_safety_status.jpg" alt="Child Balcony Safety Net Status Ad">
+      </div>
+      <div class="actions">
+        <a href="/images/ads/ad1_child_balcony_safety_status.png" download="MB_SafetyNets_Child_Safety.png" class="btn btn-download">⬇️ Download (1080x1920)</a>
+        <button class="btn btn-caption" onclick="toggleCaption('c1')">📋 Status Caption</button>
+      </div>
+      <div id="c1" class="caption-box">
+        <textarea readonly>Is your apartment balcony 100% safe for your children and pets? 🛡️👶
+
+Protect your loved ones with MB Natural Safety Nets!
+✅ Certified 180kg+ Multi-Point Breaking Load
+✅ UV-Stabilized & Deccan Weather Proof
+✅ 100% Sunlight & Natural Skyline Breeze
+✅ 5-Year Stamped Doorstep Guarantee
+
+🌐 Website: www.mbnaturalsafetynets.in
+📞 Call / WhatsApp Manohar: +91 77024 54046
+📍 Fast 30-Min Inspection Across Hyderabad!</textarea>
+        <button class="copy-btn" onclick="copyCaption('c1')">Copy Caption</button>
+      </div>
+    </div>
+
+    <!-- Ad 2 -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-badge badge-cyan">Pigeon Menace Hook</span>
+        <h3 class="card-title">Balcony Pigeon Protection Net</h3>
+      </div>
+      <div class="phone-mockup">
+        <img src="/images/ads/ad2_pigeon_control_net_status.jpg" alt="Balcony Pigeon Net Status Ad">
+      </div>
+      <div class="actions">
+        <a href="/images/ads/ad2_pigeon_control_net_status.png" download="MB_SafetyNets_Pigeon_Net.png" class="btn btn-download">⬇️ Download (1080x1920)</a>
+        <button class="btn btn-caption" onclick="toggleCaption('c2')">📋 Status Caption</button>
+      </div>
+      <div id="c2" class="caption-box">
+        <textarea readonly>Tired of dirty pigeon droppings and bad odors ruining your balcony? 🕊️❌
+
+Reclaim your clean, fresh balcony space with MB Natural Safety Nets!
+✨ 100% Bird-Proof & Humane Protection
+✨ Keep Your Balcony Spotless & Disease-Free
+✨ Nearly Invisible from 10ft — 0% View Blockage
+✨ Starting ₹18/sq.ft with 5-Year Warranty!
+
+🌐 Website: www.mbnaturalsafetynets.in
+📞 Call / WhatsApp Manohar: +91 77024 54046
+⚡ Same-Day Installation Available across Hyderabad!</textarea>
+        <button class="copy-btn" onclick="copyCaption('c2')">Copy Caption</button>
+      </div>
+    </div>
+
+    <!-- Ad 3 -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-badge badge-gold">Modern Luxury Hook</span>
+        <h3 class="card-title">SS 316 Modern Invisible Grills</h3>
+      </div>
+      <div class="phone-mockup">
+        <img src="/images/ads/ad3_ss316_invisible_grills_status.jpg" alt="SS 316 Invisible Grills Status Ad">
+      </div>
+      <div class="actions">
+        <a href="/images/ads/ad3_ss316_invisible_grills_status.png" download="MB_SafetyNets_Invisible_Grills.png" class="btn btn-download">⬇️ Download (1080x1920)</a>
+        <button class="btn btn-caption" onclick="toggleCaption('c3')">📋 Status Caption</button>
+      </div>
+      <div id="c3" class="caption-box">
+        <textarea readonly>Say goodbye to heavy, rusty iron grills! Upgrade to Modern SS 316 Invisible Grills 🌆✨
+
+Experience luxury living with zero visual obstruction:
+💎 High-Tensile Marine Grade SS 316 Steel Wire
+💎 400kg+ Breaking Strength per Cable
+💎 100% Rust-Proof & Weather Resistant
+💎 Panoramic Skyline & Lake Views Intact
+
+🌐 Website: www.mbnaturalsafetynets.in
+📞 Call / WhatsApp Manohar: +91 77024 54046
+🏢 Free On-Site Consultation for Gated Communities & Penthouses!</textarea>
+        <button class="copy-btn" onclick="copyCaption('c3')">Copy Caption</button>
+      </div>
+    </div>
+
+    <!-- Ad 4 -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-badge badge-green">4-Grid Services Hook</span>
+        <h3 class="card-title">All-in-One Services Grid</h3>
+      </div>
+      <div class="phone-mockup">
+        <img src="/images/ads/ad4_all_in_one_services_status.jpg" alt="All-in-One Services Status Ad">
+      </div>
+      <div class="actions">
+        <a href="/images/ads/ad4_all_in_one_services_status.png" download="MB_SafetyNets_Services_Grid.png" class="btn btn-download">⬇️ Download (1080x1920)</a>
+        <button class="btn btn-caption" onclick="toggleCaption('c4')">📋 Status Caption</button>
+      </div>
+      <div id="c4" class="caption-box">
+        <textarea readonly>Hyderabad's #1 Rated Safety Netting Specialists! ⭐ 4.98 Rating (3,850+ Reviews)
+
+Over 12,500+ Homes Protected Across Hyderabad & Secunderabad:
+🛡️ Balcony & Child Safety Nets
+🕊️ Pigeon Nets & Bird Spikes
+💎 SS 316 Invisible Grills
+🏏 Cricket & Sports Turf Nets
+🏢 Duct Area & Construction Nets
+
+✅ 5-Year Stamped Physical Warranty
+✅ Direct Factory Prices Starting ₹18/sq.ft
+✅ Fast 30-Min Measurement at Your Doorstep
+
+🌐 Website: www.mbnaturalsafetynets.in
+📞 WhatsApp or Call: +91 77024 54046 | Manohar Gosala</textarea>
+        <button class="copy-btn" onclick="copyCaption('c4')">Copy Caption</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleCaption(id) {
+      const box = document.getElementById(id);
+      box.classList.toggle('active');
+    }
+    function copyCaption(id) {
+      const box = document.getElementById(id);
+      const text = box.querySelector('textarea').value;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Status caption copied to clipboard!');
+      });
+    }
+  </script>
+</body>
+</html>

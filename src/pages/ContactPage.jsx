@@ -163,7 +163,7 @@ export default function ContactPage() {
     <div className="pt-8 sm:pt-12 md:pt-14 pb-20 bg-canvas-light dark:bg-obsidian-canvas min-h-screen">
       <SEOHead
         title="Contact MB Natural Safety Nets Hyderabad | Balanagar Hub"
-        description="Contact MB Natural Safety Nets at i-Tech City, Gagillapur, Balanagar, Hyderabad. Call +91 77024 54046 for 30-min doorstep laser inspection & estimate."
+        description="Contact MB Natural Safety Nets at i-Tech City, Gagillapur, Balanagar, Hyderabad. Call +91 81069 74046 for 30-min doorstep laser inspection & estimate."
         canonicalPath="/contact"
         image="/images/hero-balcony.jpg"
       />

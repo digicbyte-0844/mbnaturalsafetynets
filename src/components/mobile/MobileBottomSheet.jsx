@@ -423,7 +423,7 @@ export default function MobileBottomSheet({ isOpen, onClose, initialServiceId = 
                         maxLength={10}
                         value={phone}
                         onChange={(e) => handlePhoneChange(e.target.value)}
-                        placeholder="77024 54046"
+                        placeholder="81069 74046"
                         className={`w-full pl-14 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-obsidian-surface border ${
                           errors.phone
                             ? 'border-rose-500 focus:ring-rose-500 bg-rose-500/5'

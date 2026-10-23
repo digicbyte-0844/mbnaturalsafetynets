@@ -91,7 +91,7 @@ jsxFiles.forEach(file => {
   // Check tel links
   const telMatches = content.match(/href=["']tel:[^"']+["']/g) || [];
   telMatches.forEach(t => {
-    if (!t.includes('7702454046') && !t.includes('{brandConfig.phoneRaw}')) invalidTel++;
+    if (!t.includes('8106974046') && !t.includes('{brandConfig.phoneRaw}')) invalidTel++;
   });
 
   // Check mailto links
@@ -102,7 +102,7 @@ jsxFiles.forEach(file => {
 });
 
 assert(deadAnchors === 0, `Zero dead anchor ('href="#"') tags found across all views (Found: ${deadAnchors})`);
-assert(invalidTel === 0, `All tel: links point to validated proprietor phone raw format (+917702454046)`);
+assert(invalidTel === 0, `All tel: links point to validated proprietor phone raw format (+918106974046)`);
 assert(invalidMailto === 0, `All mailto: links point to verified recipient address (mahimanohar47@gmail.com)`);
 
 // Verify Gmail URL generator integration
@@ -148,7 +148,7 @@ assert(validatePhone('abcdefghij') !== null, 'Unhappy path: Non-numeric phone is
 assert(validateName('Vikram Reddy') === null, 'Happy path: Valid resident name accepted');
 assert(validateName('Dr. S. K. Sharma') === null, 'Happy path: Name with title and initials accepted');
 assert(validatePhone('9876543210') === null, 'Happy path: 9876543210 accepted');
-assert(validatePhone('7702454046') === null, 'Happy path: Proprietor phone 7702454046 accepted');
+assert(validatePhone('8106974046') === null, 'Happy path: Proprietor phone 8106974046 accepted');
 assert(validatePhone('8888888888') === null, 'Happy path: 8-series mobile accepted');
 assert(validatePhone('6300000000') === null, 'Happy path: 6-series mobile accepted');
 

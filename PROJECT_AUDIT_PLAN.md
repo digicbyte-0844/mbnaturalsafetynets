@@ -16,8 +16,8 @@
 - **Primary Service Geo:** Hyderabad, Secunderabad, and Cyberabad Metropolitan Region (Gachibowli, HITEC City, Kondapur, Madhapur, Kokapet, Financial District, Balanagar, Kukatpally, Miyapur, etc.)
 
 ### 1.2 Physical & Digital Contact Registry
-- **Primary Voice Hotline:** `+91 77024 54046` (`tel:+917702454046`)
-- **Direct WhatsApp Desk:** `+91 77024 54046` (`https://wa.me/917702454046`)
+- **Primary Voice Hotline:** `+91 81069 74046` (`tel:+918106974046`)
+- **Direct WhatsApp Desk:** `+91 81069 74046` (`https://wa.me/918106974046`)
 - **Official Inquiries Email:** `mahimanohar47@gmail.com` (`mailto:mahimanohar47@gmail.com`)
 - **Corporate Office & Fabrication Hub:**
   - `Plot No. 42, i-Tech City, Gagillapur, Near Balanagar Industrial Area, Hyderabad, Telangana 500043`
@@ -64,7 +64,7 @@ Each item from the technical checklist has been audited against the codebase and
 | **Sticky header** | `[ALREADY_COMPLETE]` | `Navbar.jsx` uses `sticky top-0 z-50 backdrop-blur-xl border-b border-white/10` with real-time scroll elevation and theme awareness. |
 | **Mobile hamburger menu** | `[ALREADY_COMPLETE]` | Dedicated slide-over drawer (`MobileDrawer.jsx`) featuring rapid access to all 11 services, cost calculator, gallery, and one-tap emergency call buttons. |
 | **Clickable logo** | `[ALREADY_COMPLETE]` | Brand logo wrapped in semantic `<Link to="/">` with smooth transition, active scale states, and fallback error handling. |
-| **Clickable phone (`tel:`)** | `[ALREADY_COMPLETE]` | Standardized `tel:+917702454046` implemented across desktop header, mobile floating dock, hero CTAs, and footer. |
+| **Clickable phone (`tel:`)** | `[ALREADY_COMPLETE]` | Standardized `tel:+918106974046` implemented across desktop header, mobile floating dock, hero CTAs, and footer. |
 | **Clickable email (`mailto:`)** | `[ALREADY_COMPLETE]` | Standardized `mailto:mahimanohar47@gmail.com` implemented in footer contact desk and Contact page. |
 | **Custom 404 page** | `[ALREADY_COMPLETE]` | Verified: `NotFoundPage.jsx` implemented with matching branding, service recovery links, direct telephone hotline, and registered under `<Route path="*" />` in `App.jsx`. |
 | **Print stylesheet (`@media print`)** | `[ALREADY_COMPLETE]` | Verified: Comprehensive `@media print` rules added in `src/index.css` hiding navigation, headers, footers, mobile dock, and floating modals for clean A4 printing. |
