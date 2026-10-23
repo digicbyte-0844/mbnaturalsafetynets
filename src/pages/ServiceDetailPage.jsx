@@ -21,6 +21,55 @@ export default function ServiceDetailPage({ onOpenQuoteSheet }) {
   const otherCategory = servicesData.filter(s => s.id !== service.id && s.category !== service.category);
   const relatedServices = [...sameCategory, ...otherCategory].slice(0, 3);
 
+    const serviceJsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://mbnaturalsafetynets.in/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "All Safety Nets Services",
+          "item": "https://mbnaturalsafetynets.in/services"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": service.title,
+          "item": `https://mbnaturalsafetynets.in/services/${service.id}`
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": `${service.title} in Hyderabad`,
+      "serviceType": service.title,
+      "description": service.fullDescription,
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": brandConfig.brandName,
+        "telephone": brandConfig.phoneRaw,
+        "url": brandConfig.primaryDomain
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Hyderabad"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": service.priceRange,
+        "priceCurrency": "INR"
+      }
+    }
+  ];
+
   return (
     <div className="pt-8 sm:pt-12 md:pt-14 pb-20 bg-canvas-light dark:bg-obsidian-canvas min-h-screen">
       <SEOHead
@@ -28,6 +77,7 @@ export default function ServiceDetailPage({ onOpenQuoteSheet }) {
         description={`${service.fullDescription.slice(0, 145)}... 5-Year Stamped Doorstep Warranty in Hyderabad.`}
         canonicalPath={`/services/${service.id}`}
         ogImage={service.heroImage}
+        jsonLd={serviceJsonLd}
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         

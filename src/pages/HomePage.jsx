@@ -13,16 +13,30 @@ import Badge from '../components/ui/Badge';
 import { Sparkles, Phone, ShieldCheck } from 'lucide-react';
 import { brandConfig } from '../data/brandConfig';
 import logoEmblem from '../assets/logo-emblem.png';
-
+import { faqsData } from '../data/faqsData';
 import SEOHead from '../components/seo/SEOHead';
 
 export default function HomePage({ onOpenQuoteSheet }) {
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqsData.map(f => ({
+      "@type": "Question",
+      "name": f.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": f.answer
+      }
+    }))
+  };
+
   return (
     <div className="min-h-screen">
       <SEOHead
         title="Balcony Safety Nets Hyderabad | MB Natural Safety Nets"
         description="Hyderabad's top certified specialist in high-rise balcony safety nets, bird spikes & SS 316 invisible grills. 30-min doorstep inspection & 5-yr stamped warranty."
         canonicalPath="/"
+        jsonLd={faqJsonLd}
       />
 
       {/* 1. Hero with Interactive Changeable Balcony Views */}

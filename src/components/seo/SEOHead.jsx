@@ -15,7 +15,8 @@ export default function SEOHead({
   canonicalPath,
   ogImage = DEFAULT_IMAGE,
   ogType = 'website',
-  noindex = false
+  noindex = false,
+  jsonLd = null
 }) {
   const location = useLocation();
 
@@ -71,7 +72,27 @@ export default function SEOHead({
     setMetaTag('name', 'twitter:description', description);
     setMetaTag('name', 'twitter:image', ogImage.startsWith('http') ? ogImage : `${BASE_URL}${ogImage}`);
 
-  }, [title, description, canonicalPath, ogImage, ogType, noindex, location.pathname]);
+    // 7. Inject / Synchronize Dynamic JSON-LD Structured Data
+    if (jsonLd) {
+      let scriptTag = document.querySelector('script[data-dynamic-jsonld="true"]');
+      if (!scriptTag) {
+        scriptTag = document.createElement('script');
+        scriptTag.type = 'application/ld+json';
+        scriptTag.setAttribute('data-dynamic-jsonld', 'true');
+        document.head.appendChild(scriptTag);
+      }
+      scriptTag.textContent = JSON.stringify(jsonLd);
+    } else {
+      const existing = document.querySelector('script[data-dynamic-jsonld="true"]');
+      if (existing) existing.remove();
+    }
+
+    return () => {
+      const existing = document.querySelector('script[data-dynamic-jsonld="true"]');
+      if (existing) existing.remove();
+    };
+
+  }, [title, description, canonicalPath, ogImage, ogType, noindex, jsonLd, location.pathname]);
 
   return null;
 }
