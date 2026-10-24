@@ -13,6 +13,7 @@ import confetti from 'canvas-confetti';
 import logoEmblem from '../assets/logo-emblem.png';
 import SEOHead from '../components/seo/SEOHead';
 import CopyButton from '../components/ui/CopyButton';
+import { trackGoogleConversion } from '../utils/trackGoogleConversion';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -125,6 +126,7 @@ export default function ContactPage() {
 
       setIsSubmitting(false);
       setIsSuccess(true);
+      trackGoogleConversion();
 
       // Open WhatsApp after short delay
       setTimeout(() => {
@@ -135,6 +137,7 @@ export default function ContactPage() {
       console.warn('Contact form dispatch fallback:', err);
       setIsSubmitting(false);
       setIsSuccess(true);
+      trackGoogleConversion();
       setTimeout(() => {
         const url = generateWhatsAppUrl(payload);
         window.open(url, '_blank');

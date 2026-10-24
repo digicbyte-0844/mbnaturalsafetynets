@@ -8,6 +8,7 @@ import { generateWhatsAppUrl } from '../../utils/generateWhatsAppUrl';
 import { sendEmailInquiry } from '../../utils/sendEmailInquiry';
 import logoEmblem from '../../assets/logo-emblem.png';
 import CustomDropdown from '../ui/CustomDropdown';
+import { trackGoogleConversion } from '../../utils/trackGoogleConversion';
 
 export default function MobileBottomSheet({ isOpen, onClose, initialServiceId = '', initialLocality = '' }) {
   const [step, setStep] = useState(1);
@@ -166,6 +167,7 @@ export default function MobileBottomSheet({ isOpen, onClose, initialServiceId = 
 
       setIsSubmitting(false);
       setIsSuccess(true);
+      trackGoogleConversion();
 
       // 3. Open WhatsApp after short delay
       setTimeout(() => {
@@ -176,6 +178,7 @@ export default function MobileBottomSheet({ isOpen, onClose, initialServiceId = 
       console.warn('Sheet submit fallback:', err);
       setIsSubmitting(false);
       setIsSuccess(true);
+      trackGoogleConversion();
       setTimeout(() => {
         const waUrl = generateWhatsAppUrl(leadData);
         window.open(waUrl, '_blank');
