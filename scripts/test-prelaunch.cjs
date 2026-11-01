@@ -223,6 +223,8 @@ assert(headersContent.includes('X-Content-Type-Options: nosniff'), 'nosniff head
 assert(headersContent.includes('Content-Security-Policy'), 'CSP policy configured in public/_headers');
 assert(headersContent.includes('https://static.cloudflareinsights.com'), 'CSP script-src allows Cloudflare Insights beacon');
 assert(headersContent.includes('https://cloudflareinsights.com'), 'CSP connect-src allows Cloudflare Insights analytics');
+assert(headersContent.includes('https://www.google.com') && headersContent.includes('https://*.google.com'), 'CSP connect-src allows Google Ads & Remarketing endpoints');
+assert(headersContent.includes('https://www.googleadservices.com') && headersContent.includes('https://googleads.g.doubleclick.net'), 'CSP connect-src allows Google Ads Conversion APIs');
 assert(headersContent.includes('Cache-Control: public, max-age=31536000'), 'Long-term immutable caching configured for assets');
 
 const wranglerContent = fs.readFileSync(path.join(__dirname, '../wrangler.json'), 'utf8');
