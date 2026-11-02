@@ -225,6 +225,8 @@ assert(headersContent.includes('https://static.cloudflareinsights.com'), 'CSP sc
 assert(headersContent.includes('https://cloudflareinsights.com'), 'CSP connect-src allows Cloudflare Insights analytics');
 assert(headersContent.includes('https://www.google.com') && headersContent.includes('https://*.google.com'), 'CSP connect-src allows Google Ads & Remarketing endpoints');
 assert(headersContent.includes('https://www.googleadservices.com') && headersContent.includes('https://googleads.g.doubleclick.net'), 'CSP connect-src allows Google Ads Conversion APIs');
+assert(headersContent.includes('worker-src') && headersContent.includes('blob:'), 'CSP worker-src allows blob Web Workers for confetti & modules');
+assert(headersContent.includes('style-src') && headersContent.includes('https://www.googletagmanager.com'), 'CSP style-src allows Google Tag Manager debug badge stylesheets');
 assert(headersContent.includes('Cache-Control: public, max-age=31536000'), 'Long-term immutable caching configured for assets');
 
 const wranglerContent = fs.readFileSync(path.join(__dirname, '../wrangler.json'), 'utf8');
