@@ -13,14 +13,16 @@
       gtag('js', new Date());
 
       gtag('config', 'AW-18532384612');
+      gtag('config', 'AW-7869112687');
 
-      // Official Google Ads Conversion Helper for Contact (1)
+      // Official Google Ads Conversion Helper for Contact & Contact (1)
       function gtag_report_conversion(url) {
         var callback = function () {
           if (typeof(url) != 'undefined' && url) {
             window.location = url;
           }
         };
+        // Account AW-18532384612 targets
         gtag('event', 'conversion', {
           'send_to': 'AW-18532384612/rpEPCJftoqgdEOT-9oRF',
           'event_category': 'Contact',
@@ -34,6 +36,19 @@
           'value': 1.0,
           'currency': 'INR'
         });
+        // Account AW-7869112687 targets
+        gtag('event', 'conversion', {
+          'send_to': 'AW-7869112687/A4TxCO_CpKgdEOT-9oRF',
+          'event_category': 'Contact',
+          'value': 1.0,
+          'currency': 'INR'
+        });
+        gtag('event', 'conversion', {
+          'send_to': 'AW-7869112687/rpEPCJftoqgdEOT-9oRF',
+          'event_category': 'Contact',
+          'value': 1.0,
+          'currency': 'INR'
+        });
         return false;
       }
       window.gtag_report_conversion = gtag_report_conversion;
@@ -43,6 +58,16 @@
         gtag('event', 'conversion', {
           'send_to': 'AW-18532384612/rpEPCJftoqgdEOT-9oRF',
           'event_category': 'Contact',
+          'value': 1.0,
+          'currency': 'INR'
+        });
+        gtag('event', 'conversion', {
+          'send_to': 'AW-7869112687/A4TxCO_CpKgdEOT-9oRF',
+          'event_category': 'Contact',
+          'value': 1.0,
+          'currency': 'INR'
+        });
+      }
           'value': 1.0,
           'currency': 'INR'
         });
