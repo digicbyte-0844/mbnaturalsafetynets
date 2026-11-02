@@ -241,7 +241,8 @@ assert(robotsContent.includes('Disallow: /admin/'), 'Robots.txt blocks private p
 
 const indexHtmlContent = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
 assert(indexHtmlContent.includes('AW-18532384612'), 'Google Tag AW-18532384612 present in index.html');
-assert(indexHtmlContent.includes('AW-18532384612/A4TxCO_CpKgdEOT-9oRF'), 'Google Ads Conversion Action AW-18532384612/A4TxCO_CpKgdEOT-9oRF registered in index.html');
+assert(indexHtmlContent.includes('AW-18532384612/rpEPCJftoqgdEOT-9oRF'), 'Google Ads Primary Conversion Action AW-18532384612/rpEPCJftoqgdEOT-9oRF registered in index.html');
+assert(indexHtmlContent.includes('AW-18532384612/A4TxCO_CpKgdEOT-9oRF'), 'Google Ads Secondary Conversion Action AW-18532384612/A4TxCO_CpKgdEOT-9oRF registered in index.html');
 assert(indexHtmlContent.includes('gtag_report_conversion'), 'Official gtag_report_conversion helper present in index.html');
 
 // ---------------------------------------------------------------------

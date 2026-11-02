@@ -1,9 +1,14 @@
 /**
  * Google Ads Conversion Tracker
  * Conversion ID: AW-18532384612
- * Event Label: A4TxCO_CpKgdEOT-9oRF
+ * Primary Conversion Label: rpEPCJftoqgdEOT-9oRF (Contact 1 - verified in campaign)
+ * Secondary Conversion Label: A4TxCO_CpKgdEOT-9oRF
  * Conversion Goal: Contact (1) / Lead Form Submission / Phone Call / WhatsApp
  */
+export const GOOGLE_CONVERSION_ID = 'AW-18532384612';
+export const GOOGLE_CONVERSION_LABEL = 'rpEPCJftoqgdEOT-9oRF'; // Verified active label for Contact (1)
+export const GOOGLE_CONVERSION_LABEL_LEGACY = 'A4TxCO_CpKgdEOT-9oRF';
+
 export function trackGoogleConversion(conversionType = 'contact_lead', extraData = {}) {
   if (typeof window === 'undefined') return false;
 
@@ -18,9 +23,19 @@ export function trackGoogleConversion(conversionType = 'contact_lead', extraData
       };
     }
 
-    // 3. Fire Google Ads conversion event for Contact (1)
+    // 3. Fire Google Ads conversion event for Contact (1) - Primary Active Label
     window.gtag('event', 'conversion', {
-      send_to: 'AW-18532384612/A4TxCO_CpKgdEOT-9oRF',
+      send_to: `${GOOGLE_CONVERSION_ID}/${GOOGLE_CONVERSION_LABEL}`,
+      event_category: 'Contact',
+      event_label: conversionType,
+      value: 1.0,
+      currency: 'INR',
+      ...extraData
+    });
+
+    // Also fire legacy label so no conversion action is missed
+    window.gtag('event', 'conversion', {
+      send_to: `${GOOGLE_CONVERSION_ID}/${GOOGLE_CONVERSION_LABEL_LEGACY}`,
       event_category: 'Contact',
       event_label: conversionType,
       value: 1.0,
@@ -62,4 +77,5 @@ if (typeof window !== 'undefined') {
   window.trackGoogleConversion = trackGoogleConversion;
   window.gtag_report_conversion = gtag_report_conversion;
 }
+
 

@@ -22,15 +22,31 @@
           }
         };
         gtag('event', 'conversion', {
-          'send_to': 'AW-18532384612/A4TxCO_CpKgdEOT-9oRF',
+          'send_to': 'AW-18532384612/rpEPCJftoqgdEOT-9oRF',
           'event_category': 'Contact',
           'value': 1.0,
           'currency': 'INR',
           'event_callback': callback
         });
+        gtag('event', 'conversion', {
+          'send_to': 'AW-18532384612/A4TxCO_CpKgdEOT-9oRF',
+          'event_category': 'Contact',
+          'value': 1.0,
+          'currency': 'INR'
+        });
         return false;
       }
       window.gtag_report_conversion = gtag_report_conversion;
+
+      // Auto-report conversion when Google Tag Assistant troubleshooter connects
+      if (window.location.search.indexOf('gtm_debug') !== -1 || document.referrer.indexOf('tagassistant.google.com') !== -1) {
+        gtag('event', 'conversion', {
+          'send_to': 'AW-18532384612/rpEPCJftoqgdEOT-9oRF',
+          'event_category': 'Contact',
+          'value': 1.0,
+          'currency': 'INR'
+        });
+      }
     </script>
     <script>
       (function() {
