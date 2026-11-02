@@ -239,6 +239,11 @@ const robotsContent = fs.readFileSync(path.join(__dirname, '../public/robots.txt
 assert(robotsContent.includes('Sitemap: https://mbnaturalsafetynets.in/sitemap.xml'), 'Robots.txt declares sitemap URI');
 assert(robotsContent.includes('Disallow: /admin/'), 'Robots.txt blocks private paths');
 
+const indexHtmlContent = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
+assert(indexHtmlContent.includes('AW-18532384612'), 'Google Tag AW-18532384612 present in index.html');
+assert(indexHtmlContent.includes('AW-18532384612/A4TxCO_CpKgdEOT-9oRF'), 'Google Ads Conversion Action AW-18532384612/A4TxCO_CpKgdEOT-9oRF registered in index.html');
+assert(indexHtmlContent.includes('gtag_report_conversion'), 'Official gtag_report_conversion helper present in index.html');
+
 // ---------------------------------------------------------------------
 // TEST 7: CSS & MOBILE VIEWPORT SANITY
 // ---------------------------------------------------------------------

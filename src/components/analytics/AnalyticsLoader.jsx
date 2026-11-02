@@ -1,11 +1,14 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { captureUtmParams } from '../../utils/utmTracker';
+import { trackGoogleConversion } from '../../utils/trackGoogleConversion';
 
 /**
  * Environment-Gated Analytics & UTM Initialization Loader
- * Automatically captures UTM campaign parameters on landing
- * and loads Google Analytics 4 only in production when a Measurement ID is configured.
+ * Automatically captures UTM campaign parameters on landing,
+ * sends route changes to GA/Google Tag,
+ * and intercepts all Click-to-Call (tel:) and WhatsApp interactions
+ * as Google Ads conversions (Contact 1).
  */
 export default function AnalyticsLoader() {
   const location = useLocation();
@@ -15,7 +18,33 @@ export default function AnalyticsLoader() {
     captureUtmParams();
   }, [location.search]);
 
-  // 2. Production Analytics Loader
+  // 2. Global Click-to-Call & WhatsApp Conversion Dispatcher
+  useEffect(() => {
+    const handleGlobalInteraction = (e) => {
+      const anchor = e.target.closest('a');
+      if (!anchor) return;
+
+      const href = anchor.getAttribute('href') || '';
+      if (href.startsWith('tel:')) {
+        trackGoogleConversion('phone_call_click', {
+          phone_number: '+918106974046',
+          page_path: location.pathname
+        });
+      } else if (href.includes('wa.me') || href.includes('whatsapp.com')) {
+        trackGoogleConversion('whatsapp_click', {
+          recipient: '918106974046',
+          page_path: location.pathname
+        });
+      }
+    };
+
+    document.addEventListener('click', handleGlobalInteraction, { passive: true });
+    return () => {
+      document.removeEventListener('click', handleGlobalInteraction);
+    };
+  }, [location.pathname]);
+
+  // 3. Production Analytics Loader & Virtual Pageviews
   useEffect(() => {
     const isProd = import.meta.env.PROD && !window.location.hostname.includes('localhost');
     const gaMeasurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;

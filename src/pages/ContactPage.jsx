@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Phone, Mail, MapPin, Clock, ShieldCheck, Sparkles, CheckCircle, ChevronDown, AlertCircle, Loader2, Send } from 'lucide-react';
 import { brandConfig } from '../data/brandConfig';
 import { servicesData } from '../data/servicesData';
@@ -30,6 +30,10 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
+
+  useEffect(() => {
+    trackGoogleConversion('contact_page_view', { page: '/contact' });
+  }, []);
 
   const dynamicWhatsAppUrl = generateWhatsAppUrl(formData);
   const dynamicGmailUrl = generateGmailUrl(formData);
